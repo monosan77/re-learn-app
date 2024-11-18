@@ -24,9 +24,6 @@ jobs:
       - name: Install dependencies
         run: yarn install # 依存関係のインストール
 
-      - name: Run Prettier (auto-format code)
-        run: yarn prettier --cached . # コードのフォーマット
-
       - name: Run Prettier
         run: yarn prettier --check .
 
