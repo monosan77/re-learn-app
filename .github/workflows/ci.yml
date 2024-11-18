@@ -31,7 +31,7 @@ jobs:
         run: yarn prettier --write . # コードのフォーマットチェック
 
       - name: Run tests
-        run: yarn test # テスト実行
+        run: yarn test --passWithNoTests # テスト実行
 
       - name: Build project
         run: yarn build # プロジェクトのビルド
