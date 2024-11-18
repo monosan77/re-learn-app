@@ -3,12 +3,10 @@ name: CI Pipeline
 on:
   push:
     branches:
-      - feature-branch  # 作業用のブランチ名
-      - another-feature  # 他の作業用ブランチも指定
+      - main  
   pull_request:
     branches:
-      - feature-branch  # 作業用のブランチに対するPR
-      - another-feature  # 他の作業用ブランチへのPRも指定
+      - main 
 
 jobs:
   build:
