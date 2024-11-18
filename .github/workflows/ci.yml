@@ -15,8 +15,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4 # コードをリポジトリから取得
-        with:
-          ref: ${{ github.head_ref }} 
 
       - name: Set up Node.js
         uses: actions/setup-node@v4 # Node.jsのセットアップ
@@ -27,14 +25,10 @@ jobs:
         run: yarn install # 依存関係のインストール
 
       - name: Run Prettier (auto-format code)
-        run: yarn prettier --write . # コードのフォーマット
+        run: yarn prettier --cached . # コードのフォーマット
 
-      - name: Commit changes if any formatting is applied
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add . # フォーマットされたファイルをステージング
-          git diff --cached --quiet || (git commit -m "Fix code formatting" && git push) # フォーマットに変更があればコミットしてプッシュ
+      - name: Run Prettier
+        run: yarn prettier --check .
 
       - name: Run ESLint
         run: yarn lint # ESLintによるコードチェック
