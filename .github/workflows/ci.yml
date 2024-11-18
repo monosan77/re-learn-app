@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4 # コードをリポジトリから取得
+        with:
+          ref: ${{ github.head_ref }} 
 
       - name: Set up Node.js
         uses: actions/setup-node@v4 # Node.jsのセットアップ
@@ -30,8 +32,7 @@ jobs:
       - name: Commit changes if any formatting is applied
         run: |
           git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]"
-          git checkout ${{ github.head_ref }}
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add . # フォーマットされたファイルをステージング
           git diff --cached --quiet || (git commit -m "Fix code formatting" && git push) # フォーマットに変更があればコミットしてプッシュ
 

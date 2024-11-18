@@ -14,7 +14,7 @@
       "error",
       { "argsIgnorePattern": "^_" }
     ],
-            "@typescript-eslint/no-unused-expressions": [
+              "@typescript-eslint/no-unused-expressions": [
       "error",
       {
         "allowShortCircuit": true,
