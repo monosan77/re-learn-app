@@ -7,6 +7,9 @@ export default function Page() {
       <Link href="/about">About</Link>
       <h1>こんにちは</h1>
       <h1>こんにちは</h1>
+      <h1>こんにちは</h1>
+      <h1>こんにちは</h1>
+      <h1>こんにちは</h1>
     </div>
   );
 }
