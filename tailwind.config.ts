@@ -11,6 +11,9 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        mainColor: "#4169E1",
+        mainColorHover: "#527DFF",
+        linkColor: "#00BBFF",
       },
     },
   },

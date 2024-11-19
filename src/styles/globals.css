@@ -19,3 +19,24 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0px 0px 8px #fff;
+  }
+  .text-stroke {
+    -webkit-text-stroke: 0.1px #fff; /* 太さと色 */
+  }
+  .right18p {
+    right: 18%;
+  }
+  .max-w-lg {
+    max-width: 1000px;
+  }
+  .width-750 {
+    max-width: 745px;
+  }
+  .min-height-780 {
+    min-height: 750px;
+  }
+}
