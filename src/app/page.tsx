@@ -1,5 +1,6 @@
 import ButtonLarge from "@/components/buttons/ButtonLarge";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
+import LinkText from "@/components/Link/LinkText";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -110,7 +111,16 @@ export default function Page() {
             height={50}
           />
         </div>
-        <Link
+        <LinkText url={"/users/signin"}>
+          <p>ReLearnを始める</p>
+          <Image
+            src={"/icon/link-blue.svg"}
+            alt="リンクアイコン"
+            width={17}
+            height={17}
+          />
+        </LinkText>
+        {/* <Link
           href={"/users/signin"}
           className="text-linkColor underline decoration-linkColor flex ml-3"
         >
@@ -121,7 +131,7 @@ export default function Page() {
             width={17}
             height={17}
           />
-        </Link>
+        </Link> */}
         <nav className="my-4 mx-auto lg:my-6 lg:lg:width-750 text-sm">
           <ul className="flex justify-around items-center underline">
             <li>
