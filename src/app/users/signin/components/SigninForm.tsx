@@ -3,12 +3,16 @@ import Input from "@/components/Input/Input";
 import LinkText from "@/components/Link/LinkText";
 import React from "react";
 
-const LoginForm = () => {
+const SigninForm = () => {
   return (
     <form
       action=""
       className="form-500  px-6 py-7 mx-4 border rounded-md box-shadow "
     >
+      <div className="mb-4">
+        <label htmlFor="username">ユーザーネーム</label>
+        <Input type="text" name="username" id="username" />
+      </div>
       <div className="mb-4">
         <label htmlFor="email">メールアドレス</label>
         <Input type="text" name="email" id="email" />
@@ -21,10 +25,9 @@ const LoginForm = () => {
       <nav>
         <ul className="text-center mt-7">
           <li className="flex justify-center">
-            <LinkText url="#">パスワードをお忘れの方</LinkText>
-          </li>
-          <li className="flex justify-center">
-            <LinkText url="/users/signin">新しくアカウントを作成する</LinkText>
+            <LinkText url="/users/login">
+              アカウント作成済みの方はログインページへ
+            </LinkText>
           </li>
         </ul>
       </nav>
@@ -32,4 +35,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SigninForm;
