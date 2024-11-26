@@ -120,18 +120,6 @@ export default function Page() {
             height={17}
           />
         </LinkText>
-        {/* <Link
-          href={"/users/signin"}
-          className="text-linkColor underline decoration-linkColor flex ml-3"
-        >
-          <p>ReLearnを始める</p>
-          <Image
-            src={"/icon/link-blue.svg"}
-            alt="リンクアイコン"
-            width={17}
-            height={17}
-          />
-        </Link> */}
         <nav className="my-4 mx-auto lg:my-6 lg:lg:width-750 text-sm">
           <ul className="flex justify-around items-center underline">
             <li>
