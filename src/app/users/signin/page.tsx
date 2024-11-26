@@ -1,6 +1,5 @@
 import React from "react";
 import PageTitle from "./components/PageTitle";
-import LoginForm from "./components/SigninForm";
 import SigninForm from "./components/SigninForm";
 
 const Page = () => {
