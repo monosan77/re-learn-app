@@ -1,3 +1,4 @@
+"use client";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
 import LinkText from "@/components/Link/LinkText";
 import LogoAndTitle from "@/components/Title/LogoAndTitle";
@@ -26,10 +27,10 @@ export default function Error({
           </p>
           <p>一時的にアクセスでない状態です。</p>
           <p>再度お試しください</p>
-          <div className="my-8">
+          <div onClick={() => reset()} className="my-8">
             <ButtonSmall type="button" buttonText="もう一度試す" />
           </div>
-          <div onClick={() => reset()} className="flex justify-center">
+          <div className="flex justify-center">
             <LinkText url="/">トップページへ戻る</LinkText>
           </div>
         </div>

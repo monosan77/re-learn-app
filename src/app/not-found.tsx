@@ -1,3 +1,4 @@
+"use client";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
 import LinkText from "@/components/Link/LinkText";
 import LogoAndTitle from "@/components/Title/LogoAndTitle";
@@ -20,10 +21,10 @@ export default function Error({ reset }: { reset: () => void }) {
             ページが見つかりません
           </p>
           <p>再度試すか、トップページへお戻りください。</p>
-          <div className="my-8">
+          <div onClick={() => reset()} className="my-8">
             <ButtonSmall type="button" buttonText="もう一度試す" />
           </div>
-          <div onClick={() => reset()} className="flex justify-center">
+          <div className="flex justify-center">
             <LinkText url="/">トップページへ戻る</LinkText>
           </div>
         </div>

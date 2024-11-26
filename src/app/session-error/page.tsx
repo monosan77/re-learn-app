@@ -2,7 +2,7 @@ import LinkText from "@/components/Link/LinkText";
 import LogoAndTitle from "@/components/Title/LogoAndTitle";
 import Image from "next/image";
 
-export default function Error({ reset }: { reset: () => void }) {
+export default function Page() {
   return (
     <div className="w-full min-w-60 flex justify-center">
       <div className="mt-20">
@@ -20,7 +20,7 @@ export default function Error({ reset }: { reset: () => void }) {
           </p>
           <p>セッションエラーが発生しました。</p>
           <p>恐れ入りますが、再度ログインをお願いします。</p>
-          <div onClick={() => reset()} className="flex justify-center my-7">
+          <div className="flex justify-center my-7">
             <LinkText url="/users/login">ログインページへ移動する</LinkText>
           </div>
         </div>
