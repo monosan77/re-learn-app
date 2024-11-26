@@ -25,7 +25,7 @@ const SigninForm = () => {
       <nav>
         <ul className="text-center mt-7">
           <li className="flex justify-center">
-            <LinkText url="#">
+            <LinkText url="/users/login">
               アカウント作成済みの方はログインページへ
             </LinkText>
           </li>
