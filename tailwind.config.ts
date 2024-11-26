@@ -14,6 +14,10 @@ export default {
         mainColor: "#4169E1",
         mainColorHover: "#527DFF",
         linkColor: "#00BBFF",
+        inputColor: "#454545",
+      },
+      fontFamily: {
+        sans: ["var(--font-noto-sans)"],
       },
     },
   },

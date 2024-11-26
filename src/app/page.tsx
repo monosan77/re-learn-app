@@ -1,4 +1,4 @@
-import ButtonMedium from "@/components/buttons/ButtonMedium";
+import ButtonLarge from "@/components/buttons/ButtonLarge";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,7 +27,7 @@ export default function Page() {
             お問い合わせ
           </Link>
           <Link href={"/users/login"}>
-            <ButtonSmall buttonText="ログイン" />
+            <ButtonSmall type="button" buttonText="ログイン" />
           </Link>
         </nav>
       </header>
@@ -56,7 +56,7 @@ export default function Page() {
 
             <div className="lg:absolute lg:top-3/4 lg:right18p lg:translate-x-1/2 lg:w-96">
               <Link href={"users/login"}>
-                <ButtonMedium buttonText="はじめる‼" />
+                <ButtonLarge type="button" buttonText="はじめる‼" />
               </Link>
             </div>
           </div>
