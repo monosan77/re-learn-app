@@ -1,5 +1,12 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
+import { Noto_Sans } from "next/font/google";
+
+const notoSans = Noto_Sans({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-noto-sans", // カスタムプロパティ名
+});
 
 export const metadata: Metadata = {
   title: "ReLearn",
@@ -14,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className="font-sans">{children}</body>
+      <body className={notoSans.variable}>{children}</body>
     </html>
   );
 }
