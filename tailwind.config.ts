@@ -19,6 +19,18 @@ export default {
       fontFamily: {
         sans: ["var(--font-noto-sans)"],
       },
+      width: {
+        "350": "350px",
+        "500": "500px",
+      },
+      maxWidth: {
+        "1000": "1000px",
+        "750": "750px",
+        "450": "450px",
+      },
+      minHeight: {
+        "750": "750px",
+      },
     },
   },
   plugins: [],

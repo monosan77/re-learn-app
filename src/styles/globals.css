@@ -24,12 +24,7 @@
   .text-shadow {
     text-shadow: 0px 0px 8px #fff;
   }
-  .form-350 {
-    width: 350px;
-  }
-  .form-500 {
-    max-width: 450px;
-  }
+
   .text-stroke {
     -webkit-text-stroke: 0.1px #fff; /* 太さと色 */
   }
@@ -42,13 +37,15 @@
   .right18p {
     right: 18%;
   }
-  .max-w-lg {
-    max-width: 1000px;
+
+  .hamburgerOn {
+    top: 0;
+    left: 0;
+    bottom: 0;
   }
-  .width-750 {
-    max-width: 745px;
-  }
-  .min-height-780 {
-    min-height: 750px;
+  .hamburgerOff {
+    top: 0;
+    left: -270px;
+    bottom: 0;
   }
 }

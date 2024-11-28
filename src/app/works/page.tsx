@@ -1,12 +1,18 @@
+"use client";
 import Header from "@/components/Header/Header";
 import SideBar from "@/components/SideBar/SideBar";
-import React from "react";
+import React, { useState } from "react";
 
 const Page = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function handleMenuOpen() {
+    setIsOpen(!isOpen);
+  }
   return (
     <div>
-      <Header />
-      <SideBar />
+      <Header handleMenuOpen={handleMenuOpen} />
+      <SideBar handleMenuOpen={handleMenuOpen} isOpen={isOpen} />
     </div>
   );
 };
