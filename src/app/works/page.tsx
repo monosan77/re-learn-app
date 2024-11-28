@@ -1,20 +1,7 @@
-"use client";
-import Header from "@/components/Header/Header";
-import SideBar from "@/components/SideBar/SideBar";
-import React, { useState } from "react";
+import React from "react";
 
 const Page = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function handleMenuOpen() {
-    setIsOpen(!isOpen);
-  }
-  return (
-    <div>
-      <Header handleMenuOpen={handleMenuOpen} />
-      <SideBar handleMenuOpen={handleMenuOpen} isOpen={isOpen} />
-    </div>
-  );
+  return <div>ここから記述!!!!!</div>;
 };
 
 export default Page;

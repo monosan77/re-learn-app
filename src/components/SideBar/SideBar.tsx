@@ -10,11 +10,11 @@ interface Prop {
 const SideBar = ({ handleMenuOpen, isOpen }: Prop) => {
   return (
     <div
-      className={`${isOpen ? "hamburgerOn" : "hamburgerOff"} fixed  pt-4 w-64 bg-background text-white box-shadow-league transition-all duration-300`}
+      className={`${isOpen && "hamburgerOn"} fixed top-0 bottom-0 -left-72 md:left-0 z-10   pt-4 w-64  bg-background text-white transition-all duration-300`}
     >
       <div className="flex justify-between items-center px-4 mb-6">
         <h1 className="text-2xl font-bold">Menu</h1>
-        <button type="button" onClick={handleMenuOpen}>
+        <button type="button" onClick={handleMenuOpen} className="md:hidden">
           <Image
             src={"/icon/batu-white.svg"}
             alt="アイコン"
