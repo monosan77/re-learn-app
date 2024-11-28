@@ -1,13 +1,16 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import SideBarList from "./SideBarList";
 import Image from "next/image";
 
-const SideBar = () => {
+const SideBar = ({ handleMenuOpen, isOpen }: any) => {
   return (
-    <div className="fixed top-0 left-0 bottom-0 pt-4 w-64 bg-background text-white box-shadow-league">
+    <div
+      className={`${isOpen ? "hamburgerOn" : "hamburgerOff"} fixed  w-pt-4 w-64 bg-background text-white box-shadow-league transition-all duration-300`}
+    >
       <div className="flex justify-between items-center px-4 mb-6">
         <h1 className="text-2xl font-bold">Menu</h1>
-        <button type="button">
+        <button type="button" onClick={handleMenuOpen}>
           <Image
             src={"/icon/batu-white.svg"}
             alt="アイコン"
