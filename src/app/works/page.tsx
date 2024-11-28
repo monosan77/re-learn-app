@@ -11,7 +11,7 @@ const Page = () => {
   }
   return (
     <div>
-      <Header handleMenuOpen={handleMenuOpen} isOpen={isOpen} />
+      <Header handleMenuOpen={handleMenuOpen} />
       <SideBar handleMenuOpen={handleMenuOpen} isOpen={isOpen} />
     </div>
   );

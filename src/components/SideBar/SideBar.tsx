@@ -1,12 +1,16 @@
 "use client";
-import React, { useState } from "react";
 import SideBarList from "./SideBarList";
 import Image from "next/image";
+import React from "react";
 
-const SideBar = ({ handleMenuOpen, isOpen }: any) => {
+interface Prop {
+  handleMenuOpen: () => void;
+  isOpen: boolean;
+}
+const SideBar = ({ handleMenuOpen, isOpen }: Prop) => {
   return (
     <div
-      className={`${isOpen ? "hamburgerOn" : "hamburgerOff"} fixed  w-pt-4 w-64 bg-background text-white box-shadow-league transition-all duration-300`}
+      className={`${isOpen ? "hamburgerOn" : "hamburgerOff"} fixed  pt-4 w-64 bg-background text-white box-shadow-league transition-all duration-300`}
     >
       <div className="flex justify-between items-center px-4 mb-6">
         <h1 className="text-2xl font-bold">Menu</h1>

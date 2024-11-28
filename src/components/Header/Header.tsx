@@ -3,7 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const Header = ({ handleMenuOpen }: any) => {
+interface Prop {
+  handleMenuOpen: () => void;
+}
+const Header = ({ handleMenuOpen }: Prop) => {
   return (
     <header className="w-full flex justify-between items-center fixed top-0 left-0 px-4 h-12 bg-white ">
       <button type="button" className="cursor-pointer" onClick={handleMenuOpen}>
