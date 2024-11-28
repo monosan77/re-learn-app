@@ -7,15 +7,17 @@ const SideBar = () => {
     <div className="fixed top-0 left-0 bottom-0 pt-4 w-64 bg-background text-white box-shadow-league">
       <div className="flex justify-between items-center px-4 mb-6">
         <h1 className="text-2xl font-bold">Menu</h1>
-        <Image
-          src={"/icon/batu-white.svg"}
-          alt="アイコン"
-          width={18}
-          height={18}
-        />
+        <button type="button">
+          <Image
+            src={"/icon/batu-white.svg"}
+            alt="アイコン"
+            width={18}
+            height={18}
+          />
+        </button>
       </div>
       <nav>
-        <ul className="mx-5 mb-10 text-lg font-bold space-y-3">
+        <ul className="mx-5 mb-10 text-md font-bold space-y-3">
           <li>
             <SideBarList
               url="/works"
