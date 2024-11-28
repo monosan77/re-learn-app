@@ -3,7 +3,7 @@ import Header from "@/components/Header/Header";
 import SideBar from "@/components/SideBar/SideBar";
 import React, { useState } from "react";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleMenuOpen() {
@@ -23,4 +23,4 @@ const layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default layout;
+export default Layout;
