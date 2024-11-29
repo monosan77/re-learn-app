@@ -1,5 +1,3 @@
-import TitleText from "@/components/Title/TitleText";
-import Image from "next/image";
 import React from "react";
 import ProblemHistory from "./components/ ProblemHistory";
 import ProblemLists from "./components/ProblemLists";
