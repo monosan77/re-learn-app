@@ -10,7 +10,7 @@ interface Prop {
 const SideBar = ({ handleMenuOpen, isOpen }: Prop) => {
   return (
     <div
-      className={`${isOpen && "hamburgerOn"} fixed top-0 bottom-0 -left-72 md:left-0 z-10   pt-4 w-64  bg-background text-white transition-all duration-300`}
+      className={`${isOpen && "hamburgerOn"} fixed top-0 bottom-0 -left-72 md:left-0 z-20   pt-4 w-64  bg-background text-white transition-all duration-300`}
     >
       <div className="flex justify-between items-center px-4 mb-6">
         <h1 className="text-2xl font-bold">Menu</h1>
@@ -24,7 +24,7 @@ const SideBar = ({ handleMenuOpen, isOpen }: Prop) => {
         </button>
       </div>
       <nav>
-        <ul className="mx-5 mb-10 text-md font-bold space-y-3">
+        <ul className="mx-5 mb-10 text-md  space-y-3">
           <li>
             <SideBarList
               url="/works"
@@ -47,7 +47,7 @@ const SideBar = ({ handleMenuOpen, isOpen }: Prop) => {
             />
           </li>
         </ul>
-        <ul className="mx-5 mb-10 text-lg font-bold space-y-3">
+        <ul className="mx-5 mb-10 text-lg  space-y-3">
           <h3 className="border-b mb-4">復習記録</h3>
           <li>
             <SideBarList
@@ -64,7 +64,7 @@ const SideBar = ({ handleMenuOpen, isOpen }: Prop) => {
             />
           </li>
         </ul>
-        <ul className="mx-5 mb-10 text-lg font-bold space-y-3">
+        <ul className="mx-5 mb-10 text-lg space-y-3">
           <h3 className="border-b mb-4">問題集</h3>
           <li>
             <SideBarList
