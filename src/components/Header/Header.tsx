@@ -16,7 +16,7 @@ const Header = ({ handleMenuOpen }: Prop) => {
       >
         <Image src="/icon/menu2.svg" alt="" width={25} height={25} />
       </button>
-      <Link href={"/works"}>
+      <Link href={"/works/home"}>
         <Image src={"/logo/ReLearn.png"} alt="" width={110} height={30} />
       </Link>
     </header>

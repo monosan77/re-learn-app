@@ -21,6 +21,12 @@
 }
 
 @layer utilities {
+  .no-scrollbar-arrows::-webkit-scrollbar-button {
+    display: none;
+  }
+  .no-scrollbar-arrows {
+    scrollbar-width: thin; /* Firefox用 */
+  }
   .text-shadow {
     text-shadow: 0px 0px 8px #fff;
   }
