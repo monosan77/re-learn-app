@@ -26,6 +26,7 @@ export default {
       maxWidth: {
         "1000": "1000px",
         "750": "750px",
+        "600": "600px",
         "450": "450px",
       },
       minHeight: {
