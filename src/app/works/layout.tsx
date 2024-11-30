@@ -14,9 +14,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <SideBar handleMenuOpen={handleMenuOpen} isOpen={isOpen} />
       <div className="w-full md:w-[calc(100%-256px)] md:ml-64 transition-all duration-300">
         <Header handleMenuOpen={handleMenuOpen} />
-        <div className="mt-12">
+        <div className="w-full mt-12">
           <div>{children}</div>
-          {/* <h1>ここから記述</h1> */}
         </div>
       </div>
     </div>
