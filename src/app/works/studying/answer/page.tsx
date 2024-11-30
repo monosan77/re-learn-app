@@ -10,7 +10,7 @@ const Page = () => {
   return (
     <div>
       <ProblemTitle />
-      <div className="w-[calc(100%-32px)] mx-4 p-6 mt-40 mb-24 max-w-750 md:mx-auto rounded-md border border-solid  border-gray-300  card-shadow space-y-4">
+      <div className="w-[calc(100%-32px)] mx-4 p-6 mt-28 mb-24 max-w-750 md:mx-auto rounded-md border border-solid  border-gray-300  card-shadow space-y-4">
         <StudyingTitle color="red-600" text="答え" />
         <StudyingProblemTitle />
         <CorrectORIncorrect />

@@ -11,7 +11,7 @@ const Page = () => {
   return (
     <div>
       <ProblemTitle />
-      <div className="w-[calc(100%-32px)] mx-4 md:max-w-750 lg:mx-auto mt-8 mb-14">
+      <div className="w-[calc(100%-32px)] mx-4 md:max-w-750 lg:mx-auto pt-24 mb-14">
         <TitleText text="問題の新規作成" />
         <form action="" className=" pt-4 space-y-6">
           <InputText title="問題タイトル" />

@@ -9,7 +9,7 @@ const Page = () => {
   return (
     <div>
       <ProblemTitle />
-      <div className="w-full px-4 mt-40 mb-24 max-w-600 mx-auto space-y-4">
+      <div className="w-full px-4 mt-28 mb-32 max-w-600 mx-auto space-y-4">
         <div className="flex justify-between items-center font-bold text-3xl">
           <h2>結果</h2>
           <h2>5/10点</h2>
