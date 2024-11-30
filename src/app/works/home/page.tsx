@@ -1,5 +1,5 @@
 import React from "react";
-import ProblemHistory from "./components/ ProblemHistory";
+import ProblemHistory from "./components/ProblemHistory";
 import ProblemLists from "./components/ProblemLists";
 
 const Page = () => {
