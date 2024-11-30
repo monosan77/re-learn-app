@@ -5,7 +5,7 @@ import React from "react";
 const ProblemHistory = () => {
   return (
     <>
-      <div className="relative flex justify-start items-center mx-4 mt-16 mb-4">
+      <div className="relative flex justify-start items-center mx-4 mt-16 mb-4 space-x-2">
         <Image
           src={"/icon/clock-black.svg"}
           alt="アイコン"
