@@ -2,7 +2,7 @@ import React from "react";
 import ProblemTitle from "./components/ProblemTitle";
 import Category from "./components/Category";
 import AddProblem from "./components/AddProblem";
-import StartBtn from "./components/StartBtn";
+import StudyStartContent from "./components/StudyStartContent";
 
 const Page = () => {
   return (
@@ -13,7 +13,7 @@ const Page = () => {
         <Category />
         <AddProblem />
       </div>
-      <StartBtn />
+      <StudyStartContent />
     </div>
   );
 };
