@@ -27,7 +27,7 @@ export default function Page() {
           >
             お問い合わせ
           </Link>
-          <Link href={"/users/login"}>
+          <Link href={"/auth/signin"}>
             <ButtonSmall type="button" buttonText="ログイン" />
           </Link>
         </nav>
@@ -56,7 +56,7 @@ export default function Page() {
             </div>
 
             <div className="lg:absolute lg:top-3/4 lg:right18p lg:translate-x-1/2 lg:w-96">
-              <Link href={"users/login"}>
+              <Link href={"/auth/signin"}>
                 <ButtonLarge type="button" buttonText="はじめる‼" />
               </Link>
             </div>

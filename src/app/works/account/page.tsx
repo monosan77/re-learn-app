@@ -1,21 +1,31 @@
-import ButtonSmall from "@/components/buttons/ButtonSmall";
-import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
-import Input from "@/components/Input/Input";
 import TitleText from "@/components/Title/TitleText";
 import Image from "next/image";
 import React from "react";
+import { signOut } from "../../../../auth";
 
 const Page = () => {
   return (
     <div className="w-[calc(100%-32px)] mx-4 my-8 p-7 md:max-w-600 md:mx-auto rounded-md  card-shadow space-y-8">
-      <div className="flex justify-start items-center space-x-4">
-        <Image
-          src={"/icon/person-black.svg"}
-          alt="アイコン"
-          width={25}
-          height={25}
-        />
-        <TitleText text="アカウント" />
+      <div className="w-full flex justify-between items-center ">
+        <div className="flex justify-start items-center space-x-4">
+          <Image
+            src={"/icon/person-black.svg"}
+            alt="アイコン"
+            width={25}
+            height={25}
+          />
+          <TitleText text="アカウント" />
+        </div>
+        <form
+          action={async () => {
+            "use server";
+            await signOut({ redirectTo: "/" });
+          }}
+        >
+          <button type="submit" className="text-red-600 font-bold mr-4">
+            サインアウト
+          </button>
+        </form>
       </div>
       <form action="" className="w-full space-y-8">
         <div className="w-full flex justify-start items-center space-x-7">
@@ -28,7 +38,7 @@ const Page = () => {
             <label htmlFor="userName" className="font-bold">
               名前
             </label>
-            <Input type="text" name="userName" id="userName" />
+            <p>yoshiki noguch</p>
           </div>
         </div>
         <div className="space-y-3">
@@ -45,10 +55,11 @@ const Page = () => {
             <span className="font-bold">メールアドレス</span>
           </label>
           <div className="ml-8">
-            <Input type="email" name="email" id="email" />
+            {/* <Input type="email" name="email" id="email" /> */}
+            <p>test@example.com</p>
           </div>
         </div>
-        <div className="space-y-3">
+        {/* <div className="space-y-3">
           <label
             htmlFor=""
             className="flex justify-start items-center space-x-3"
@@ -71,12 +82,12 @@ const Page = () => {
               <label htmlFor="dark">ダークモード</label>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="w-full flex justify-between">
+        {/* <div className="w-full flex justify-between">
           <ButtonSmallWhite type="button" buttonText="戻る" />
           <ButtonSmall type="button" buttonText="変更を保存" />
-        </div>
+        </div> */}
       </form>
     </div>
   );
