@@ -8,7 +8,7 @@ const Page = async () => {
   const session = await auth();
   if (!session) return redirect("/session-error");
 
-  console.log(session);
+  // console.log(session);
   return (
     <div className="w-full lg:max-w-1000 mx-auto mb-10">
       <ProblemHistory />
