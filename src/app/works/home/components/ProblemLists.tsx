@@ -1,12 +1,18 @@
 "use client";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
 import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
+import Card_Popup from "@/components/Card/Card_Popup";
 import Input from "@/components/Input/Input";
+import Mask_Transparent from "@/components/Mask/Mask_Transparent";
 import TitleText from "@/components/Title/TitleText";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 const ProblemLists = () => {
+  const [isOpenPop, setIsOpenPop] = useState(false);
+  function handleOpen() {
+    setIsOpenPop(!isOpenPop);
+  }
   // RGBから相対輝度を計算して、明るさを判定する関数
   // function isDarkColor(hex) {
   //   // HEXをRGBに変換
@@ -60,41 +66,45 @@ const ProblemLists = () => {
         </div>
 
         <div className="relative ">
-          <button className="w-full h-full flex justify-center items-center bg-gray-400 p-4 rounded-md space-y-2">
+          <button
+            className="w-full h-full flex justify-center items-center bg-gray-400 p-4 rounded-md space-y-2"
+            onClick={handleOpen}
+          >
             <p className="text-white font-bold">新しい問題集を作る</p>
           </button>
         </div>
-        <div className="fixed top-0 left-0 bottom-0 z-30 bg-transparent flex justify-center items-center w-full h-full">
-          <div className=" w-64 p-6 bg-background rounded-md text-sm">
-            <form action="" className="space-y-4">
-              <h3 className="text-center  text-white text-lg  font-bold ">
-                問題集を作成
-              </h3>
-              <div>
-                <label htmlFor="" className="text-white">
-                  問題集タイトル
-                </label>
-                <Input type="text" name="title" id="title" />
-              </div>
-              <div className="">
-                <label htmlFor="color" className="text-white">
-                  テーマカラー
-                </label>
-                <input
-                  type="color"
-                  id="color"
-                  name="color"
-                  className="w-full"
-                />
-              </div>
-              <div className="flex justify-between">
-                <ButtonSmall type="submit" buttonText="作成" />
-                <ButtonSmallWhite type="button" buttonText="閉じる" />
-              </div>
-            </form>
-          </div>
-        </div>
+
+        <Mask_Transparent active={isOpenPop} fn={handleOpen} />
+
+        <Card_Popup active={isOpenPop}>
+          <form action="" className="space-y-4">
+            <h3 className="text-center  text-white text-lg  font-bold ">
+              問題集を作成
+            </h3>
+            <div>
+              <label htmlFor="" className="text-white">
+                問題集タイトル
+              </label>
+              <Input type="text" name="title" id="title" />
+            </div>
+            <div className="">
+              <label htmlFor="color" className="text-white">
+                テーマカラー
+              </label>
+              <input type="color" id="color" name="color" className="w-full" />
+            </div>
+            <div className="flex justify-between">
+              <ButtonSmall type="submit" buttonText="作成" />
+              <ButtonSmallWhite
+                type="button"
+                buttonText="閉じる"
+                fn={handleOpen}
+              />
+            </div>
+          </form>
+        </Card_Popup>
       </div>
+      {/* </div> */}
     </>
   );
 };
