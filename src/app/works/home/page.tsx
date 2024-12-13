@@ -2,10 +2,11 @@ import React from "react";
 import ProblemHistory from "./components/ProblemHistory";
 import ProblemLists from "./components/ProblemLists";
 import { auth } from "../../../../auth";
+import { redirect } from "next/navigation";
 
 const Page = async () => {
   const session = await auth();
-  if (!session) return <div>Not authenticated</div>;
+  if (!session) return redirect("/session-error");
 
   console.log(session);
   return (
