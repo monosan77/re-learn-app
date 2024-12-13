@@ -24,11 +24,75 @@ model auth_data {
 
 model profile {
   id        String      @id @default(uuid())
-  auth_providerId    String      @unique
+  auth_provider_id    String      @unique
   image    String?  // プロフィール画像（任意）
   email       String    @unique
   name        String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  auth_data      auth_data     @relation(fields: [auth_providerId], references: [providerId])
+  auth_data      auth_data     @relation(fields: [auth_provider_id], references: [providerId])
+
+  problemSet problem_set[]
+
+  historyProblem history_problem[]
+}
+
+model problem_set {
+  id    String @id @default(uuid())
+  name  String //問題集のタイトル
+  profile_id String
+  profile profile @relation(fields: [profile_id],references: [id])
+
+  category category[]
+}
+
+//解答履歴
+model history_problem {
+  id            Int  @id @default(autoincrement())
+  profile        profile    @relation(fields: [profile_id], references: [id])
+  profile_id        String
+  problem     problem  @relation(fields: [problem_id], references: [id])
+  problem_id    Int
+  solvedAt     DateTime //解答した日時
+  isCorrect    Boolean //正解フラグ
+  attemptedAnswer String //ユーザーの解答テキスト
+}
+
+model category {
+  id            Int  @id @default(autoincrement())
+  name          String //カテゴリー名
+  problem_set   problem_set @relation(fields: [problem_set_id], references: [id])
+  problem_set_id  String
+
+  problem      problem[]
+
+}
+
+model problem {
+  id            Int  @id @default(autoincrement())
+  title         String //問題タイトル
+  format       format  @relation(fields: [format_id], references: [id]) 
+  format_id      Int  //出題形式
+  statement     String //問題文
+  answer        String //解答文
+  otherOptions  String //他の選択肢
+  explanation   String //解説
+  category     category  @relation(fields: [category_id], references: [id])
+  category_id    Int
+  createdAt    DateTime @default(now()) //問題作整備
+  updatedAt    DateTime @updatedAt //更新日
+
+  history_problem history_problem[]
+}
+
+enum Format {
+  select
+  write
+}
+
+model format {
+  id   Int     @id @default(autoincrement())
+  name Format //select 選択問題 write 記述問題
+
+  problem problem[]
 }
