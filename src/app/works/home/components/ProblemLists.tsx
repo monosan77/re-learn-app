@@ -1,18 +1,14 @@
-"use client";
-import ButtonSmall from "@/components/buttons/ButtonSmall";
-import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
-import Card_Popup from "@/components/Card/Card_Popup";
-import Input from "@/components/Input/Input";
-import Mask_Transparent from "@/components/Mask/Mask_Transparent";
 import TitleText from "@/components/Title/TitleText";
 import Image from "next/image";
 import React, { useState } from "react";
+import NewProblemContent from "./NewProblemContent";
 
 const ProblemLists = () => {
-  const [isOpenPop, setIsOpenPop] = useState(false);
-  function handleOpen() {
-    setIsOpenPop(!isOpenPop);
-  }
+  // const [isOpenPop, setIsOpenPop] = useState(false);
+  // function handleOpen() {
+  //   setIsOpenPop(!isOpenPop);
+  // }
+
   // RGBから相対輝度を計算して、明るさを判定する関数
   // function isDarkColor(hex) {
   //   // HEXをRGBに変換
@@ -65,7 +61,8 @@ const ProblemLists = () => {
           <p className="text-white text-sm lg:text-base">NextJs</p>
         </div>
 
-        <div className="relative ">
+        <NewProblemContent />
+        {/* <div className="relative ">
           <button
             className="w-full h-full flex justify-center items-center bg-gray-400 p-4 rounded-md space-y-2"
             onClick={handleOpen}
@@ -102,7 +99,7 @@ const ProblemLists = () => {
               />
             </div>
           </form>
-        </Card_Popup>
+        </Card_Popup> */}
       </div>
       {/* </div> */}
     </>

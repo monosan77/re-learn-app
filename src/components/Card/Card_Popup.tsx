@@ -1,3 +1,4 @@
+"use server";
 import React, { ReactNode } from "react";
 
 interface Prop {
