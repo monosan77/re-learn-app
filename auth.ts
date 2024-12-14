@@ -40,8 +40,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return token;
     },
-    async session({ session, token, user }) {
-      console.log(session);
+    async session({ session, token }) {
+      // console.log(session);
       const customSession = session as CustomSession; // 型アサーション
       const customToken = token as CustomJWT; // 型アサーション
       if (customToken.id) {
