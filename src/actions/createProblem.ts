@@ -3,9 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { auth } from "../../auth";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
-// export async function()
 export async function createProblem(formData: FormData) {
   "use server";
   const session = await auth();
@@ -13,18 +11,7 @@ export async function createProblem(formData: FormData) {
     const message = { title: "セッションエラー" };
     return message;
   }
-  console.log(session?.user);
-  // "use server";
-  console.log(formData.get("color"), "form");
-  console.log(!formData.get("title")?.toString().trim(), "form");
-  if (!formData.get("title") || !formData.get("color")) {
-    formData.get("title") === null;
-  }
-  if (
-    !formData.get("title")?.toString().trim()
-    // !formData.get("title") ||
-    // !formData.get("color")?.toString()
-  ) {
+  if (!formData.get("title")?.toString().trim()) {
     const message = { title: "入力してください" };
     return message;
   }
@@ -32,7 +19,7 @@ export async function createProblem(formData: FormData) {
   // 暗い色ならtrueを返す
   const textColor = isDarkColor(formData.get("color") as string);
 
-  const createData = await prisma.problem_set.create({
+  await prisma.problem_set.create({
     data: {
       name: formData.get("title") as string,
       color: formData.get("color") as string,
@@ -59,7 +46,6 @@ function isDarkColor(hex: string) {
   // 輝度を計算 (簡易的な輝度の計算式)
 
   const brightness = r * 0.299 + g * 0.587 + b * 0.114;
-  console.log(brightness);
   if (brightness < 128) {
     const color = "#ffffff";
     return color;
@@ -67,5 +53,4 @@ function isDarkColor(hex: string) {
     const color = "#000000";
     return color;
   }
-  // return brightness < 128; // 128未満なら暗い色と判定
 }

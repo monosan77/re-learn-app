@@ -1,11 +1,17 @@
+"use client";
 import ProblemTitle from "@/components/ProblemForm/ProblemTitle";
 import React from "react";
 import StudyingProblemTitle from "../answer/components/StudyingProblemTitle";
 import CorrectORIncorrect from "../answer/components/CorrectORIncorrect";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
 import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+  const router = useRouter();
+  function backPage() {
+    router.back();
+  }
   return (
     <div>
       <ProblemTitle />
@@ -33,7 +39,7 @@ const Page = () => {
       <div className="w-full px-4 pt-4 pb-8 md:pt-8  md:w-[calc(100%-256px)] fixed bottom-0 bg-background">
         <div className="max-w-600 mx-auto flex justify-between items-center">
           <ButtonSmall type="button" buttonText="やり直す" />
-          <ButtonSmallWhite type="button" buttonText="終了する" />
+          <ButtonSmallWhite type="button" buttonText="終了する" fn={backPage} />
         </div>
       </div>
     </div>

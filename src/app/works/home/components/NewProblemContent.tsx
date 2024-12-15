@@ -1,22 +1,8 @@
 "use client";
-import { createProblem } from "@/actions/createProblem";
-import ButtonSmall from "@/components/buttons/ButtonSmall";
-import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
-import Card_Popup from "@/components/Card/Card_Popup";
-import Input from "@/components/Input/Input";
 import Mask_Transparent from "@/components/Mask/Mask_Transparent";
-import { prisma } from "@/lib/prisma";
 import React, { useState } from "react";
-import Form from "./Form";
 import Link from "next/link";
 
-// async function createProblem(formData: FormData) {
-//   "use server";
-//   console.log(formData, "form");
-//   // const data = await prisma.problem_set.create({
-//   //   formdata
-//   // })
-// }
 const NewProblemContent = ({}) => {
   const [isOpenPop, setIsOpenPop] = useState(false);
   function handleOpen() {
