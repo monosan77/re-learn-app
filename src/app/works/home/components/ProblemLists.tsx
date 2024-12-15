@@ -15,7 +15,6 @@ async function getProblemSet() {
         profile_id: session?.user?.id,
       },
     });
-    console.log(problemData);
     return problemData;
   } catch (error) {
     console.error(error);
@@ -25,8 +24,6 @@ async function getProblemSet() {
 
 const ProblemLists = async () => {
   const problemData = await getProblemSet();
-
-  console.log(problemData, "cccc");
 
   return (
     <>
