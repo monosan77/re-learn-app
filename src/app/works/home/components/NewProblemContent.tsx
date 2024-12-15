@@ -26,17 +26,11 @@ const NewProblemContent = ({}) => {
   return (
     <>
       <div className="relative ">
-        {/* <button
-          className="w-full h-full flex justify-center items-center bg-gray-400 p-4 rounded-md space-y-2"
-          onClick={handleOpen}
-        >
-          <p className="text-white font-bold">新しい問題集を作る</p>
-        </button> */}
         <Link
           href={"/works/create"}
           // as={"/works/create"}
           scroll={false}
-          className="w-full h-full flex justify-center items-center bg-gray-400 p-4 rounded-md space-y-2"
+          className="w-full h-full flex justify-center items-center bg-gray-400 p-4 rounded-md space-y-2 box-shadow hover:scale-[1.025] transition-all duration-100"
           // onClick={handleOpen}
         >
           <p className="text-white font-bold">新しい問題集を作る</p>
@@ -44,35 +38,6 @@ const NewProblemContent = ({}) => {
       </div>
 
       <Mask_Transparent active={isOpenPop} fn={handleOpen} />
-
-      {/* <Card_Popup active={isOpenPop}> */}
-      {/* <Form /> */}
-      {/* <form action={createProblem} className="space-y-4">
-          <h3 className="text-center  text-white text-lg  font-bold ">
-            問題集を作成
-          </h3>
-          <div>
-            <label htmlFor="" className="text-white">
-              問題集タイトル
-            </label>
-            <Input type="text" name="title" id="title" />
-          </div>
-          <div className="">
-            <label htmlFor="color" className="text-white">
-              テーマカラー
-            </label>
-            <input type="color" id="color" name="color" className="w-full" />
-          </div>
-          <div className="flex justify-between">
-            <ButtonSmall type="submit" buttonText="作成" />
-            <ButtonSmallWhite
-              type="button"
-              buttonText="閉じる"
-              fn={handleOpen}
-            />
-          </div>
-        </form> */}
-      {/* </Card_Popup> */}
     </>
   );
 };
