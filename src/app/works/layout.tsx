@@ -3,7 +3,13 @@ import Header from "@/components/Header/Header";
 import SideBar from "@/components/SideBar/SideBar";
 import React, { useState } from "react";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({
+  children,
+  modal,
+}: {
+  children: React.ReactNode;
+  modal: React.ReactNode;
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   function handleMenuOpen() {
@@ -16,6 +22,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <Header handleMenuOpen={handleMenuOpen} />
         <div className="w-full pt-12">
           <div>{children}</div>
+          <div>{modal}</div>
         </div>
       </div>
     </div>
