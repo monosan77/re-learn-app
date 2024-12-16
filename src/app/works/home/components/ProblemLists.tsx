@@ -15,9 +15,6 @@ async function getProblemSet() {
         profile_id: session?.user?.id,
       },
     });
-    setTimeout(() => {
-      console.log("iiii");
-    }, 1000);
     return problemData;
   } catch (error) {
     console.error(error);
