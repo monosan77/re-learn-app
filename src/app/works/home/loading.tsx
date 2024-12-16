@@ -1,3 +1,9 @@
+import Loader from "@/components/Loading/Loader";
+
 export default function Loading() {
-  return <div>Loading...</div>;
+  return (
+    <div className="w-full h-screen flex justify-center items-center">
+      <Loader />
+    </div>
+  );
 }
