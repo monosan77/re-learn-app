@@ -15,7 +15,7 @@ export default function Error({
       <div className="mt-20">
         <LogoAndTitle title="500 Error" />
         <Image
-          src={"/errorImage/error-img.png"}
+          src={"/errorImage/error-500.png"}
           alt=""
           width={400}
           height={300}

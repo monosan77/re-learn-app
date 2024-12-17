@@ -27,25 +27,25 @@ const SideBar = ({ handleMenuOpen, isOpen }: Prop) => {
         <ul className="mx-5 mb-10 text-md  space-y-3">
           <li>
             <SideBarList
-              url="/works"
+              url="/works/home"
               src="/icon/home-white.svg"
               menuText="ホーム"
             />
           </li>
           <li>
             <SideBarList
-              url="/works"
+              url="/works/account"
               src="/icon/person-white.svg"
               menuText="アカウント"
             />
           </li>
-          <li>
+          {/* <li>
             <SideBarList
               url="/works"
               src="/icon/gear-white.svg"
               menuText="設定"
             />
-          </li>
+          </li> */}
         </ul>
         <ul className="mx-5 mb-10 text-lg  space-y-3">
           <h3 className="border-b mb-4">復習記録</h3>
