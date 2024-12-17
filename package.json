@@ -10,7 +10,7 @@
     "test": "jest",
     "format": " yarn prettier --write .",
     "ci": "yarn lint && yarn test --passWithNoTests && yarn build && yarn format",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma migrate deploy && prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.0.1",
