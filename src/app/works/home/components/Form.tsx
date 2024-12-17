@@ -6,13 +6,6 @@ import { createProblem } from "@/actions/createProblem";
 import { useRouter } from "next/navigation";
 
 const Form = () => {
-  // async function createProblem(formData: FormData) {
-  //   "use server";
-  //   console.log(formData, "form");
-  //   // const data = await prisma.problem_set.create({
-  //   //   formdata
-  //   // })
-  // }
   const router = useRouter();
   const [errors, setErrors] = useState<string>();
   async function handleSubmit(formData: FormData) {
