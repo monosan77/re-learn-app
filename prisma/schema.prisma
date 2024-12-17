@@ -25,7 +25,7 @@ model auth_data {
 model profile {
   id        String      @id
   // auth_provider_id    String      @unique
-  image    String?  // プロフィール画像（任意）
+  image    String  // プロフィール画像（任意）
   email       String    @unique
   name        String?
   createdAt DateTime @default(now())
@@ -42,8 +42,8 @@ model problem_set {
   name  String //問題集のタイトル
   color String
   text_color String
-  profile_id String?
-  profile profile? @relation(fields: [profile_id],references: [id])
+  profile_id String
+  profile profile @relation(fields: [profile_id],references: [id])
 
   category category[]
 }
