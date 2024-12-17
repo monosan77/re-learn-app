@@ -63,6 +63,8 @@ model history_problem {
 model category {
   id            Int  @id @default(autoincrement())
   name          String //カテゴリー名
+  color         String
+  text_color    String
   problem_set   problem_set @relation(fields: [problem_set_id], references: [id])
   problem_set_id  String
 
