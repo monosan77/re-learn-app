@@ -1,43 +1,43 @@
-export interface Auth_Data {
+export interface Auth_DataModel {
   id: number;
   provider: string;
   providerId: string;
   createdAt: Date;
   updatedAt: Date;
-  profile: Profile;
+  profile: ProfileModel;
 }
 
-export interface Profile {
+export interface ProfileModel {
   id: string;
   image: string;
   email: string;
   name: string;
   createdAt: Date;
   updatedAt: Date;
-  auth_data: Auth_Data;
+  auth_data: Auth_DataModel;
 }
 
-export interface Problem_Set {
+export interface Problem_SetModel {
   id: string;
   name: string;
   color: string;
   text_color: string;
   profile_id: string;
 
-  category?: Category[];
+  category?: CategoryModel[];
 }
 
-export interface Category {
+export interface CategoryModel {
   id: number;
   name: string;
   color: string;
   text_color: string;
   problem_set_id: string;
 
-  problem?: Problem[];
+  problem?: ProblemModel[];
 }
 
-export interface Problem {
+export interface ProblemModel {
   id: number;
   title: string;
   format: "select" | "write";
