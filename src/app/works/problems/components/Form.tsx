@@ -1,17 +1,21 @@
 "use client";
 import Input from "@/components/Input/Input";
 import React, { useState } from "react";
-import Buttons from "./Buttons";
-import { createProblem } from "@/actions/createProblem";
 import { useRouter } from "next/navigation";
+import Buttons from "./Buttons";
+import { createCategory } from "@/actions/createCategory";
 
-const Form = () => {
+interface Prop {
+  id: string;
+}
+const Form = ({ id }: Prop) => {
   const router = useRouter();
   const [errors, setErrors] = useState<string>();
+
   async function handleSubmit(formData: FormData) {
     setErrors("");
 
-    const result = await createProblem(formData);
+    const result = await createCategory(formData, id);
     if (result) {
       setErrors(result?.title);
     } else {
@@ -23,12 +27,12 @@ const Form = () => {
   return (
     <form action={handleSubmit} className="space-y-4">
       <h3 className="text-center  text-white text-lg  font-bold ">
-        問題集を作成
+        カテゴリーを作成
       </h3>
       <div>
         <label htmlFor="title" className="text-white">
-          問題集タイトル
-          <p className="text-xs text-red-600">※{errors}</p>
+          カテゴリータイトル
+          <p className="text-xs text-red-600">{errors}</p>
         </label>
         <Input type="text" name="title" id="title" />
       </div>

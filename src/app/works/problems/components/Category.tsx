@@ -1,11 +1,14 @@
 import React from "react";
 import ProblemList from "./ProblemList";
 import Image from "next/image";
-
-const Category = () => {
+import { CategoryModel } from "@/types/types";
+interface Prop {
+  category: CategoryModel;
+}
+const Category = ({ category }: Prop) => {
   return (
     <div className="min-w-60 h-fit text-white bg-slate-600 p-3 rounded-md box-shadow">
-      <h3 className="border-solid border-b font-bold mb-2">Next.Js</h3>
+      <h3 className="border-solid border-b font-bold mb-2">{category.name}</h3>
       <ul className="pace-y-0.5">
         <li className="">
           <ProblemList problemName="SSRについて" />

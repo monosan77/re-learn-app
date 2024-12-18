@@ -41,7 +41,7 @@ const ProblemLists = async () => {
           problemData.map((problem) => (
             <Link
               key={problem.id}
-              href={`/works/problems?q=${problem.id}`}
+              href={`/works/problems?id=${problem.id}`}
               className="w-full px-4 py-6 rounded-md space-y-2 box-shadow  hover:scale-[1.025] transition-all duration-100"
               style={{ backgroundColor: problem.color }}
             >

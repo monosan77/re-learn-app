@@ -81,7 +81,7 @@ async function upsertUserInfo(
       providerId: providerId ? providerId.toString() : undefined,
       profile: {
         update: {
-          image: user.image,
+          image: user.image ?? "",
           email: user.email ? user.email : "",
         },
       },
@@ -91,7 +91,7 @@ async function upsertUserInfo(
       provider: providerImg,
       profile: {
         create: {
-          image: user.image,
+          image: user.image ?? "",
           name: user.name,
           email: user.email ? user.email : "",
         },

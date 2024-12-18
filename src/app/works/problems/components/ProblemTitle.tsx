@@ -1,11 +1,21 @@
 import React from "react";
 import NavList from "./NavList";
+import { Problem_SetModel } from "@/types/types";
 
-const ProblemTitle = () => {
+interface Prop {
+  problemData: Problem_SetModel;
+}
+const ProblemTitle = async ({ problemData }: Prop) => {
   return (
-    <div className="w-full bg-mainColor">
-      <div className=" text-white px-4 pt-5 pb-2 w-full max-w-1000 mx-auto">
-        <h1 className="font-bold text-xl mb-4">プログラミング</h1>
+    <div
+      className="w-full bg-mainColor"
+      style={{ background: `${problemData?.color}` }}
+    >
+      <div
+        className=" px-4 pt-5 pb-2 w-full max-w-1000 mx-auto"
+        style={{ color: `${problemData?.text_color}` }}
+      >
+        <h1 className="font-bold text-xl mb-4">{problemData?.name}</h1>
         <div className="flex justify-end items-center space-x-4">
           <NavList
             imgPath="/icon/plus-white.svg"

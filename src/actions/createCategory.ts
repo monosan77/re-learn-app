@@ -5,7 +5,7 @@ import { auth } from "../../auth";
 import { revalidatePath } from "next/cache";
 import { isDarkColor } from "@/utils/isDarkColor";
 
-export async function createProblem(formData: FormData) {
+export async function createCategory(formData: FormData, id: string) {
   "use server";
   const session = await auth();
   if (!session || !session.user) {
@@ -20,12 +20,12 @@ export async function createProblem(formData: FormData) {
   // 暗い色ならtrueを返す
   const textColor = isDarkColor(formData.get("color") as string);
 
-  await prisma.problem_set.create({
+  await prisma.category.create({
     data: {
       name: formData.get("title") as string,
       color: formData.get("color") as string,
       text_color: textColor,
-      profile_id: session.user.id as string,
+      problem_set_id: id,
     },
   });
 
