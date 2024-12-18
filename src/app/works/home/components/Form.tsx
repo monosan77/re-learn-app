@@ -30,7 +30,13 @@ const Form = () => {
           問題集タイトル
           <p className="text-xs text-red-600">※{errors}</p>
         </label>
-        <Input type="text" name="title" id="title" />
+        <Input
+          type="text"
+          name="title"
+          id="title"
+          value={undefined}
+          setFn={undefined}
+        />
       </div>
       <div className="">
         <label htmlFor="color" className="text-white">

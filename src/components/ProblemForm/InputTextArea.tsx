@@ -3,8 +3,9 @@ interface Props {
   title: string;
   setFn: ((value: string) => void) | undefined;
   value: string | undefined;
+  error: string;
 }
-const InputTextArea = ({ title, setFn, value }: Props) => {
+const InputTextArea = ({ title, setFn, value, error }: Props) => {
   function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {
     if (setFn !== undefined) {
       setFn(e.target.value);
@@ -14,7 +15,7 @@ const InputTextArea = ({ title, setFn, value }: Props) => {
   return (
     <div className="flex flex-col">
       <label htmlFor="problemText" className="font-bold">
-        {title}
+        {title} <span className="text-red-500 text-sm">{error}</span>
       </label>
       <textarea
         name="problemText"
