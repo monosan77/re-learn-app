@@ -1,7 +1,6 @@
 "use client";
 import Input from "@/components/Input/Input";
 import React, { useState } from "react";
-import { createProblem } from "@/actions/createProblem";
 import { useRouter } from "next/navigation";
 import Buttons from "./Buttons";
 import { createCategory } from "@/actions/createCategory";

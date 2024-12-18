@@ -25,7 +25,7 @@ export async function createProblem(formData: FormData) {
       name: formData.get("title") as string,
       color: formData.get("color") as string,
       text_color: textColor,
-      profile_id: session.user.id,
+      profile_id: session.user.id as string,
     },
   });
 
