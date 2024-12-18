@@ -2,6 +2,7 @@ import React from "react";
 import ProblemList from "./ProblemList";
 import Image from "next/image";
 import { CategoryModel } from "@/types/types";
+import Link from "next/link";
 interface Prop {
   category: CategoryModel;
 }
@@ -20,7 +21,10 @@ const Category = ({ category }: Prop) => {
           <ProblemList problemName="CSRについて" />
         </li>
         <li className="pt-1">
-          <button className="flex justify-end items-center space-x-2">
+          <Link
+            href={"/works/create-problem"}
+            className="flex justify-start items-center space-x-2"
+          >
             <Image
               src={"/icon/plus-gray.svg"}
               alt="アイコン"
@@ -28,7 +32,7 @@ const Category = ({ category }: Prop) => {
               height={18}
             />
             <p className="text-gray-200 text-sm">問題を追加</p>
-          </button>
+          </Link>
         </li>
       </ul>
     </div>
