@@ -33,3 +33,9 @@ jobs:
 
       - name: Build project
         run: yarn build # プロジェクトのビルド
+      - name: Run Prisma migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          yarn prisma migrate deploy
+          yarn prisma generate
