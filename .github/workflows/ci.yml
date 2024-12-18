@@ -18,15 +18,20 @@ jobs:
         uses: actions/setup-node@v4 # Node.jsのセットアップ
         with:
           node-version: "20" # 使用するNode.jsのバージョン
-      - name: Run Prisma migrations
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: |
-          yarn prisma migrate deploy
-          yarn prisma generate
+      
+      - name: Set up .env
+        run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+    
 
       - name: Install dependencies
         run: yarn install # 依存関係のインストール
+      
+      # - name: Run Prisma migrations
+      #   env:
+      #     DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      #   run: |
+      #     yarn prisma migrate deploy
+      #     yarn prisma generate
 
       - name: Run Prettier
         run: yarn prettier --check .
