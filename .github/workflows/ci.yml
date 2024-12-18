@@ -25,13 +25,6 @@ jobs:
       - name: Install dependencies
         run: yarn install # 依存関係のインストール
 
-      # - name: Run Prisma migrations
-      #   env:
-      #     DATABASE_URL:
-      #   run: |
-      #     yarn prisma migrate deploy
-      #     yarn prisma generate
-
       - name: Run Prettier
         run: yarn prettier --check .
 
@@ -43,4 +36,3 @@ jobs:
 
       - name: Build project
         run: yarn build # プロジェクトのビルド
-
