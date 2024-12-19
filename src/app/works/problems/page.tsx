@@ -27,6 +27,7 @@ const Page = async ({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) => {
   const id = (await searchParams).id;
+  console.log(id);
   if (!id) return <p>データを取得できませんでした</p>;
 
   const problemData: Problem_SetModel | null = await getProblemData(id);
@@ -38,7 +39,12 @@ const Page = async ({
       <div className="p-4  flex justify-start   space-x-4 overflow-hidden hover:overflow-x-auto hover:scrollbar-thin">
         {problemData.category
           ? problemData.category.map((part) => (
-              <Category category={part} key={part.id} name={problemData.name} />
+              <Category
+                problemSet_id={id}
+                category={part}
+                key={part.id}
+                name={problemData.name}
+              />
             ))
           : ""}
         {/* <Category /> */}

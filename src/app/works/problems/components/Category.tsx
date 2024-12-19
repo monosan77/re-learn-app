@@ -3,26 +3,14 @@ import ProblemList from "./ProblemList";
 import Image from "next/image";
 import { CategoryModel, ProblemModel } from "@/types/types";
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+import { getProblemList } from "@/actions/getProblem";
 interface Prop {
+  problemSet_id: string;
   category: CategoryModel;
   name: string;
 }
 
-async function getProblemList(id: string) {
-  try {
-    const problem = await prisma.problem.findMany({
-      where: {
-        category_id: id,
-      },
-    });
-    return problem;
-  } catch (error) {
-    console.log(error);
-    return null;
-  }
-}
-const Category = async ({ category, name }: Prop) => {
+const Category = async ({ problemSet_id, category, name }: Prop) => {
   const problems: ProblemModel[] | null = await getProblemList(category.id);
   if (!problems) return <p>データを取得できませんでした。</p>;
   return (
@@ -34,12 +22,16 @@ const Category = async ({ category, name }: Prop) => {
       <ul className="pace-y-0.5">
         {problems.map((problem) => (
           <li key={problem.id}>
-            <ProblemList problemName={problem.title} />
+            <Link
+              href={`/works/edit-problem?problemSetId=${problemSet_id}&categoryId=${category.id}&problemSetName=${name}&problemId=${problem.id}`}
+            >
+              <ProblemList problemName={problem.title} />
+            </Link>
           </li>
         ))}
         <li className="pt-1">
           <Link
-            href={`/works/create-problem?id=${category.id}&category=${name}`}
+            href={`/works/create-problem?categoryId=${category.id}&problemSetId=${problemSet_id}&problemSetName=${name}`}
             className="flex justify-start items-center space-x-2"
           >
             <Image

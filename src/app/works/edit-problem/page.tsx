@@ -1,58 +1,45 @@
-"use client";
-import ButtonSmall from "@/components/buttons/ButtonSmall";
-import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
-import IncorrectAnswer from "@/components/ProblemForm/IncorrectAnswer";
-import InputText from "@/components/ProblemForm/InputText";
-import InputTextArea from "@/components/ProblemForm/InputTextArea";
-import ProblemFormat from "@/components/ProblemForm/ProblemFormat";
 import ProblemTitle from "@/components/ProblemForm/ProblemTitle";
 import TitleText from "@/components/Title/TitleText";
-import { useRouter } from "next/navigation";
 import React from "react";
-const Page = () => {
-  const router = useRouter();
-  function backPage() {
-    router.back();
-  }
+import EditProblemForm from "./components/EditProblemForm";
+import { getCategory } from "@/actions/getCategory";
+import { CategoryModel, ProblemModel } from "@/types/types";
+import { getProblem } from "@/actions/getProblem";
+
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | undefined }>;
+}) => {
+  const problemSetId = (await searchParams).problemSetId;
+  const problemId = (await searchParams).problemId;
+  const categoryId = (await searchParams).categoryId;
+  const problemSetName = (await searchParams).problemSetName;
+  if (!problemSetId || !categoryId || !problemSetName || !problemId)
+    return <p>データを取得できませんでした</p>;
+  const data = await Promise.all([
+    getCategory(categoryId),
+    getProblem(problemId),
+  ]);
+  const categoryData: CategoryModel | null = data[0];
+  const problemData: ProblemModel | null = data[1];
+  if (!categoryData || !problemData) return <p>データを取得できませんでした</p>;
   return (
     <div>
-      <ProblemTitle title={""} bgColor={""} textColor={""} name={""} />
+      <ProblemTitle
+        title={categoryData.name}
+        bgColor={categoryData.color}
+        textColor={categoryData.text_color}
+        name={problemSetName}
+      />
       <div className="w-[calc(100%-32px)] mx-4 md:max-w-750 lg:mx-auto pt-24 mb-14">
         <TitleText text="問題の編集" />
-        <form action="" className=" pt-4 space-y-6">
-          <InputTextArea
-            title="問題タイトル"
-            setFn={undefined}
-            value={undefined}
-            error={""}
-          />
-
-          <ProblemFormat setFormat={() => {}} />
-
-          <InputTextArea title="問題文" />
-
-          <InputText title="答え" setFn={undefined} error={""} />
-
-          <IncorrectAnswer
-            answer={""}
-            statement={""}
-            otherAnswer={[]}
-            setOtherAnswer={() => {}}
-            incorrectError={""}
-            setIncorrectError={() => {}}
-          />
-
-          <InputTextArea title="解説" error={""} />
-
-          <div className="max-w-450 flex justify-between items-center mx-auto pt-8">
-            <ButtonSmall type="button" buttonText="保存する" />
-            <ButtonSmallWhite
-              type="button"
-              buttonText="キャンセル"
-              fn={backPage}
-            />
-          </div>
-        </form>
+        <EditProblemForm
+          category_id={categoryData.id}
+          problem_id={problemId}
+          problemSetId={problemSetId}
+          problemData={problemData}
+        />
       </div>
     </div>
   );
