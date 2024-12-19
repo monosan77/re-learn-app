@@ -5,6 +5,7 @@ import AddProblem from "./components/AddProblem";
 import StudyStartContent from "./components/StudyStartContent";
 import { prisma } from "@/lib/prisma";
 import { Problem_SetModel } from "@/types/types";
+
 async function getProblemData(id: string) {
   const data = await prisma.problem_set.findUnique({
     where: {
@@ -27,16 +28,17 @@ const Page = async ({
 }) => {
   const id = (await searchParams).id;
   if (!id) return <p>データを取得できませんでした</p>;
+
   const problemData: Problem_SetModel | null = await getProblemData(id);
   if (!problemData) return <p>データを取得できませんでした</p>;
-  console.log(problemData);
+
   return (
     <div>
       <ProblemTitle problemData={problemData} />
       <div className="p-4  flex justify-start   space-x-4 overflow-hidden hover:overflow-x-auto hover:scrollbar-thin">
         {problemData.category
           ? problemData.category.map((part) => (
-              <Category category={part} key={part.id} />
+              <Category category={part} key={part.id} name={problemData.name} />
             ))
           : ""}
         {/* <Category /> */}

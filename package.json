@@ -13,6 +13,7 @@
     "postinstall": "prisma migrate deploy && prisma generate"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "@prisma/client": "^6.0.1",
     "next": "15.0.3",
     "next-auth": "^5.0.0-beta.25",

@@ -8,6 +8,7 @@ const AddProblem = ({ id }: Prop) => {
   return (
     <Link
       href={`/works/createCategory?id=${id}`}
+      scroll={false}
       className="flex justify-start items-center h-fit min-w-60 text-white bg-slate-400 p-3 rounded-md box-shadow space-x-2"
     >
       <Image
