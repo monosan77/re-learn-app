@@ -20,7 +20,8 @@ jobs:
           node-version: "20" # 使用するNode.jsのバージョン
 
       - name: Set up .env
-        run: echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+        run: |
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
           echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env
 
       - name: Install dependencies
