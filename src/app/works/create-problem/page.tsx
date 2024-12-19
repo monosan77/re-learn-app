@@ -21,9 +21,11 @@ const Page = async ({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) => {
   const id = (await searchParams).id;
+  const problemId = (await searchParams).problemId;
   const category = (await searchParams).category;
 
-  if (!id || !category) return <p>データを取得できませんでした</p>;
+  if (!id || !category || !problemId)
+    return <p>データを取得できませんでした</p>;
   const categoryData: CategoryModel | null = await getCategory(id);
   if (!categoryData) return <p>データを取得できませんでした</p>;
   return (
@@ -36,7 +38,10 @@ const Page = async ({
       />
       <div className="w-[calc(100%-32px)] mx-4 md:max-w-750 lg:mx-auto pt-24 mb-14">
         <TitleText text="問題の新規作成" />
-        <CreateProblemForm category_id={categoryData.id} problem_id={id} />
+        <CreateProblemForm
+          category_id={categoryData.id}
+          problem_id={problemId}
+        />
       </div>
     </div>
   );

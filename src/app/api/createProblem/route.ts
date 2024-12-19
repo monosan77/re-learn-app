@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
 interface FormData {
@@ -45,6 +46,8 @@ export async function POST(req: Request) {
         category_id: formData.category_id,
       },
     });
+    console.log(data);
+    revalidatePath("/works/problems");
     return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
     console.error("server error", error);

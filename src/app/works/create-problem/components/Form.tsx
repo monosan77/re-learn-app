@@ -5,7 +5,6 @@ import InputTextArea from "@/components/ProblemForm/InputTextArea";
 import ProblemFormat from "@/components/ProblemForm/ProblemFormat";
 import React, { useState } from "react";
 import ButtonContents from "./ButtonContents";
-import { revalidatePath } from "next/cache";
 import { useRouter } from "next/navigation";
 
 export function arrayNothingValidation(
@@ -99,18 +98,14 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
           category_id: category_id,
         }),
       });
+      console.log(res);
       if (!res.ok) {
         throw new Error("api error");
       }
-      revalidatePath("/works/problems");
       return router.push(`/works/problems?id=${problem_id}`);
     } catch (error) {
       console.log(error);
     }
-
-    // if (!title || title.trim().length === 0) {
-    //   setTitleError("※必須入力です");
-    // }
   }
   return (
     <form action="" className=" pt-4 space-y-6">

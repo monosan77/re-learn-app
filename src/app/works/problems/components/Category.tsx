@@ -5,6 +5,7 @@ import { CategoryModel, ProblemModel } from "@/types/types";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 interface Prop {
+  problem_id: string;
   category: CategoryModel;
   name: string;
 }
@@ -22,7 +23,7 @@ async function getProblemList(id: string) {
     return null;
   }
 }
-const Category = async ({ category, name }: Prop) => {
+const Category = async ({ problem_id, category, name }: Prop) => {
   const problems: ProblemModel[] | null = await getProblemList(category.id);
   if (!problems) return <p>データを取得できませんでした。</p>;
   return (
@@ -39,7 +40,7 @@ const Category = async ({ category, name }: Prop) => {
         ))}
         <li className="pt-1">
           <Link
-            href={`/works/create-problem?id=${category.id}&category=${name}`}
+            href={`/works/create-problem?id=${category.id}&problemId=${problem_id}&category=${name}`}
             className="flex justify-start items-center space-x-2"
           >
             <Image
