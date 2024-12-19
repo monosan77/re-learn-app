@@ -3,7 +3,6 @@ import ProblemList from "./ProblemList";
 import Image from "next/image";
 import { CategoryModel, ProblemModel } from "@/types/types";
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
 import { getProblemList } from "@/actions/getProblem";
 interface Prop {
   problemSet_id: string;

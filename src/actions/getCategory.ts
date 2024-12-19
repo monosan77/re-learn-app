@@ -14,6 +14,7 @@ export async function getCategory(id: string) {
     }
     return null;
   } catch (error) {
+    console.log(error);
     throw new Error("データを取得できませんでした。");
   }
 }
