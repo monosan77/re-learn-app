@@ -1,5 +1,5 @@
 export interface Auth_DataModel {
-  id: number;
+  id: string;
   provider: string;
   providerId: string;
   createdAt: Date;
@@ -28,7 +28,7 @@ export interface Problem_SetModel {
 }
 
 export interface CategoryModel {
-  id: number;
+  id: string;
   name: string;
   color: string;
   text_color: string;
@@ -38,14 +38,14 @@ export interface CategoryModel {
 }
 
 export interface ProblemModel {
-  id: number;
+  id: string;
   title: string;
-  format: "select" | "write";
+  format: string;
   statement: string;
   answer: string;
-  otherOptions: string;
-  explanation: string;
-  category_id: number;
+  otherOptions: string[];
+  explanation: string | null;
+  category_id: string;
   createdAt: Date;
   updatedAt: Date;
 
@@ -53,9 +53,9 @@ export interface ProblemModel {
 }
 
 export interface History_Problem {
-  id: number;
+  id: string;
   profile_id: string;
-  problem_id: number;
+  problem_id: string;
   solvedAt: Date;
   isCorrect: Date;
   attemptedAnswer: string;

@@ -5,6 +5,9 @@ import InputTextArea from "@/components/ProblemForm/InputTextArea";
 import ProblemFormat from "@/components/ProblemForm/ProblemFormat";
 import React, { useState } from "react";
 import ButtonContents from "./ButtonContents";
+import { revalidatePath } from "next/cache";
+import { Router } from "next/router";
+import { useRouter } from "next/navigation";
 
 export function arrayNothingValidation(
   elem: string[],
@@ -29,7 +32,14 @@ export function nothingValidation(
   return 0;
 }
 
-const CreateProblemForm = () => {
+interface Prop {
+  category_id: string;
+  problem_id: string;
+}
+
+const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
+  const router = useRouter();
+  console.log(category_id, "id");
   const [title, setTitle] = useState("");
   const [format, setFormat] = useState("select");
   const [statement, setStatement] = useState("");
@@ -45,7 +55,7 @@ const CreateProblemForm = () => {
   const [isErrorValidation, setIsErrorValidation] = useState(false);
   const [explanationError, setExplanationError] = useState("");
 
-  function handleSubmit() {
+  async function handleSubmit() {
     setTitleError("");
     setStatementError("");
     setAnswerError("");
@@ -73,15 +83,39 @@ const CreateProblemForm = () => {
         "※必須入力です"
       );
     }
-    if (isErrorValidation === 0) {
-      return console.log("エラーは発生しませんでした。");
+    if (isErrorValidation > 0) {
+      return;
     }
-    console.log("エラー発生");
+
+    try {
+      const res = await fetch("/api/createProblem", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: title,
+          format: format,
+          statement: statement,
+          answer: answer,
+          otherAnswer: otherAnswer,
+          explanation: explanation,
+          category_id: category_id,
+        }),
+      });
+      if (!res.ok) {
+        throw new Error("api error");
+      }
+      revalidatePath("/works/problems");
+      return router.push(`/works/problems?id=${problem_id}`);
+    } catch (error) {
+      console.log(error);
+    }
+
     // if (!title || title.trim().length === 0) {
     //   setTitleError("※必須入力です");
     // }
   }
-  console.log(format);
   return (
     <form action="" className=" pt-4 space-y-6">
       <InputText
