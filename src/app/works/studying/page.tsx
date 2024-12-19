@@ -6,7 +6,7 @@ import StudyingTitle from "./components/StudyingTitle";
 const Page = () => {
   return (
     <div>
-      <ProblemTitle />
+      <ProblemTitle title={""} bgColor={""} textColor={""} name={""} />
       <div className="w-[calc(100%-32px)] mx-4 p-6 mt-28 mb-24 max-w-750 md:mx-auto rounded-md border border-solid  border-gray-300  card-shadow space-y-4">
         <StudyingTitle color="mainColor" text="問題" />
 

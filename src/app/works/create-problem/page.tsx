@@ -1,11 +1,5 @@
-// "use client";
-import IncorrectAnswer from "@/components/ProblemForm/IncorrectAnswer";
-import InputText from "@/components/ProblemForm/InputText";
-import InputTextArea from "@/components/ProblemForm/InputTextArea";
-import ProblemFormat from "@/components/ProblemForm/ProblemFormat";
 import ProblemTitle from "@/components/ProblemForm/ProblemTitle";
 import TitleText from "@/components/Title/TitleText";
-import ButtonContents from "./components/ButtonContents";
 import CreateProblemForm from "./components/Form";
 import { prisma } from "@/lib/prisma";
 import { CategoryModel } from "@/types/types";
@@ -32,7 +26,6 @@ const Page = async ({
   if (!id || !category) return <p>データを取得できませんでした</p>;
   const categoryData: CategoryModel | null = await getCategory(id);
   if (!categoryData) return <p>データを取得できませんでした</p>;
-  console.log(categoryData);
   return (
     <div>
       <ProblemTitle

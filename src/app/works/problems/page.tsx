@@ -28,11 +28,9 @@ const Page = async ({
 }) => {
   const id = (await searchParams).id;
   if (!id) return <p>データを取得できませんでした</p>;
-  // const problemData: any | null = await getProblemData(id);
 
   const problemData: Problem_SetModel | null = await getProblemData(id);
   if (!problemData) return <p>データを取得できませんでした</p>;
-  console.log(problemData);
 
   return (
     <div>

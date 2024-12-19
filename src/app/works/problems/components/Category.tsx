@@ -24,9 +24,7 @@ async function getProblemList(id: string) {
 }
 const Category = async ({ category, name }: Prop) => {
   const problems: ProblemModel[] | null = await getProblemList(category.id);
-  // const problem: ProblemModel | null = await getProblemList(category.id);
   if (!problems) return <p>データを取得できませんでした。</p>;
-  console.log(problems, "problem");
   return (
     <div
       className="min-w-60 h-fit  p-3 rounded-md box-shadow"
@@ -35,7 +33,7 @@ const Category = async ({ category, name }: Prop) => {
       <h3 className="border-solid border-b font-bold mb-2">{category.name}</h3>
       <ul className="pace-y-0.5">
         {problems.map((problem) => (
-          <li className="">
+          <li key={problem.id}>
             <ProblemList problemName={problem.title} />
           </li>
         ))}

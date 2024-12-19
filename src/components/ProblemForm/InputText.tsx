@@ -2,9 +2,9 @@ import Input from "@/components/Input/Input";
 import React from "react";
 interface Prop {
   title: string;
-  value: string | undefined;
-  setFn: ((value: string) => void) | undefined;
-  error: string;
+  value?: string | undefined;
+  setFn?: ((value: string) => void) | undefined;
+  error?: string;
 }
 const InputText = ({ title, value, setFn, error }: Prop) => {
   return (

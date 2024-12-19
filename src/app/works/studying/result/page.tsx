@@ -14,7 +14,7 @@ const Page = () => {
   }
   return (
     <div>
-      <ProblemTitle />
+      <ProblemTitle title={""} bgColor={""} textColor={""} name={""} />
       <div className="w-full px-4 mt-28 mb-32 max-w-600 mx-auto space-y-4">
         <div className="flex justify-between items-center font-bold text-3xl">
           <h2>結果</h2>

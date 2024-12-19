@@ -1,7 +1,6 @@
 "use client";
 import { nothingValidation } from "@/app/works/create-problem/components/Form";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
-import Input from "@/components/Input/Input";
 import React, { useState } from "react";
 interface Prop {
   answer: string;
@@ -57,7 +56,6 @@ const IncorrectAnswer = ({
 
       const data = await res.json();
       // const data1 = JSON.parse(data.text);
-      console.log(data);
       if (res.ok) {
         setOtherAnswer(data.text);
       } else {
@@ -72,7 +70,7 @@ const IncorrectAnswer = ({
   };
 
   function handleChange(num: number, e: React.ChangeEvent<HTMLInputElement>) {
-    let prevOtherAnser = [...otherAnswer];
+    const prevOtherAnser = [...otherAnswer];
     prevOtherAnser[num] = e.target.value;
     setOtherAnswer(prevOtherAnser);
   }

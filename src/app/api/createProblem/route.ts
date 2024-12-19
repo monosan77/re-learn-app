@@ -12,7 +12,6 @@ interface FormData {
 }
 export async function POST(req: Request) {
   const formData: FormData = await req.json();
-  console.log(formData);
   try {
     if (
       formData.title.trim().length === 0 ||
@@ -46,7 +45,6 @@ export async function POST(req: Request) {
         category_id: formData.category_id,
       },
     });
-    console.log(data);
     return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
     console.error("server error", error);

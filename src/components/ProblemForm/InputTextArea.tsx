@@ -1,9 +1,9 @@
 import React from "react";
 interface Props {
   title: string;
-  setFn: ((value: string) => void) | undefined;
-  value: string | undefined;
-  error: string;
+  setFn?: ((value: string) => void) | undefined;
+  value?: string | undefined;
+  error?: string;
 }
 const InputTextArea = ({ title, setFn, value, error }: Props) => {
   function handleChange(e: React.ChangeEvent<HTMLTextAreaElement>) {

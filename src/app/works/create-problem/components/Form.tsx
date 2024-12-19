@@ -6,7 +6,6 @@ import ProblemFormat from "@/components/ProblemForm/ProblemFormat";
 import React, { useState } from "react";
 import ButtonContents from "./ButtonContents";
 import { revalidatePath } from "next/cache";
-import { Router } from "next/router";
 import { useRouter } from "next/navigation";
 
 export function arrayNothingValidation(
@@ -44,7 +43,6 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
   const [format, setFormat] = useState("select");
   const [statement, setStatement] = useState("");
   const [answer, setAnswer] = useState("");
-  // const [incorrect, setIncorrect] = useState();
   const [otherAnswer, setOtherAnswer] = useState(new Array(3).fill(""));
 
   const [explanation, setExplanation] = useState("");
@@ -52,8 +50,6 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
   const [statementError, setStatementError] = useState("");
   const [answerError, setAnswerError] = useState("");
   const [incorrectError, setIncorrectError] = useState("");
-  const [isErrorValidation, setIsErrorValidation] = useState(false);
-  const [explanationError, setExplanationError] = useState("");
 
   async function handleSubmit() {
     setTitleError("");

@@ -75,8 +75,6 @@ model category {
 model problem {
   id            String @id @default(uuid())
   title         String //問題タイトル
-  // format       format  @relation(fields: [format_id], references: [id]) 
-  // format_id      Int  //出題形式
   format        String
   statement     String //問題文
   answer        String //解答文
@@ -94,10 +92,3 @@ enum Format {
   select
   write
 }
-
-// model format {
-//   id   Int     @id @default(autoincrement())
-//   name Format //select 選択問題 write 記述問題
-
-//   problem problem[]
-// }

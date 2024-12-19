@@ -14,7 +14,6 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 // POSTリクエストのハンドラー
 export async function POST(request: Request) {
-  console.log("uuu");
   try {
     const { answer, statement } = await request.json();
 
@@ -32,10 +31,6 @@ export async function POST(request: Request) {
     const result = await model.generateContent(prompt);
     // const response = result.response;
     const text = result.response.text().split(",");
-    console.log(text);
-    console.log(text[0]);
-    console.log(text[1]);
-    console.log(text[2]);
 
     return NextResponse.json({ text }, { status: 200 });
   } catch (error) {
