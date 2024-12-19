@@ -83,7 +83,7 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
     }
 
     try {
-      const res = await fetch("/api/createProblem", {
+      const res = await fetch("/api/editProblem", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

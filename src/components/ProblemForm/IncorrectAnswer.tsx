@@ -1,5 +1,5 @@
 "use client";
-import { nothingValidation } from "@/app/works/create-problem/components/Form";
+import { nothingValidation } from "@/app/works/create-problem/components/CreateProblemForm";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
 import React, { useState } from "react";
 interface Prop {

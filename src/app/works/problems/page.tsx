@@ -40,7 +40,7 @@ const Page = async ({
         {problemData.category
           ? problemData.category.map((part) => (
               <Category
-                problem_id={id}
+                problemSet_id={id}
                 category={part}
                 key={part.id}
                 name={problemData.name}
