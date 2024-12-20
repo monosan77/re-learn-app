@@ -1,7 +1,6 @@
 "use client";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
 import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
-import { useRouter } from "next/navigation";
 import React from "react";
 interface Prop {
   modalOpenFn: () => void;

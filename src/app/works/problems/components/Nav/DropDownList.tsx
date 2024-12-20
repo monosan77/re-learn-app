@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import React, { ReactNode } from "react";
-import List from "./List";
 import NavList from "./NavList";
 interface Prop {
   handleFn: () => void;

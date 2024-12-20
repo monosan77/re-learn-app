@@ -102,6 +102,7 @@ const EditProblemForm = ({
       <InputText
         title="問題タイトル"
         value={title}
+        name={"title"}
         setFn={setTitle}
         error={titleError}
       />
@@ -119,6 +120,7 @@ const EditProblemForm = ({
       <InputText
         title="答え"
         value={answer}
+        name="answer"
         setFn={setAnswer}
         error={answerError}
       />

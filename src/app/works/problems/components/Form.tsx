@@ -24,6 +24,9 @@ const Form = ({ id }: Prop) => {
 
     // console.log(result?.title);
   }
+  function backPage() {
+    router.back();
+  }
   return (
     <form action={handleSubmit} className="space-y-4">
       <h3 className="text-center  text-white text-lg  font-bold ">
@@ -42,7 +45,7 @@ const Form = ({ id }: Prop) => {
         </label>
         <input type="color" id="color" name="color" className="w-full" />
       </div>
-      <Buttons />
+      <Buttons modalOpenFn={backPage} />
     </form>
   );
 };

@@ -1,5 +1,4 @@
 import { prisma } from "@/lib/prisma";
-import { ok } from "assert";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 

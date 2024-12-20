@@ -5,9 +5,9 @@ interface Props {
   name: string;
   id: string;
   value?: string | undefined;
-  setFn?: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
+  // setFn?: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
 }
-const Input = ({ type, name, id, value, setFn }: Props) => {
+const Input = ({ type, name, id, value }: Props) => {
   return (
     <input
       type={type}
