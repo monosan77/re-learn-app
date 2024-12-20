@@ -102,9 +102,13 @@ const Nav = ({ problemData }: Prop) => {
           <p className="">問題集を削除したら復元できません。</p>
           <p>本当に削除しますか？</p>
           <div className="flex justify-between">
-            <button onClick={deleteProblemSet}>
-              <ButtonSmall buttonText="削除" type="button" />
-            </button>
+            {/* <button onClick={deleteProblemSet}> */}
+            <ButtonSmall
+              type="button"
+              buttonFn={deleteProblemSet}
+              buttonText="削除"
+            />
+            {/* </button> */}
             <ButtonSmallWhite
               buttonText="戻る"
               type="button"

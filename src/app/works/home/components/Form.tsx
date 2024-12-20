@@ -1,21 +1,31 @@
 "use client";
 import Input from "@/components/Input/Input";
 import React, { useState } from "react";
-import Buttons from "./Buttons";
+// import Buttons from "./Buttons";
 import { createProblem } from "@/actions/createProblem";
 import { useRouter } from "next/navigation";
+import Buttons from "../../problems/components/Buttons";
 
-const Form = () => {
+interface Prop {
+  handleOpen: () => void;
+}
+const Form = ({ handleOpen }: Prop) => {
   const router = useRouter();
   const [errors, setErrors] = useState<string>();
   async function handleSubmit(formData: FormData) {
     setErrors("");
 
-    const result = await createProblem(formData);
-    if (result) {
-      setErrors(result?.title);
-    } else {
-      router.back();
+    try {
+      const result = await createProblem(formData);
+      if (result) {
+        setErrors(result?.title);
+      } else {
+        handleOpen();
+        return router.push("/works/home");
+      }
+    } catch (error) {
+      console.log(error);
+      setErrors("server error");
     }
 
     // console.log(result?.title);
@@ -44,7 +54,7 @@ const Form = () => {
         </label>
         <input type="color" id="color" name="color" className="w-full" />
       </div>
-      <Buttons />
+      <Buttons modalOpenFn={handleOpen} />
     </form>
   );
 };

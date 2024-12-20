@@ -7,8 +7,9 @@ import { createCategory } from "@/actions/createCategory";
 
 interface Prop {
   id: string;
+  handleOpen: () => void;
 }
-const Form = ({ id }: Prop) => {
+const Form = ({ id, handleOpen }: Prop) => {
   const router = useRouter();
   const [errors, setErrors] = useState<string>();
 
@@ -19,13 +20,9 @@ const Form = ({ id }: Prop) => {
     if (result) {
       setErrors(result?.title);
     } else {
-      router.back();
+      handleOpen();
+      return router.push(`/works/problems?id=${id}`);
     }
-
-    // console.log(result?.title);
-  }
-  function backPage() {
-    router.back();
   }
   return (
     <form action={handleSubmit} className="space-y-4">
@@ -45,7 +42,7 @@ const Form = ({ id }: Prop) => {
         </label>
         <input type="color" id="color" name="color" className="w-full" />
       </div>
-      <Buttons modalOpenFn={backPage} />
+      <Buttons modalOpenFn={handleOpen} />
     </form>
   );
 };

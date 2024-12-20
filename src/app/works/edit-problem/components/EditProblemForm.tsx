@@ -25,7 +25,7 @@ const EditProblemForm = ({
   console.log(problemData);
   const router = useRouter();
   const [title, setTitle] = useState(problemData?.title ?? "");
-  const [format, setFormat] = useState(problemData?.format ?? "");
+  const [format, setFormat] = useState(problemData?.format ?? "select");
   const [statement, setStatement] = useState(problemData?.statement ?? "");
   const [answer, setAnswer] = useState(problemData?.answer ?? "");
   const [otherAnswer, setOtherAnswer] = useState(
@@ -108,7 +108,7 @@ const EditProblemForm = ({
       />
 
       {/* 出題形式 */}
-      <ProblemFormat setFormat={setFormat} />
+      <ProblemFormat setFormat={setFormat} format={format} />
 
       <InputTextArea
         title="問題文"

@@ -37,7 +37,6 @@ interface Prop {
 
 const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
   const router = useRouter();
-  console.log(category_id, "id");
   const [title, setTitle] = useState("");
   const [format, setFormat] = useState("select");
   const [statement, setStatement] = useState("");
@@ -119,7 +118,7 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
       />
 
       {/* 出題形式 */}
-      <ProblemFormat setFormat={setFormat} />
+      <ProblemFormat setFormat={setFormat} format={format} />
 
       <InputTextArea
         title="問題文"
