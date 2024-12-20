@@ -1,7 +1,6 @@
 "use client";
 import Mask_Transparent from "@/components/Mask/Mask_Transparent";
 import React, { useState } from "react";
-import Link from "next/link";
 import Modal from "@/components/Modal";
 import Form from "./Form";
 

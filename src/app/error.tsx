@@ -27,9 +27,13 @@ export default function Error({
           </p>
           <p>一時的にアクセスでない状態です。</p>
           <p>再度お試しください</p>
-          <div onClick={() => reset()} className="my-8">
-            <ButtonSmall type="button" buttonText="もう一度試す" />
-          </div>
+          {/* <div onClick={() => reset()} className="my-8"> */}
+          <ButtonSmall
+            buttonFn={reset}
+            type="button"
+            buttonText="もう一度試す"
+          />
+          {/* </div> */}
           <div className="flex justify-center">
             <LinkText url="/">トップページへ戻る</LinkText>
           </div>
