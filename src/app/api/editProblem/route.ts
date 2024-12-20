@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { ok } from "assert";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
@@ -77,6 +78,33 @@ export async function PUT(req: Request) {
   }
 }
 
+export async function DELETE(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const problemSetId = searchParams.get("id");
+
+    console.log(problemSetId);
+
+    if (!problemSetId) {
+      return NextResponse.json(
+        { message: "リクエストエラー" },
+        { status: 405 }
+      );
+    }
+
+    const data = await prisma.problem_set.delete({
+      where: {
+        id: problemSetId,
+      },
+    });
+    revalidatePath("/works/home");
+    return NextResponse.json({ data }, { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ message: "server error" }, { status: 500 });
+  }
+}
+
 // bodyから取得したデータのバリデーション関数
 function validation(formData: FormData) {
   if (
@@ -84,17 +112,16 @@ function validation(formData: FormData) {
     formData.format.trim().length === 0 ||
     formData.statement.trim().length === 0 ||
     formData.answer.trim().length === 0 ||
-    !formData.category_id ||
-    formData.otherAnswer[0].trim().length === 0 ||
-    formData.otherAnswer[1].trim().length === 0 ||
-    formData.otherAnswer[2].trim().length === 0
+    !formData.category_id
   ) {
     return { ok: false };
   }
-  formData.otherAnswer.map((data) => {
-    if (data.trim().length === 0) {
-      return { ok: false };
-    }
-  });
+  if (formData.format === "select") {
+    formData.otherAnswer.map((data) => {
+      if (data.trim().length === 0) {
+        return { ok: false };
+      }
+    });
+  }
   return { ok: true };
 }

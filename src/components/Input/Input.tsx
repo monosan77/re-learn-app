@@ -4,24 +4,18 @@ interface Props {
   type: string;
   name: string;
   id: string;
-  value?: string;
-  setFn?: ((value: string) => void) | undefined;
+  value?: string | undefined;
+  setFn?: (e: React.ChangeEvent<HTMLInputElement>) => void | undefined;
 }
 const Input = ({ type, name, id, value, setFn }: Props) => {
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    if (setFn !== undefined) {
-      setFn(e.target.value);
-    }
-    return;
-  }
   return (
     <input
       type={type}
       name={name}
       id={id}
-      value={value && value}
-      onChange={setFn && handleChange}
-      className="w-full border border-gray-400 rounded-md px-1  bg-white focus:outline-black focus:border focus:rounded-sm"
+      defaultValue={value ? value : undefined}
+      // onChange={value ? setFn : undefined}
+      className="w-full border text-black border-gray-400 rounded-md px-1  bg-white focus:outline-black focus:border focus:rounded-sm"
     />
   );
 };

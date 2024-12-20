@@ -18,7 +18,7 @@ const Category = async ({ problemSet_id, category, name }: Prop) => {
       className="min-w-60 h-fit  p-3 rounded-md box-shadow"
       style={{ background: category.color, color: category.text_color }}
     >
-      <h3 className="border-solid border-b font-bold mb-2">{category.name}</h3>
+      <h3 className="border-solid border-b font-bold mb-2">{category.name} </h3>
       <ul className="pace-y-0.5">
         {problems.map((problem) => (
           <li key={problem.id}>

@@ -1,8 +1,8 @@
 import React from "react";
 
 interface Prop {
-  active: boolean;
-  fn: () => void;
+  active?: boolean;
+  fn?: () => void;
 }
 
 const Mask_Transparent = ({ active, fn }: Prop) => {

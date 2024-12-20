@@ -47,7 +47,6 @@ const Page = async ({
               />
             ))
           : ""}
-        {/* <Category /> */}
         <AddProblem id={id} />
       </div>
       <StudyStartContent />

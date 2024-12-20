@@ -107,10 +107,12 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
       console.log(error);
     }
   }
+
   return (
     <form action="" className=" pt-4 space-y-6">
       <InputText
         title="問題タイトル"
+        name="title"
         value={title}
         setFn={setTitle}
         error={titleError}
@@ -128,6 +130,7 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
 
       <InputText
         title="答え"
+        name="answer"
         value={answer}
         setFn={setAnswer}
         error={answerError}
