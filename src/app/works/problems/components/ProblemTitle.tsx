@@ -1,6 +1,6 @@
 import React from "react";
-import NavList from "./NavList";
 import { Problem_SetModel } from "@/types/types";
+import Nav from "./Nav/Nav";
 
 interface Prop {
   problemData: Problem_SetModel;
@@ -16,13 +16,7 @@ const ProblemTitle = async ({ problemData }: Prop) => {
         style={{ color: `${problemData?.text_color}` }}
       >
         <h1 className="font-bold text-xl mb-4">{problemData?.name}</h1>
-        <div className="flex justify-end items-center space-x-4">
-          <NavList
-            imgPath="/icon/plus-white.svg"
-            categoryName="カテゴリー追加"
-          />
-          <NavList imgPath="/icon/filter-white.svg" categoryName="絞り込み" />
-        </div>
+        <Nav problemData={problemData} />
       </div>
     </div>
   );
