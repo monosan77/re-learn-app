@@ -103,7 +103,7 @@ const Nav = ({ problemData }: Prop) => {
           <p>本当に削除しますか？</p>
           <div className="flex justify-between">
             <button onClick={deleteProblemSet}>
-              <ButtonSmall buttonText="削除" type="button" />
+              <ButtonSmall buttonText="削除" />
             </button>
             <ButtonSmallWhite
               buttonText="戻る"
