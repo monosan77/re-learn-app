@@ -1,8 +1,9 @@
 import React from "react";
 interface Prop {
   setFormat: (value: string) => void;
+  format: string;
 }
-const ProblemFormat = ({ setFormat }: Prop) => {
+const ProblemFormat = ({ setFormat, format }: Prop) => {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormat(e.target.value);
   }
@@ -17,7 +18,8 @@ const ProblemFormat = ({ setFormat }: Prop) => {
             id="select"
             value={"select"}
             onChange={handleChange}
-            defaultChecked
+            // defaultChecked={true}
+            defaultChecked={format === "select" ? true : false}
           />
           <label htmlFor="select">4択式</label>
         </div>
@@ -28,6 +30,7 @@ const ProblemFormat = ({ setFormat }: Prop) => {
             id="write"
             value={"write"}
             onChange={handleChange}
+            defaultChecked={format === "write" ? true : false}
           />
           <label htmlFor="write">記述式</label>
         </div>
