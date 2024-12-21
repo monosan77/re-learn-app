@@ -44,6 +44,8 @@ model problem_set {
   text_color String
   profile_id String
   profile profile @relation(fields: [profile_id],references: [id],onDelete: Cascade)
+  createdAt    DateTime @default(now()) //問題作整備
+  updatedAt    DateTime @updatedAt //更新日
 
   category category[]
 }
@@ -67,6 +69,8 @@ model category {
   text_color    String
   problem_set   problem_set @relation(fields: [problem_set_id], references: [id],onDelete: Cascade)
   problem_set_id  String
+  createdAt    DateTime @default(now()) //問題作整備
+  updatedAt    DateTime @updatedAt //更新日
 
   problem      problem[]
 
