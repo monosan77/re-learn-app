@@ -5,8 +5,6 @@ import React, { useState } from "react";
 import { CategoryModel } from "@/types/types";
 import { updateCategory } from "@/actions/updateCategory";
 import { useRouter } from "next/navigation";
-import ButtonSmall from "@/components/buttons/ButtonSmall";
-import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
 import Mask_Transparent from "@/components/Mask/Mask_Transparent";
 import Form from "../CategoryForm/Form";
 import ConfirmModal from "@/components/Modal/ConfirmModal";
