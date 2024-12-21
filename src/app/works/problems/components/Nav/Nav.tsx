@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import NavList from "./NavList";
 import List from "./List";
 import DropDownList from "./DropDownList";
 import Form from "../../../home/components/ProblemSetForm/Form";
