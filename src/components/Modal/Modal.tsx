@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import Mask_Transparent from "./Mask/Mask_Transparent";
+import Mask_Transparent from "../Mask/Mask_Transparent";
 
 interface Prop {
   children: ReactNode;
@@ -16,7 +16,6 @@ const Modal = ({ children, openFn }: Prop) => {
       <Mask_Transparent fn={openFn} />
     </>
   );
-  //  <div className="w-500 bg-black h-16">{children}</div>;
 };
 
 export default Modal;

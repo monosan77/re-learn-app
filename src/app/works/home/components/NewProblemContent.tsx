@@ -1,13 +1,34 @@
 "use client";
 import Mask_Transparent from "@/components/Mask/Mask_Transparent";
 import React, { useState } from "react";
-import Modal from "@/components/Modal";
-import Form from "./Form";
+import Modal from "@/components/Modal/Modal";
+import Form from "./ProblemSetForm/Form";
+import { createProblem } from "@/actions/createProblem";
+import { useRouter } from "next/navigation";
 
 const NewProblemContent = ({}) => {
+  const router = useRouter();
   const [isOpenPop, setIsOpenPop] = useState(false);
   function handleOpen() {
     setIsOpenPop(!isOpenPop);
+  }
+
+  const [errors, setErrors] = useState<string>();
+  async function handleSubmit(formData: FormData) {
+    setErrors("");
+
+    try {
+      const result = await createProblem(formData);
+      if (result) {
+        setErrors(result?.title);
+      } else {
+        handleOpen();
+        return router.push("/works/home");
+      }
+    } catch (error) {
+      console.log(error);
+      setErrors("server error");
+    }
   }
 
   return (
@@ -23,7 +44,11 @@ const NewProblemContent = ({}) => {
 
       <div style={{ display: isOpenPop ? "block" : "none" }} className="">
         <Modal openFn={handleOpen}>
-          <Form handleOpen={handleOpen} />
+          <Form
+            modalOpenFn={handleOpen}
+            handleSubmit={handleSubmit}
+            errors={errors}
+          />
         </Modal>
         <Mask_Transparent active={isOpenPop} fn={handleOpen} />
       </div>

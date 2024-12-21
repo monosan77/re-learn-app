@@ -1,8 +1,8 @@
 "use client";
-import Modal from "@/components/Modal";
+import Modal from "@/components/Modal/Modal";
 import Image from "next/image";
 import React, { useState } from "react";
-import Form from "./Form";
+import Form from "./CategoryForm/Form";
 import { createCategory } from "@/actions/createCategory";
 import { useRouter } from "next/navigation";
 interface Prop {
