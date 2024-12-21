@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { updateProblem } from "@/actions/updateProblem";
 import Modal from "@/components/Modal/Modal";
 import ConfirmModal from "@/components/Modal/ConfirmModal";
+import AddCategoryNav from "./AddCategoryNav";
 interface Prop {
   problemData: Problem_SetModel;
 }
@@ -76,8 +77,9 @@ const Nav = ({ problemData }: Prop) => {
 
   return (
     <div className="flex justify-end items-center ">
-      <NavList imgPath="/icon/plus-white.svg" categoryName="カテゴリー追加" />
+      <AddCategoryNav problemSetId={problemData.id} />
 
+      {/* <NavList imgPath="/icon/plus-white.svg" categoryName="カテゴリー追加" /> */}
       <DropDownList
         handleFn={handleOpenFilter}
         openBool={isOpenFilter}
@@ -89,7 +91,6 @@ const Nav = ({ problemData }: Prop) => {
           <List text="サインアウト" />
         </ul>
       </DropDownList>
-
       <DropDownList
         handleFn={handleOpenSetting}
         openBool={isOpenSetting}
@@ -112,7 +113,6 @@ const Nav = ({ problemData }: Prop) => {
           <List text="サインアウト" />
         </ul>
       </DropDownList>
-
       {/* 問題集の編集モーダル */}
       <div className={`${isProblemModal ? "block" : "hidden"} `}>
         <Modal openFn={handleOpenSetting}>
@@ -124,7 +124,6 @@ const Nav = ({ problemData }: Prop) => {
           />
         </Modal>
       </div>
-
       {/* 削除確認モーダル */}
       <ConfirmModal
         active={isDeleteModal}
