@@ -25,9 +25,8 @@ const NewProblemContent = ({}) => {
         <Modal openFn={handleOpen}>
           <Form handleOpen={handleOpen} />
         </Modal>
+        <Mask_Transparent active={isOpenPop} fn={handleOpen} />
       </div>
-
-      <Mask_Transparent active={isOpenPop} fn={handleOpen} />
     </>
   );
 };
