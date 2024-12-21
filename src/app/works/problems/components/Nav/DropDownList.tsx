@@ -17,7 +17,7 @@ const DropDownList = ({
   children,
 }: Prop) => {
   return (
-    <div className="relative">
+    <div className="relative ml-4">
       <button onClick={handleFn}>
         <NavList imgPath={iconPath} categoryName={navName} />
       </button>

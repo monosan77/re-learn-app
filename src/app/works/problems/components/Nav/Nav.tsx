@@ -9,6 +9,7 @@ import { Problem_SetModel } from "@/types/types";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
 import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
 import { useRouter } from "next/navigation";
+import Mask_Transparent from "@/components/Mask/Mask_Transparent";
 interface Prop {
   problemData: Problem_SetModel;
 }
@@ -29,9 +30,13 @@ const Nav = ({ problemData }: Prop) => {
   }
   function handleProblemModalOpen() {
     setIsProblemModal(!isProblemModal);
+    setIsOpenSetting(false);
+    setIsDeleteModal(false);
   }
   function handleDeleteProblemModalOpen() {
     setIsDeleteModal(!isDeleteModal);
+    setIsProblemModal(false);
+    setIsOpenSetting(false);
   }
 
   async function deleteProblemSet() {
@@ -53,7 +58,7 @@ const Nav = ({ problemData }: Prop) => {
 
   return (
     <>
-      <div className="flex justify-end items-center space-x-4">
+      <div className="flex justify-end items-center ">
         <NavList imgPath="/icon/plus-white.svg" categoryName="カテゴリー追加" />
         <DropDownList
           handleFn={handleOpenFilter}
@@ -97,26 +102,24 @@ const Nav = ({ problemData }: Prop) => {
           </Modal>
         </div>
         {/* 削除確認モーダル */}
-        <div
-          style={{ display: isDeleteModal ? "block" : "none" }}
-          className="w-80 bg-background rounded p-4 text-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 space-y-4"
-        >
-          <p className="">問題集を削除したら復元できません。</p>
-          <p>本当に削除しますか？</p>
-          <div className="flex justify-between">
-            {/* <button onClick={deleteProblemSet}> */}
-            <ButtonSmall
-              type="button"
-              buttonFn={deleteProblemSet}
-              buttonText="削除"
-            />
-            {/* </button> */}
-            <ButtonSmallWhite
-              buttonText="戻る"
-              type="button"
-              fn={handleDeleteProblemModalOpen}
-            />
+        <div style={{ display: isDeleteModal ? "block" : "none" }}>
+          <div className="w-80 bg-background rounded p-4 text-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 space-y-4">
+            <p className="">問題集を削除したら復元できません。</p>
+            <p>本当に削除しますか？</p>
+            <div className="flex justify-between">
+              <ButtonSmall
+                type="button"
+                buttonFn={deleteProblemSet}
+                buttonText="削除"
+              />
+              <ButtonSmallWhite
+                buttonText="戻る"
+                type="button"
+                fn={handleDeleteProblemModalOpen}
+              />
+            </div>
           </div>
+          <Mask_Transparent fn={handleDeleteProblemModalOpen} />
         </div>
       </div>
     </>
