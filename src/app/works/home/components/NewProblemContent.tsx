@@ -22,7 +22,7 @@ const NewProblemContent = ({}) => {
       </div>
 
       <div style={{ display: isOpenPop ? "block" : "none" }} className="">
-        <Modal>
+        <Modal openFn={handleOpen}>
           <Form handleOpen={handleOpen} />
         </Modal>
       </div>

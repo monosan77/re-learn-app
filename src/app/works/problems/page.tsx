@@ -1,10 +1,10 @@
 import React from "react";
 import ProblemTitle from "./components/ProblemTitle";
 import Category from "./components/Category";
-import AddProblem from "./components/AddProblem";
 import StudyStartContent from "./components/StudyStartContent";
 import { prisma } from "@/lib/prisma";
 import { Problem_SetModel } from "@/types/types";
+import AddCategory from "./components/AddCategory";
 
 async function getProblemData(id: string) {
   const data = await prisma.problem_set.findUnique({
@@ -36,7 +36,7 @@ const Page = async ({
   return (
     <div>
       <ProblemTitle problemData={problemData} />
-      <div className="p-4  flex justify-start   space-x-4 overflow-hidden hover:overflow-x-auto hover:scrollbar-thin">
+      <div className="p-4 min-h-40 flex justify-start space-x-4 overflow-hidden hover:overflow-x-auto hover:scrollbar-thin">
         {problemData.category
           ? problemData.category.map((part) => (
               <Category
@@ -47,7 +47,7 @@ const Page = async ({
               />
             ))
           : ""}
-        <AddProblem id={id} />
+        <AddCategory id={id} />
       </div>
       <StudyStartContent />
     </div>

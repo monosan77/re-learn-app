@@ -5,10 +5,11 @@ interface Prop {
   fn?: () => void;
 }
 
-const Mask_Transparent = ({ active, fn }: Prop) => {
+const Mask_Transparent = ({ fn }: Prop) => {
   return (
     <div
-      className={`${active ? "block" : "hidden"} fixed top-0 left-0 bottom-0 z-30 bg-transparent  w-full h-full`}
+      className={`fixed top-0 left-0 bottom-0 z-10 bg-transparent  w-full h-full`}
+      // className={`${active ? "block" : "hidden"} fixed top-0 left-0 bottom-0 z-30 bg-transparent  w-full h-full`}
       onClick={fn}
     ></div>
   );

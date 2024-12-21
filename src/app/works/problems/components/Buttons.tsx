@@ -8,9 +8,7 @@ interface Prop {
 const Buttons = ({ modalOpenFn }: Prop) => {
   return (
     <div className="flex justify-between">
-      {/* <button type="submit"> */}
       <ButtonSmall type="submit" buttonText="作成" />
-      {/* </button> */}
       <ButtonSmallWhite type="button" buttonText="閉じる" fn={modalOpenFn} />
     </div>
   );

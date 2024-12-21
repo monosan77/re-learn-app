@@ -4,7 +4,6 @@ import NavList from "./NavList";
 import List from "./List";
 import DropDownList from "./DropDownList";
 import Modal from "@/components/Modal";
-import Mask_Transparent from "@/components/Mask/Mask_Transparent";
 import Form from "./Form";
 import { Problem_SetModel } from "@/types/types";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
@@ -53,44 +52,47 @@ const Nav = ({ problemData }: Prop) => {
   }
 
   return (
-    <div className="flex justify-end items-center space-x-4">
-      <NavList imgPath="/icon/plus-white.svg" categoryName="カテゴリー追加" />
-      <DropDownList
-        handleFn={handleOpenFilter}
-        openBool={isOpenFilter}
-        iconPath={"/icon/filter-white.svg"}
-        navName={"Filter"}
-      >
-        <ul className="space-y-2 text-sm">
-          <List text="問題集の" />
-          <List text="サインアウト" />
-        </ul>
-      </DropDownList>
+    <>
+      <div className="flex justify-end items-center space-x-4">
+        <NavList imgPath="/icon/plus-white.svg" categoryName="カテゴリー追加" />
+        <DropDownList
+          handleFn={handleOpenFilter}
+          openBool={isOpenFilter}
+          iconPath={"/icon/filter-white.svg"}
+          navName={"Filter"}
+        >
+          <ul className="space-y-2 text-sm">
+            <List text="問題集の" />
+            <List text="サインアウト" />
+          </ul>
+        </DropDownList>
 
-      <DropDownList
-        handleFn={handleOpenSetting}
-        openBool={isOpenSetting}
-        iconPath={"/icon/gear-white.svg"}
-        navName={"設定"}
-      >
-        <ul className="space-y-2 text-sm">
-          <button
-            className="block w-full text-start"
-            onClick={handleProblemModalOpen}
-          >
-            <List text="問題集の設定" />
-          </button>
-          <button
-            className="block w-full text-start"
-            onClick={handleDeleteProblemModalOpen}
-          >
-            <List text="問題集の削除" />
-          </button>
-          <List text="サインアウト" />
-        </ul>
+        <DropDownList
+          handleFn={handleOpenSetting}
+          openBool={isOpenSetting}
+          iconPath={"/icon/gear-white.svg"}
+          navName={"設定"}
+        >
+          <ul className="space-y-2 text-sm">
+            <button
+              className="block w-full text-start"
+              onClick={handleProblemModalOpen}
+            >
+              <List text="問題集の設定" />
+            </button>
+            <button
+              className="block w-full text-start"
+              onClick={handleDeleteProblemModalOpen}
+            >
+              <List text="問題集の削除" />
+            </button>
+            <List text="サインアウト" />
+          </ul>
+        </DropDownList>
+
         {/* 問題集の編集モーダル */}
         <div className={`${isProblemModal ? "block" : "hidden"} `}>
-          <Modal>
+          <Modal openFn={handleOpenSetting}>
             <Form problemData={problemData} modalOpenFn={handleOpenSetting} />
           </Modal>
         </div>
@@ -116,9 +118,8 @@ const Nav = ({ problemData }: Prop) => {
             />
           </div>
         </div>
-        <Mask_Transparent />
-      </DropDownList>
-    </div>
+      </div>
+    </>
   );
 };
 
