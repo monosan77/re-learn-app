@@ -40,7 +40,7 @@ const Page = async ({
   return (
     <div>
       <ProblemTitle problemData={problemData} />
-      <div className="p-4 min-h-40 flex justify-start space-x-4 overflow-hidden hover:overflow-x-auto hover:scrollbar-thin">
+      <div className="px-4 pt-4 pb-52 flex justify-start space-x-4 overflow-hidden hover:overflow-x-auto hover:scrollbar-thin">
         {problemData.category
           ? problemData.category.map((part) => (
               <Category

@@ -9,9 +9,11 @@ import { updateProblem } from "@/actions/updateProblem";
 import Modal from "@/components/Modal/Modal";
 import ConfirmModal from "@/components/Modal/ConfirmModal";
 import AddCategoryNav from "./AddCategoryNav";
+
 interface Prop {
   problemData: Problem_SetModel;
 }
+
 const Nav = ({ problemData }: Prop) => {
   const router = useRouter();
   const [isOpenSetting, setIsOpenSetting] = useState(false);
@@ -40,7 +42,7 @@ const Nav = ({ problemData }: Prop) => {
 
   async function deleteProblemSet() {
     try {
-      const res = await fetch(`/api/editProblem?id=${problemData.id}`, {
+      const res = await fetch(`/api/problemSet?id=${problemData.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

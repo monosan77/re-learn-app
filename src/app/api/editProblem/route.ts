@@ -80,23 +80,21 @@ export async function PUT(req: Request) {
 export async function DELETE(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
-    const problemSetId = searchParams.get("id");
+    const problemId = searchParams.get("id");
 
-    console.log(problemSetId);
-
-    if (!problemSetId) {
+    if (!problemId) {
       return NextResponse.json(
         { message: "リクエストエラー" },
         { status: 405 }
       );
     }
 
-    const data = await prisma.problem_set.delete({
+    const data = await prisma.problem.delete({
       where: {
-        id: problemSetId,
+        id: problemId,
       },
     });
-    revalidatePath("/works/home");
+    revalidatePath("/works/problem");
     return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
     console.log(error);
