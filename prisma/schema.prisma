@@ -91,8 +91,3 @@ model problem {
 
   history_problem history_problem[]
 }
-
-enum Format {
-  select
-  write
-}
