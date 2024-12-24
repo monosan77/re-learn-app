@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Mask_Transparent from "@/components/Mask/Mask_Transparent";
 import Form from "../CategoryForm/Form";
 import ConfirmModal from "@/components/Modal/ConfirmModal";
+import MenuModal from "./MenuModal";
 interface Prop {
   category: CategoryModel;
   problemSet_id: string;
@@ -19,20 +20,25 @@ const CategoryTItle = ({ category, problemSet_id }: Prop) => {
   const [isDeleteModal, setIsDeleteModal] = useState(false);
   const [errors, setErrors] = useState<string>();
 
+  // カテゴリー編集のモーダル開閉
   function handleOpenSetting() {
     setIsOpenSetting(!isOpenSetting);
     setIsMenuOpen(false);
     setIsDeleteModal(false);
   }
+  //編集、削除の目乳の開閉
   function handleMenuOpen() {
     setIsMenuOpen(!isMenuOpen);
     setIsOpenSetting(false);
     setIsDeleteModal(false);
   }
+  // 削除の確認モーダル
   function handleDeleteCategoryModalOpen() {
     setIsDeleteModal(!isDeleteModal);
     setIsMenuOpen(false);
   }
+
+  //　編集の確定関数
   async function handleSubmit(formData: FormData) {
     setErrors("");
     try {
@@ -82,34 +88,12 @@ const CategoryTItle = ({ category, problemSet_id }: Prop) => {
       </div>
 
       <div style={{ display: isMenuOpen ? "block" : "none" }}>
-        <div
-          // style={{ display: isMenuOpen ? "block" : "none" }}
-          className="w-40 text-white bg-background absolute left-full top-0 z-30 p-2 ml-1 rounded-lg"
-        >
-          <div className="flex items-center justify-between  text-center mb-3">
-            <h3 className="font-bold">カテゴリー</h3>
-            <button onClick={handleMenuOpen}>
-              <Image
-                src={"/icon/batu-white.svg"}
-                alt="アイコン"
-                width={14}
-                height={14}
-                className="hover:opacity-70"
-              />
-            </button>
-          </div>
-
-          <ul className="space-y-2 ">
-            <li className="border-b hover:opacity-80">
-              <button type="button" onClick={handleOpenSetting}>
-                編集
-              </button>
-            </li>
-            <li className="border-b hover:opacity-80">
-              <button onClick={handleDeleteCategoryModalOpen}>削除</button>
-            </li>
-          </ul>
-        </div>
+        <MenuModal
+          handleFn={handleOpenSetting}
+          deleteFn={handleDeleteCategoryModalOpen}
+          handleOpenMenu={handleMenuOpen}
+          modalTitle="カテゴリー"
+        />
         <Mask_Transparent fn={handleMenuOpen} />
       </div>
 
