@@ -1,6 +1,3 @@
--- CreateEnum
-CREATE TYPE "Format" AS ENUM ('select', 'write');
-
 -- CreateTable
 CREATE TABLE "auth_data" (
     "id" TEXT NOT NULL,
