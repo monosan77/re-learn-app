@@ -1,6 +1,6 @@
 import React from "react";
 import ProblemTitle from "./components/ProblemTitle";
-import Category from "./components/Category";
+import Category from "./components/Category/Category";
 import StudyStartContent from "./components/StudyStartContent";
 import { prisma } from "@/lib/prisma";
 import { Problem_SetModel } from "@/types/types";
@@ -12,7 +12,11 @@ async function getProblemData(id: string) {
       id: id,
     },
     include: {
-      category: true,
+      category: {
+        orderBy: {
+          createdAt: "asc",
+        },
+      },
     },
   });
   if (data) {

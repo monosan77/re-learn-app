@@ -1,14 +1,16 @@
 "use client";
-import Modal from "@/components/Modal/Modal";
-import Image from "next/image";
 import React, { useState } from "react";
-import Form from "./CategoryForm/Form";
+import NavList from "./NavList";
+import Modal from "@/components/Modal/Modal";
+import Form from "../CategoryForm/Form";
 import { createCategory } from "@/actions/createCategory";
 import { useRouter } from "next/navigation";
+
 interface Prop {
-  id: string;
+  problemSetId: string;
 }
-const AddCategory = ({ id }: Prop) => {
+
+const AddCategoryNav = ({ problemSetId }: Prop) => {
   const router = useRouter();
 
   const [isOpenPop, setIsOpenPop] = useState(false);
@@ -21,30 +23,21 @@ const AddCategory = ({ id }: Prop) => {
     setErrors("");
 
     try {
-      const result = await createCategory(formData, id);
+      const result = await createCategory(formData, problemSetId);
       if (result) {
         setErrors(result?.title);
       } else {
         handleOpen();
-        return router.push(`/works/problems?id=${id}`);
+        return router.push(`/works/problems?id=${problemSetId}`);
       }
     } catch (error) {
       console.log(error);
     }
   }
   return (
-    <>
-      <button
-        onClick={handleOpen}
-        className="flex justify-start items-center h-fit min-w-60 text-white bg-slate-400 p-3 rounded-md box-shadow space-x-2"
-      >
-        <Image
-          src={"/icon/plus-white2.svg"}
-          alt="アイコン"
-          width={18}
-          height={18}
-        />
-        <p className="text-sm">カテゴリーを追加</p>
+    <div>
+      <button onClick={handleOpen}>
+        <NavList imgPath="/icon/plus-white.svg" categoryName="カテゴリー追加" />
       </button>
       <div style={{ display: isOpenPop ? "block" : "none" }}>
         <Modal openFn={handleOpen}>
@@ -56,8 +49,8 @@ const AddCategory = ({ id }: Prop) => {
           />
         </Modal>
       </div>
-    </>
+    </div>
   );
 };
 
-export default AddCategory;
+export default AddCategoryNav;

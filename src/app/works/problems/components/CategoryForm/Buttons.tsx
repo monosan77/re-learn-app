@@ -1,19 +1,15 @@
 "use client";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
 import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
-import { useRouter } from "next/navigation";
 import React from "react";
-
-const Buttons = () => {
-  const router = useRouter();
-  function backPage() {
-    router.back();
-  }
+interface Prop {
+  modalOpenFn: () => void;
+}
+const Buttons = ({ modalOpenFn }: Prop) => {
   return (
     <div className="flex justify-between">
       <ButtonSmall type="submit" buttonText="作成" />
-      <ButtonSmallWhite type="button" buttonText="閉じる" fn={backPage} />
-      {/* <ButtonSmallWhite type="button" buttonText="閉じる" fn={handleOpen} /> */}
+      <ButtonSmallWhite type="button" buttonText="閉じる" fn={modalOpenFn} />
     </div>
   );
 };
