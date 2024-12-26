@@ -1,12 +1,40 @@
 "use client";
+import { createStudySession } from "@/actions/createStudySession";
 import ButtonMedium from "@/components/buttons/ButtonMedium";
+import { CategoryModel } from "@/types/types";
 import Image from "next/image";
-import React from "react";
+import React, { useContext, useState } from "react";
+import { LoadingPopup } from "../../layout";
+import { useRouter } from "next/navigation";
 interface Prop {
   handlePopUp: () => void;
   isStudyPopUp: boolean;
+  categoryData: CategoryModel[];
 }
-const PopupSetting = ({ handlePopUp, isStudyPopUp }: Prop) => {
+
+const PopupSetting = ({ handlePopUp, isStudyPopUp, categoryData }: Prop) => {
+  const router = useRouter();
+  const { setLoading } = useContext(LoadingPopup);
+  const [error, setError] = useState("");
+  async function handleSubmit(formData: FormData) {
+    try {
+      setError("");
+      setLoading(true);
+      const data: { response: string; ok: boolean } = await createStudySession(
+        formData,
+        categoryData
+      );
+      if (!data.ok) {
+        setError(data.response);
+        setLoading(false);
+      }
+      return router.push(`/works/studying?id=${data.response}`);
+    } catch {
+      setError("※サーバーエラーが発生しました。");
+      setLoading(false);
+    }
+  }
+
   return (
     <div
       className={`${isStudyPopUp ? "bottom-0" : "-bottom-96"} w-full md:w-[calc(100%-256px)] mx-auto fixed text-white transition-all duration-200`}
@@ -23,23 +51,29 @@ const PopupSetting = ({ handlePopUp, isStudyPopUp }: Prop) => {
             />
           </button>
         </div>
-        <p className="font-bold text-lg">問題集 : プログラミング</p>
-        <form action="" className="space-y-5">
+        <p className="font-bold text-lg">
+          問題集 : プログラミング{" "}
+          <span className="text-red-600 text-base">{error}</span>
+        </p>
+        <form action={handleSubmit} className="space-y-5">
           <div className="space-x-4">
             <label htmlFor="">カテゴリー選択 : </label>
             <select
-              name=""
-              id=""
+              name="category"
+              id="category"
               className="text-black rounded-md text-sm py-0.5 px-2 min-w-[180px] inner-shadow"
             >
               <option value="--" hidden>
                 --
               </option>
-              <option value="NextJs">NextJs</option>
-              <option value="Vue.js">Vue.js</option>
+              {categoryData.map((category) => (
+                <option key={category.id} value={`${category.id}`}>
+                  {category.name}
+                </option>
+              ))}
             </select>
           </div>
-          <div className="space-x-4">
+          {/* <div className="space-x-4">
             <label htmlFor="">問題数を選択 : </label>
             <select
               name=""
@@ -54,12 +88,13 @@ const PopupSetting = ({ handlePopUp, isStudyPopUp }: Prop) => {
               <option value="30">30問</option>
               <option value="all">すべて</option>
             </select>
-          </div>
+          </div> */}
           <div className="py-6">
-            <ButtonMedium type="button" buttonText="復習を始める" />
+            <ButtonMedium type="submit" buttonText="復習を始める" />
           </div>
         </form>
       </div>
+      {/* <div className="">{loading && <Loader />}</div> */}
     </div>
   );
 };

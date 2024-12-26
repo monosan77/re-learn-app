@@ -60,3 +60,22 @@ export interface History_Problem {
   isCorrect: Date;
   attemptedAnswer: string;
 }
+
+export interface Study_Session_Model {
+  id: string;
+  profile_id: string;
+  current_index: number;
+  is_completed: boolean;
+  updatedAt: Date;
+  answer_history?: Answer_History_Model[];
+}
+
+export interface Answer_History_Model {
+  id: number;
+  study_session_id: string;
+  index: number;
+  problem_id: string;
+  is_correct: boolean;
+  user_answer: string;
+  updatedAt: Date;
+}
