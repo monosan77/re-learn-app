@@ -16,9 +16,13 @@ async function getProblemData(id: string) {
         orderBy: {
           createdAt: "asc",
         },
+        include: {
+          problem: true,
+        },
       },
     },
   });
+  console.log(data, "データを取得");
   if (data) {
     return data;
   }
@@ -31,11 +35,11 @@ const Page = async ({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) => {
   const id = (await searchParams).id;
-  console.log(id);
   if (!id) return <p>データを取得できませんでした</p>;
 
   const problemData: Problem_SetModel | null = await getProblemData(id);
-  if (!problemData) return <p>データを取得できませんでした</p>;
+  if (!problemData || !problemData.category)
+    return <p>データを取得できませんでした</p>;
 
   return (
     <div>
@@ -53,7 +57,7 @@ const Page = async ({
           : ""}
         <AddCategory id={id} />
       </div>
-      <StudyStartContent />
+      <StudyStartContent categoryData={problemData.category} />
     </div>
   );
 };

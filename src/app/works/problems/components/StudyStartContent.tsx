@@ -2,8 +2,13 @@
 import React, { useState } from "react";
 import StartBtn from "./StartBtn";
 import PopupSetting from "./PopupSetting";
+import { CategoryModel } from "@/types/types";
 
-const StudyStartContent = () => {
+interface Prop {
+  categoryData: CategoryModel[];
+}
+
+const StudyStartContent = ({ categoryData }: Prop) => {
   const [isStudyPopUp, setIsStudyPopUp] = useState(false);
   function handlePopUp() {
     setIsStudyPopUp(!isStudyPopUp);
@@ -11,7 +16,11 @@ const StudyStartContent = () => {
   return (
     <>
       <StartBtn handlePopUp={handlePopUp} />
-      <PopupSetting handlePopUp={handlePopUp} isStudyPopUp={isStudyPopUp} />
+      <PopupSetting
+        handlePopUp={handlePopUp}
+        isStudyPopUp={isStudyPopUp}
+        categoryData={categoryData}
+      />
     </>
   );
 };
