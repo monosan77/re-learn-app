@@ -1,8 +1,7 @@
 "use client";
 import { createStudySession } from "@/actions/createStudySession";
 import ButtonMedium from "@/components/buttons/ButtonMedium";
-import Loader from "@/components/Loading/Loader";
-import { CategoryModel, Study_Session_Model } from "@/types/types";
+import { CategoryModel } from "@/types/types";
 import Image from "next/image";
 import React, { useContext, useState } from "react";
 import { LoadingPopup } from "../../layout";
@@ -15,7 +14,7 @@ interface Prop {
 
 const PopupSetting = ({ handlePopUp, isStudyPopUp, categoryData }: Prop) => {
   const router = useRouter();
-  const { loading, setLoading } = useContext(LoadingPopup);
+  const { setLoading } = useContext(LoadingPopup);
   const [error, setError] = useState("");
   async function handleSubmit(formData: FormData) {
     try {
@@ -30,7 +29,7 @@ const PopupSetting = ({ handlePopUp, isStudyPopUp, categoryData }: Prop) => {
         setLoading(false);
       }
       return router.push(`/works/studying?id=${data.response}`);
-    } catch (error) {
+    } catch {
       setError("※サーバーエラーが発生しました。");
       setLoading(false);
     }
