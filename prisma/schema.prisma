@@ -35,6 +35,8 @@ model profile {
   problemSet problem_set[]
 
   historyProblem history_problem[]
+
+  study_session study_session[]
 }
 
 model problem_set {
@@ -90,4 +92,27 @@ model problem {
   updatedAt    DateTime @updatedAt //更新日
 
   history_problem history_problem[]
+}
+
+model study_session {
+  id    String  @id @default(uuid())
+  profile_id   String 
+  profile profile  @relation(fields: [profile_id],references: [id])
+  current_index Int @default(1)
+  is_completed Boolean @default(false)
+  updatedAt    DateTime @updatedAt
+
+  answer_history answer_history[]
+}
+
+model answer_history {
+  id  Int  @id @default(autoincrement())
+  study_session_id  String
+  study_session study_session @relation(fields: [study_session_id],references: [id],onDelete: Cascade)
+  index Int
+  problem_id String
+  is_correct Boolean @default(false)
+  user_answer String
+  updatedAt    DateTime @updatedAt
+
 }
