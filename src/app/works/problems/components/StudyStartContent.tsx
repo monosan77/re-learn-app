@@ -6,9 +6,10 @@ import { CategoryModel } from "@/types/types";
 
 interface Prop {
   categoryData: CategoryModel[];
+  problemSetName: string;
 }
 
-const StudyStartContent = ({ categoryData }: Prop) => {
+const StudyStartContent = ({ categoryData, problemSetName }: Prop) => {
   const [isStudyPopUp, setIsStudyPopUp] = useState(false);
   function handlePopUp() {
     setIsStudyPopUp(!isStudyPopUp);
@@ -20,6 +21,7 @@ const StudyStartContent = ({ categoryData }: Prop) => {
         handlePopUp={handlePopUp}
         isStudyPopUp={isStudyPopUp}
         categoryData={categoryData}
+        problemSetName={problemSetName}
       />
     </>
   );

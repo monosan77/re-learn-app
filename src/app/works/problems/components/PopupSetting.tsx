@@ -10,9 +10,15 @@ interface Prop {
   handlePopUp: () => void;
   isStudyPopUp: boolean;
   categoryData: CategoryModel[];
+  problemSetName: string;
 }
 
-const PopupSetting = ({ handlePopUp, isStudyPopUp, categoryData }: Prop) => {
+const PopupSetting = ({
+  handlePopUp,
+  isStudyPopUp,
+  categoryData,
+  problemSetName,
+}: Prop) => {
   const router = useRouter();
   const { setLoading } = useContext(LoadingPopup);
   const [error, setError] = useState("");
@@ -28,9 +34,13 @@ const PopupSetting = ({ handlePopUp, isStudyPopUp, categoryData }: Prop) => {
         setError(data.response);
         setLoading(false);
       }
-      return router.push(`/works/studying?id=${data.response}`);
+      return router.push(
+        `/works/studying?id=${data.response}&category=${formData.get("category")}&name=${problemSetName}&index=1`
+      );
     } catch {
       setError("※サーバーエラーが発生しました。");
+      setLoading(false);
+    } finally {
       setLoading(false);
     }
   }
