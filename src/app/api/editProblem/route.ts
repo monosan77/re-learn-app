@@ -25,13 +25,18 @@ export async function POST(req: Request) {
       );
     }
 
+    const newOptions: string[] = formData.otherAnswer.map((elem: string) => {
+      const result = elem.replace(/[\r\n]+/g, "");
+      return result;
+    });
+
     const data = await prisma.problem.create({
       data: {
         title: formData.title,
         format: formData.format,
         statement: formData.statement,
         answer: formData.answer,
-        otherOptions: formData.otherAnswer,
+        otherOptions: newOptions,
         explanation: formData.explanation,
         category_id: formData.category_id,
       },
@@ -55,16 +60,22 @@ export async function PUT(req: Request) {
         { status: 405 }
       );
     }
+
+    const newOptions: string[] = formData.otherAnswer.map((elem: string) => {
+      const result = elem.replace(/[\r\n]+/g, "");
+      return result;
+    });
+
     const data = await prisma.problem.update({
       where: {
         id: formData.problem_id,
       },
       data: {
-        title: formData.title,
+        title: formData.title.trim(),
         format: formData.format,
         statement: formData.statement,
         answer: formData.answer,
-        otherOptions: formData.otherAnswer,
+        otherOptions: newOptions,
         explanation: formData.explanation,
         category_id: formData.category_id,
       },
