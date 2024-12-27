@@ -75,6 +75,7 @@ export interface Answer_History_Model {
   study_session_id: string;
   index: number;
   problem_id: string;
+  problem: ProblemModel;
   is_correct: boolean;
   user_answer: string;
   updatedAt: Date;
