@@ -22,7 +22,6 @@ async function getProblemData(id: string) {
       },
     },
   });
-  console.log(data, "データを取得");
   if (data) {
     return data;
   }
@@ -57,7 +56,10 @@ const Page = async ({
           : ""}
         <AddCategory id={id} />
       </div>
-      <StudyStartContent categoryData={problemData.category} />
+      <StudyStartContent
+        categoryData={problemData.category}
+        problemSetName={problemData.name}
+      />
     </div>
   );
 };
