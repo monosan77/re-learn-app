@@ -1,8 +1,9 @@
+"use client";
 import React from "react";
 interface Props {
   type: "submit" | "reset" | "button" | undefined;
   buttonText: string;
-  fn: () => void | null;
+  fn?: () => void | null;
 }
 const ButtonSmallWhite = ({ type, buttonText, fn }: Props) => {
   return (
