@@ -7,6 +7,7 @@ interface Prop {
   currentProblem: Answer_History_Model;
   shuffledSelectAnswer: string[];
   write: string;
+  select: string;
   setWrite: (value: string) => void;
   setSelect: (value: string) => void;
 }
@@ -16,6 +17,7 @@ const ProblemContent = ({
   currentProblem,
   shuffledSelectAnswer,
   write,
+  select,
   setWrite,
   setSelect,
 }: Prop) => {
@@ -45,13 +47,14 @@ const ProblemContent = ({
         <ul className="space-y-3 max-w-96 mb-5">
           {shuffledSelectAnswer.map((answer, index) => (
             <li
-              key={answer}
+              key={index}
               className="flex px-2 bg-gray-300 justify-start rounded-sm items-center space-x-2 cursor-pointer"
             >
               <input
                 type="radio"
                 name="select"
                 id={`select${index}`}
+                checked={answer === select}
                 value={answer}
                 onChange={(e) => setSelect(e.target.value)}
               />

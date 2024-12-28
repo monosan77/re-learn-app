@@ -1,10 +1,7 @@
-import StudyingNextBtn from "@/components/buttons/StudyingNextBtn";
 import React from "react";
-import StudyingTitle from "./components/StudyingTitle";
 import StudyingCard from "@/components/Card/StudyingCard";
 import { getCategory } from "@/actions/getCategory";
 import { getAnswerHistory } from "@/actions/getAnserHistory";
-import Input from "@/components/Input/Input";
 import { createSelectAnswer } from "@/utils/shuffledArray";
 import {
   Answer_History_Model,
@@ -26,13 +23,14 @@ const Page = async ({ searchParams }: Prop) => {
   const categoryData: CategoryModel | null = await getCategory(category_id);
   const answerHistoryData: Study_Session_Model | null =
     await getAnswerHistory(id);
+  console.log(answerHistoryData);
 
   if (!categoryData || !answerHistoryData || !answerHistoryData.answer_history)
     return <p>データを取得できませんでした。</p>;
 
-  // const currentProblem = answerHistoryData.answer_history[index - 1];
-  const currentProblem: Answer_History_Model =
-    answerHistoryData.answer_history[2];
+  const currentProblem = answerHistoryData.answer_history[index - 1];
+  // const currentProblem: Answer_History_Model =
+  //   answerHistoryData.answer_history[2];
 
   // 選択式の時、選択肢をランダムに並び替える
   let shuffledSelectAnswer: string[] = [];
@@ -46,6 +44,9 @@ const Page = async ({ searchParams }: Prop) => {
   return (
     <StudyingCard categoryData={categoryData} name={name}>
       <StudyContent
+        id={id}
+        category_id={category_id}
+        name={name}
         index={index}
         length={answerHistoryData.answer_history.length}
         currentProblem={currentProblem}

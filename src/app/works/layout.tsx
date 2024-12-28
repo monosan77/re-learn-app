@@ -1,6 +1,7 @@
 "use client";
 import Header from "@/components/Header/Header";
 import Loader from "@/components/Loading/Loader";
+import Mask_Gray from "@/components/Mask/Mask_Gray";
 import Mask_Transparent from "@/components/Mask/Mask_Transparent";
 import SideBar from "@/components/SideBar/SideBar";
 import React, { createContext, useState } from "react";
@@ -28,9 +29,11 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <LoadingPopup.Provider value={{ loading, setLoading }}>
             {children}
             {loading && (
-              <div>
-                <Loader />
-                <Mask_Transparent />
+              <div className="fixed top-0 left-0 right-0 bottom-0">
+                <div className="fixed top-0 left-0 right-0 z-50">
+                  <Loader />
+                </div>
+                <Mask_Gray />
               </div>
             )}
           </LoadingPopup.Provider>

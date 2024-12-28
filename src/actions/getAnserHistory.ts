@@ -13,6 +13,9 @@ export async function getAnswerHistory(id: string) {
           include: {
             problem: true,
           },
+          orderBy: {
+            index: "asc",
+          },
         },
       },
     });
