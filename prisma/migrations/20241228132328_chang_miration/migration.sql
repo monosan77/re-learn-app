@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "history_problem" ALTER COLUMN "solvedAt" SET DEFAULT CURRENT_TIMESTAMP;

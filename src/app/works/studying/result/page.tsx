@@ -1,12 +1,11 @@
 import ProblemTitle from "@/components/ProblemForm/ProblemTitle";
 import React from "react";
-import ButtonSmall from "@/components/buttons/ButtonSmall";
-import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
 import { CategoryModel, Study_Session_Model } from "@/types/types";
 import { getCategory } from "@/actions/getCategory";
 import { getAnswerHistory } from "@/actions/getAnserHistory";
 import StudyingProblemTitle from "../components/StudyingProblemTitle";
 import CorrectORIncorrect from "../components/CorrectORIncorrect";
+import Buttons from "./components/Buttons";
 
 interface Prop {
   searchParams: Promise<{ [key: string]: string | undefined }>;
@@ -16,8 +15,8 @@ const Page = async ({ searchParams }: Prop) => {
   const id = (await searchParams).id;
   const category_id = (await searchParams).category;
   const name = (await searchParams).name;
-  console.log(id, category_id, name);
-  if (!id || !category_id || !name)
+  const setId = (await searchParams).setId;
+  if (!id || !category_id || !name || !setId)
     return <p>データを取得できませんでした。1</p>;
 
   //各種データを並列取得
@@ -65,12 +64,7 @@ const Page = async ({ searchParams }: Prop) => {
           </div>
         ))}
       </div>
-      <div className="w-full px-4 pt-4 pb-8 md:pt-8  md:w-[calc(100%-256px)] fixed bottom-0 bg-background">
-        <div className="max-w-600 mx-auto flex justify-between items-center">
-          <ButtonSmall type="button" buttonText="やり直す" />
-          <ButtonSmallWhite type="button" buttonText="終了する" />
-        </div>
-      </div>
+      <Buttons answerHistoryData={answerHistoryData} setId={setId} />
     </div>
   );
 };

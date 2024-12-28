@@ -13,7 +13,8 @@ const Page = async ({ searchParams }: Prop) => {
   const category_id = (await searchParams).category;
   const name = (await searchParams).name;
   const index = Number((await searchParams).index);
-  if (!id || !category_id || !name || !index)
+  const setId = (await searchParams).setId;
+  if (!id || !category_id || !name || !index || !setId)
     return <p>データを取得できませんでした。</p>;
 
   const [categoryData, answerHistoryData]: [
@@ -39,6 +40,7 @@ const Page = async ({ searchParams }: Prop) => {
     <StudyingCard categoryData={categoryData} name={name}>
       <StudyContent
         id={id}
+        setId={setId}
         category_id={category_id}
         name={name}
         index={index}

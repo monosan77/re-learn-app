@@ -34,9 +34,9 @@ model profile {
 
   problemSet problem_set[]
 
-  historyProblem history_problem[]
-
   study_session study_session[]
+
+  history_group history_group[]
 }
 
 model problem_set {
@@ -52,16 +52,24 @@ model problem_set {
   category category[]
 }
 
+model history_group {
+  id            String @id @default(uuid())
+  createdAt     DateTime @default(now()) // セッション作成日時
+  profile        profile    @relation(fields: [profile_id], references: [id] ,onDelete: Cascade)
+  profile_id        String
+  history_problem      history_problem[]       // 1対多の関係
+
+}
 //解答履歴
 model history_problem {
   id            String @id @default(uuid())
-  profile        profile    @relation(fields: [profile_id], references: [id] ,onDelete: Cascade)
-  profile_id        String
-  problem     problem  @relation(fields: [problem_id], references: [id],onDelete: Cascade)
-  problem_id    String
-  solvedAt     DateTime //解答した日時
+  solvedAt      DateTime @default(now())  //解答した日時
   isCorrect    Boolean //正解フラグ
   attemptedAnswer String //ユーザーの解答テキスト
+  problem     problem  @relation(fields: [problem_id], references: [id],onDelete: Cascade)
+  problem_id    String
+  history_group history_group @relation(fields: [history_group_id],references: [id])
+  history_group_id String
 }
 
 model category {

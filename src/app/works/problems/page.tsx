@@ -57,6 +57,7 @@ const Page = async ({
         <AddCategory id={id} />
       </div>
       <StudyStartContent
+        problemSetId={id}
         categoryData={problemData.category}
         problemSetName={problemData.name}
       />

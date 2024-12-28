@@ -7,6 +7,7 @@ import React, { useContext, useState } from "react";
 import { LoadingPopup } from "../../layout";
 import { useRouter } from "next/navigation";
 interface Prop {
+  problemSetId: string;
   handlePopUp: () => void;
   isStudyPopUp: boolean;
   categoryData: CategoryModel[];
@@ -14,6 +15,7 @@ interface Prop {
 }
 
 const PopupSetting = ({
+  problemSetId,
   handlePopUp,
   isStudyPopUp,
   categoryData,
@@ -35,7 +37,7 @@ const PopupSetting = ({
         setLoading(false);
       }
       return router.push(
-        `/works/studying?id=${data.response}&category=${formData.get("category")}&name=${problemSetName}&index=1`
+        `/works/studying?id=${data.response}&category=${formData.get("category")}&setId=${problemSetId}&name=${problemSetName}&index=1`
       );
     } catch {
       setError("※サーバーエラーが発生しました。");

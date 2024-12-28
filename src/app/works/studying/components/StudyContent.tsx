@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 
 interface Prop {
   id: string;
+  setId: string;
   category_id: string;
   name: string;
   index: number;
@@ -19,6 +20,7 @@ interface Prop {
 
 const StudyContent = ({
   id,
+  setId,
   category_id,
   name,
   index,
@@ -53,12 +55,12 @@ const StudyContent = ({
 
       if (length === index) {
         return router.push(
-          `/works/studying/result?id=${id}&category=${category_id}&name=${name}`
+          `/works/studying/result?id=${id}&category=${category_id}&setId=${setId}&name=${name}`
         );
       }
 
       return router.push(
-        `/works/studying?id=${id}&category=${category_id}&name=${name}&index=${index + 1}`
+        `/works/studying?id=${id}&category=${category_id}&setId=${setId}&name=${name}&index=${index + 1}`
       );
     } catch (error) {
       console.log(error);
