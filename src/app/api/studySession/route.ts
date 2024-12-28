@@ -34,7 +34,7 @@ export async function PUT(req: Request) {
     const isCorrect = currentProblem.problem.answer === userAnswer;
     const isCompleted = studySessionData?.answer_history.length === index;
 
-    const data1 = await prisma.study_session.update({
+    await prisma.study_session.update({
       where: {
         id: currentProblem.study_session_id,
       },
@@ -43,7 +43,7 @@ export async function PUT(req: Request) {
         is_completed: isCompleted,
       },
     });
-    const data2 = await prisma.answer_history.update({
+    await prisma.answer_history.update({
       where: {
         id: currentProblem.id,
       },

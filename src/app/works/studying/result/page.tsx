@@ -1,11 +1,13 @@
 "use client";
 import ProblemTitle from "@/components/ProblemForm/ProblemTitle";
 import React from "react";
-import StudyingProblemTitle from "../answer/components/StudyingProblemTitle";
-import CorrectORIncorrect from "../answer/components/CorrectORIncorrect";
+// import StudyingProblemTitle from "../answer/components/StudyingProblemTitle";
+// import CorrectORIncorrect from "../answer/components/CorrectORIncorrect";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
 import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
 import { useRouter } from "next/navigation";
+// import StudyingProblemTitle from "../components/StudyingProblemTitle";
+// import CorrectORIncorrect from "../components/CorrectORIncorrect";
 
 const Page = () => {
   const router = useRouter();
@@ -22,18 +24,18 @@ const Page = () => {
         </div>
         <div className="p-5 border rounded-md card-shadow space-y-2">
           <h3 className="font-bold text-2xl">1問目</h3>
-          <StudyingProblemTitle />
-          <CorrectORIncorrect />
+          {/* <StudyingProblemTitle />
+          <CorrectORIncorrect /> */}
         </div>
         <div className="p-5 border rounded-md card-shadow space-y-2">
           <h3 className="font-bold text-2xl">2問目</h3>
-          <StudyingProblemTitle />
-          <CorrectORIncorrect />
+          {/* <StudyingProblemTitle />
+          <CorrectORIncorrect /> */}
         </div>
         <div className="p-5 border rounded-md card-shadow space-y-2">
           <h3 className="font-bold text-2xl">3問目</h3>
-          <StudyingProblemTitle />
-          <CorrectORIncorrect />
+          {/* <StudyingProblemTitle />
+          <CorrectORIncorrect /> */}
         </div>
       </div>
       <div className="w-full px-4 pt-4 pb-8 md:pt-8  md:w-[calc(100%-256px)] fixed bottom-0 bg-background">

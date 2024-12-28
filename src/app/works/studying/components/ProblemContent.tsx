@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import StudyingTitle from "./StudyingTitle";
 import { Answer_History_Model } from "@/types/types";
 interface Prop {

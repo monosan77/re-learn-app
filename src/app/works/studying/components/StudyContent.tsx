@@ -47,14 +47,15 @@ const StudyContent = ({
             currentProblem.problem.format === "select" ? select : write,
         }),
       });
-      const data = await res.json();
+      if (!res.ok) {
+        throw new Error("通信に失敗しました。");
+      }
 
       router.push(
         `/works/studying?id=${id}&category=${category_id}&name=${name}&index=${index + 1}`
       );
     } catch (error) {
-      console.log(currentProblem);
-      // console.log(data);
+      console.log(error);
     } finally {
       setLoading(false);
       setIsProblemContent(true);

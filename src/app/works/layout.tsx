@@ -2,7 +2,6 @@
 import Header from "@/components/Header/Header";
 import Loader from "@/components/Loading/Loader";
 import Mask_Gray from "@/components/Mask/Mask_Gray";
-import Mask_Transparent from "@/components/Mask/Mask_Transparent";
 import SideBar from "@/components/SideBar/SideBar";
 import React, { createContext, useState } from "react";
 
