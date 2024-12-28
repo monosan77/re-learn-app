@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { Answer_History_Model } from "@/types/types";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 interface fetchModel {
   currentProblem: Answer_History_Model;
@@ -50,6 +50,30 @@ export async function PUT(req: Request) {
       data: {
         user_answer: userAnswer,
         is_correct: isCorrect,
+      },
+    });
+    return NextResponse.json({ message: "ok" });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ message: "server error" }, { status: 500 });
+  }
+}
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const studyId = searchParams.get("studyId");
+    console.log(studyId);
+    if (!studyId) {
+      return NextResponse.json(
+        { message: "リクエストエラー" },
+        { status: 405 }
+      );
+    }
+
+    await prisma.study_session.delete({
+      where: {
+        id: studyId,
       },
     });
     return NextResponse.json({ message: "ok" });
