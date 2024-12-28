@@ -51,7 +51,13 @@ const StudyContent = ({
         throw new Error("通信に失敗しました。");
       }
 
-      router.push(
+      if (length === index) {
+        return router.push(
+          `/works/studying/result?id=${id}&category=${category_id}&name=${name}`
+        );
+      }
+
+      return router.push(
         `/works/studying?id=${id}&category=${category_id}&name=${name}&index=${index + 1}`
       );
     } catch (error) {
