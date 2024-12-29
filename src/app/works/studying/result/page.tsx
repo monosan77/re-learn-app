@@ -64,7 +64,12 @@ const Page = async ({ searchParams }: Prop) => {
           </div>
         ))}
       </div>
-      <Buttons answerHistoryData={answerHistoryData} setId={setId} />
+      <Buttons
+        category_id={category_id}
+        name={name}
+        answerHistoryData={answerHistoryData}
+        setId={setId}
+      />
     </div>
   );
 };

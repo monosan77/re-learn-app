@@ -9,6 +9,8 @@ import React, { useContext } from "react";
 interface Prop {
   answerHistoryData: Study_Session_Model;
   setId: string;
+  name: string;
+  category_id: string;
 }
 
 async function deleteStudySession(answerHistoryData: Study_Session_Model) {
@@ -34,9 +36,10 @@ async function createHistory(answerHistoryData: Study_Session_Model) {
   return createProblemHistory;
 }
 
-const Buttons = ({ answerHistoryData, setId }: Prop) => {
+const Buttons = ({ answerHistoryData, setId, name, category_id }: Prop) => {
   const router = useRouter();
   const { setLoading } = useContext(LoadingPopup);
+
   async function handleFinish() {
     try {
       setLoading(true);
@@ -48,8 +51,32 @@ const Buttons = ({ answerHistoryData, setId }: Prop) => {
       if (!deleteResponse.ok || !createProblemHistory.ok) {
         throw new Error("サーバーエラーが起きました。");
       }
-      console.log(createProblemHistory);
       return router.push(`/works/problems?id=${setId}`);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleResetProblem() {
+    try {
+      setLoading(true);
+      const res = await fetch("/api/resetStudyProblem", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ answerHistoryData }),
+      });
+
+      if (!res.ok) {
+        throw new Error("通信エラー");
+      }
+
+      return router.push(
+        `/works/studying?id=${answerHistoryData.id}&category=${category_id}&setId=${setId}&name=${name}&index=1`
+      );
     } catch (error) {
       console.log(error);
     } finally {
@@ -60,7 +87,11 @@ const Buttons = ({ answerHistoryData, setId }: Prop) => {
   return (
     <div className="w-full px-4 pt-4 pb-8 md:pt-8  md:w-[calc(100%-256px)] fixed bottom-0 bg-background">
       <div className="max-w-600 mx-auto flex justify-between items-center">
-        <ButtonSmall type="button" buttonText="やり直す" />
+        <ButtonSmall
+          type="button"
+          buttonText="やり直す"
+          buttonFn={handleResetProblem}
+        />
         <ButtonSmallWhite
           type="button"
           buttonText="終了する"
