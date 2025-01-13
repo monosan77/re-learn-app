@@ -4,7 +4,7 @@ import { Answer_History_Model } from "@/types/types";
 import React, { useContext, useState } from "react";
 import ProblemContent from "./ProblemContent";
 import AnswerContent from "./AnswerContent";
-import { LoadingPopup } from "../../layout";
+import { LoadingPopup } from "@/components/Layout/works/WorksLayout";
 import { useRouter } from "next/navigation";
 
 interface Prop {

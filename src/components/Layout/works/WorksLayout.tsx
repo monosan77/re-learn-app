@@ -1,5 +1,4 @@
 "use client";
-// import { LoadingPopup } from "@/app/works/layout";
 import Header from "@/components/Header/Header";
 import Loader from "@/components/Loading/Loader";
 import Mask_Gray from "@/components/Mask/Mask_Gray";
@@ -17,7 +16,7 @@ const WorksLayout = ({
   problemData,
 }: {
   children: React.ReactNode;
-  problemData: Problem_SetModel[]
+  problemData: Problem_SetModel[];
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
