@@ -1,12 +1,15 @@
+import { Inputs } from "@/app/works/create-problem/components/CreateProblemForm";
 import React from "react";
+import { UseFormRegister } from "react-hook-form";
 interface Prop {
-  setFormat: (value: string) => void;
-  format: string;
+  // setFormat: (value: string) => void;
+  // format: string;
+  register: UseFormRegister<Inputs>;
 }
-const ProblemFormat = ({ setFormat, format }: Prop) => {
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setFormat(e.target.value);
-  }
+const ProblemFormat = ({ register }: Prop) => {
+  // function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+  //   setFormat(e.target.value);
+  // }
   return (
     <div>
       <label className="font-bold">問題形式</label>
@@ -14,23 +17,25 @@ const ProblemFormat = ({ setFormat, format }: Prop) => {
         <div className="flex justify-start space-x-2">
           <input
             type="radio"
-            name="format"
+            // name="format"
             id="select"
             value={"select"}
-            onChange={handleChange}
-            // defaultChecked={true}
-            defaultChecked={format === "select" ? true : false}
+            {...register("format")}
+            // onChange={handleChange}
+            // defaultChecked={'true}
+            // defaultChecked={format === "select" ? true : false}
           />
           <label htmlFor="select">4択式</label>
         </div>
         <div className="flex justify-start space-x-2">
           <input
             type="radio"
-            name="format"
+            // name="format"
             id="write"
             value={"write"}
-            onChange={handleChange}
-            defaultChecked={format === "write" ? true : false}
+            {...register("format")}
+            // onChange={handleChange}
+            // defaultChecked={format === "write" ? true : false}
           />
           <label htmlFor="write">記述式</label>
         </div>

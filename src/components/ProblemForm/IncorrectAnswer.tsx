@@ -1,50 +1,57 @@
 "use client";
-import { nothingValidation } from "@/app/works/create-problem/components/CreateProblemForm";
+import { Inputs } from "@/app/works/create-problem/components/CreateProblemForm";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
 import React, { useState } from "react";
+import {
+  FieldErrors,
+  UseFormRegister,
+  UseFormSetError,
+  UseFormSetValue,
+} from "react-hook-form";
+import { PulseLoader } from "react-spinners";
+
 interface Prop {
   answer: string;
-  statement: string;
   otherAnswer: string[];
-  setOtherAnswer: (value: string[]) => void;
-  incorrectError: string;
-  setIncorrectError: (value: string) => void;
+  statement: string;
+  error: FieldErrors<Inputs>;
+  register: UseFormRegister<Inputs>;
+  setError: UseFormSetError<Inputs>;
+  setValue: UseFormSetValue<Inputs>;
 }
 const IncorrectAnswer = ({
   answer,
-  statement,
   otherAnswer,
-  setOtherAnswer,
-  incorrectError,
-  setIncorrectError,
+  statement,
+  error,
+  register,
+  setError,
+  setValue,
 }: Prop) => {
   const [loading, setLoading] = useState(false);
-
   const handleSubmit = async () => {
-    // ロード中のチェック
     if (loading) return;
-    // バリデーション
-    let isErrorValidation = 0;
-    isErrorValidation += nothingValidation(
-      answer,
-      setIncorrectError,
-      "※問題文と答えを入力してください。"
-    );
-    isErrorValidation += nothingValidation(
-      statement,
-      setIncorrectError,
-      "※問題文と答えを入力してください。"
-    );
-    if (isErrorValidation > 0) return;
+    // 問題文と答えが入力されていないと生成できないので手動でバリデーション
+    if (answer.trim().length === 0 && statement.trim().length === 0) {
+      return setError("otherAnswer", {
+        type: "custom",
+        message: "問題文と答えを入力してください",
+      });
+    } else if (statement.trim().length === 0) {
+      return setError("otherAnswer", {
+        type: "custom",
+        message: "問題文を入力してください",
+      });
+    } else if (answer.trim().length === 0) {
+      return setError("otherAnswer", {
+        type: "custom",
+        message: "答えを入力してください",
+      });
+    }
+    setError("otherAnswer", { type: "custom", message: "" });
 
     // 処理開始
     setLoading(true);
-    setIncorrectError("");
-    setOtherAnswer([
-      "自動生成中・・・",
-      "自動生成中・・・",
-      "自動生成中・・・",
-    ]);
     try {
       const res = await fetch("/api/geminiApi", {
         method: "POST",
@@ -54,72 +61,57 @@ const IncorrectAnswer = ({
         body: JSON.stringify({ answer, statement }),
       });
 
-      const data = await res.json();
-      // const data1 = JSON.parse(data.text);
       if (res.ok) {
-        setOtherAnswer(data.text);
+        const data = await res.json();
+        console.log(data, "生成された");
+        setValue("otherAnswer", data.text, {
+          shouldValidate: true,
+          shouldDirty: true,
+        });
       } else {
-        throw new Error("上手く生成できませんでした。");
+        throw new Error("生成できませんでした。");
       }
-    } catch (error) {
+    } catch (error: unknown) {
       console.error("Request failed:", error);
-      setIncorrectError("上手く生成できませんでした。");
+      setError("otherAnswer", {
+        type: "custom",
+        message: "答えを生成できませんでした。",
+      });
     } finally {
       setLoading(false);
     }
   };
+  console.log(error.otherAnswer?.message, "ddd");
 
-  function handleChange(num: number, e: React.ChangeEvent<HTMLInputElement>) {
-    const prevOtherAnser = [...otherAnswer];
-    prevOtherAnser[num] = e.target.value;
-    setOtherAnswer(prevOtherAnser);
-  }
   return (
     <div>
       <label className="font-bold">
         不正解選択肢{" "}
-        <span className="text-red-600 text-sm">{incorrectError}</span>
+        <span className="text-red-600 text-sm">
+          {error.otherAnswer?.message && error.otherAnswer?.message}
+          {loading && (
+            <span className="ml-5 text-mainColor">
+              不正解の選択肢を生成しています。
+              <PulseLoader size={7} color="#4169e1" />
+            </span>
+          )}
+        </span>
       </label>
       <div className="space-y-3">
-        <div className="flex justify-start items-center space-x-2">
-          <label htmlFor="1">1</label>
-          <input
-            type={"text"}
-            name={"1"}
-            id={"1"}
-            value={otherAnswer[0]}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleChange(0, e)
-            }
-            className="w-full border border-gray-400 rounded-md px-1  bg-white focus:outline-black focus:border focus:rounded-sm"
-          />
-        </div>
-        <div className="flex justify-start items-center space-x-2">
-          <label htmlFor="2">2</label>
-          <input
-            type={"text"}
-            name={"2"}
-            id={"2"}
-            value={otherAnswer[1]}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleChange(1, e)
-            }
-            className="w-full border border-gray-400 rounded-md px-1  bg-white focus:outline-black focus:border focus:rounded-sm"
-          />
-        </div>
-        <div className="flex justify-start items-center space-x-2">
-          <label htmlFor="3">3</label>
-          <input
-            type={"text"}
-            name={"3"}
-            id={"3"}
-            value={otherAnswer[2]}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleChange(2, e)
-            }
-            className="w-full border border-gray-400 rounded-md px-1  bg-white focus:outline-black focus:border focus:rounded-sm"
-          />
-        </div>
+        {otherAnswer.map((_, index) => (
+          <div
+            key={index}
+            className="flex justify-start items-center space-x-2"
+          >
+            <label htmlFor={index.toString()}>{index + 1}</label>
+            <input
+              type={"text"}
+              id={index.toString()}
+              {...register(`otherAnswer.${index}`)}
+              className="w-full border border-gray-400 rounded-md px-1  bg-white focus:outline-black focus:border focus:rounded-sm"
+            />
+          </div>
+        ))}
       </div>
       <div className="w-full flex justify-center items-center my-7">
         <div onClick={handleSubmit}>

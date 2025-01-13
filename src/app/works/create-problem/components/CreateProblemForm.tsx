@@ -3,84 +3,60 @@ import IncorrectAnswer from "@/components/ProblemForm/IncorrectAnswer";
 import InputText from "@/components/ProblemForm/InputText";
 import InputTextArea from "@/components/ProblemForm/InputTextArea";
 import ProblemFormat from "@/components/ProblemForm/ProblemFormat";
-import React, { useState } from "react";
 import ButtonContents from "./ButtonContents";
 import { useRouter } from "next/navigation";
+import { useForm, SubmitHandler } from "react-hook-form";
 
-export function arrayNothingValidation(
-  elem: string[],
-  setFn: (value: string) => void,
-  errorText: string
-) {
-  let check = 0;
-  elem.map((item) => {
-    check = nothingValidation(item, setFn, errorText);
-  });
-  return check;
-}
-export function nothingValidation(
-  elem: string,
-  setFn: (value: string) => void,
-  errorText: string
-) {
-  if (!elem || elem.trim().length === 0) {
-    setFn(errorText);
-    return 1;
-  }
-  return 0;
-}
 
 interface Prop {
   category_id: string;
   problem_id: string;
 }
 
+export interface Inputs {
+  title: string;
+  format: "select" | "write";
+  statement: string;
+  answer: string;
+  otherAnswer: string[];
+  explanation: string;
+}
+
 const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
   const router = useRouter();
-  const [title, setTitle] = useState("");
-  const [format, setFormat] = useState("select");
-  const [statement, setStatement] = useState("");
-  const [answer, setAnswer] = useState("");
-  const [otherAnswer, setOtherAnswer] = useState(new Array(3).fill(""));
-
-  const [explanation, setExplanation] = useState("");
-  const [titleError, setTitleError] = useState("");
-  const [statementError, setStatementError] = useState("");
-  const [answerError, setAnswerError] = useState("");
-  const [incorrectError, setIncorrectError] = useState("");
-
-  async function handleSubmit() {
-    setTitleError("");
-    setStatementError("");
-    setAnswerError("");
-    setIncorrectError("");
-    let isErrorValidation = 0;
-    isErrorValidation += nothingValidation(
-      title,
-      setTitleError,
-      "※必須入力です"
-    );
-    isErrorValidation += nothingValidation(
-      statement,
-      setStatementError,
-      "※必須入力です"
-    );
-    isErrorValidation += nothingValidation(
-      answer,
-      setAnswerError,
-      "※必須入力です"
-    );
-    if (format === "select") {
-      isErrorValidation += arrayNothingValidation(
-        otherAnswer,
-        setIncorrectError,
-        "※必須入力です"
-      );
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    watch,
+    setError,
+    setValue,
+  } = useForm<Inputs>({
+    defaultValues: {
+      title: "",
+      format: "select",
+      statement: "",
+      answer: "",
+      otherAnswer: ["", "", ""],
+      explanation: "",
+    },
+  });
+  const [format, answer, statement, otherAnswer] = watch([
+    "format",
+    "answer",
+    "statement",
+    "otherAnswer",
+  ]);
+console.log(otherAnswer,'other')
+  const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
+    // 配列全体にエラーメッセージを付与したいのでここでバリデーションを実施する。
+    if (otherAnswer.every((item) => item.trim().length === 0)) {
+      return setError("otherAnswer", {
+        type: "custom",
+        message: "選択肢は必須です。",
+      });
     }
-    if (isErrorValidation > 0) {
-      return;
-    }
-
+    console.log(data);
     try {
       const res = await fetch("/api/editProblem", {
         method: "POST",
@@ -88,13 +64,8 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title: title,
-          format: format,
-          statement: statement,
-          answer: answer,
-          otherAnswer: otherAnswer,
-          explanation: explanation,
-          category_id: category_id,
+          ...data,
+          category_id,
         }),
       });
       console.log(res);
@@ -105,56 +76,54 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
     } catch (error) {
       console.log(error);
     }
-  }
-
+  };
   return (
-    <form action="" className=" pt-4 space-y-6">
+    <form className=" pt-4 space-y-6">
       <InputText
         title="問題タイトル"
         name="title"
-        value={title}
-        setFn={setTitle}
-        error={titleError}
+        register={register}
+        error={errors}
       />
 
       {/* 出題形式 */}
-      <ProblemFormat setFormat={setFormat} format={format} />
+      <ProblemFormat register={register} />
 
       <InputTextArea
         title="問題文"
-        setFn={setStatement}
-        value={statement}
-        error={statementError}
+        register={register}
+        name={"statement"}
+        error={errors}
       />
 
       <InputText
         title="答え"
         name="answer"
-        value={answer}
-        setFn={setAnswer}
-        error={answerError}
+        register={register}
+        error={errors}
       />
 
       {/* 不正解選択肢 */}
       {format === "select" && (
         <IncorrectAnswer
-          statement={statement}
+          register={register}
           answer={answer}
           otherAnswer={otherAnswer}
-          setOtherAnswer={setOtherAnswer}
-          incorrectError={incorrectError}
-          setIncorrectError={setIncorrectError}
+          statement={statement}
+          setError={setError}
+          setValue={setValue}
+          error={errors}
         />
       )}
 
       <InputTextArea
         title="解説（任意）"
-        setFn={setExplanation}
-        value={explanation}
-        error={""}
+        register={register}
+        name={"explanation"}
+        error={errors}
       />
 
-      <ButtonContents handleSubmit={handleSubmit} />
+      <ButtonContents handleSubmit={handleSubmit(onSubmit)} />
     </form>
   );
 };
