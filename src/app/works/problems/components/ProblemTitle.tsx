@@ -8,7 +8,7 @@ interface Prop {
 const ProblemTitle = async ({ problemData }: Prop) => {
   return (
     <div
-      className="w-full bg-mainColor"
+      className="w-ful"
       style={{ background: `${problemData?.color}` }}
     >
       <div
