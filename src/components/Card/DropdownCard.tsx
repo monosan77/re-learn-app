@@ -1,5 +1,6 @@
-import Image from "next/image";
 import React, { ReactNode } from "react";
+import CloseIcon from "@mui/icons-material/Close";
+
 interface Prop {
   handleFn: () => void;
   openBool: boolean;
@@ -15,13 +16,7 @@ const DropdownCard = ({ children, openBool, navName, handleFn }: Prop) => {
         <div className="flex items-center justify-between text-center mb-3">
           <h3>{navName}</h3>
           <button onClick={handleFn}>
-            <Image
-              src={"/icon/batu-white.svg"}
-              alt="アイコン"
-              width={14}
-              height={14}
-              className="hover:opacity-70"
-            />
+            <CloseIcon />
           </button>
         </div>
         {children}

@@ -1,5 +1,5 @@
 "use client";
-import { LoadingPopup } from "@/app/works/layout";
+import { LoadingPopup } from "@/components/Layout/works/WorksLayout";
 import ButtonSmall from "@/components/buttons/ButtonSmall";
 import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
 import { Study_Session_Model } from "@/types/types";

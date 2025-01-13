@@ -1,19 +1,15 @@
 import TitleText from "@/components/Title/TitleText";
-import Image from "next/image";
 import React from "react";
 import { signOut } from "../../../../auth";
+import PersonIcon from "@mui/icons-material/Person";
+import EmailIcon from "@mui/icons-material/Email";
 
 const Page = () => {
   return (
     <div className="w-[calc(100%-32px)] mx-4 my-8 p-7 md:max-w-600 md:mx-auto rounded-md  card-shadow space-y-8">
       <div className="w-full flex justify-between items-center ">
         <div className="flex justify-start items-center space-x-4">
-          <Image
-            src={"/icon/person-black.svg"}
-            alt="アイコン"
-            width={25}
-            height={25}
-          />
+          <PersonIcon />
           <TitleText text="アカウント" />
         </div>
         <form
@@ -46,16 +42,10 @@ const Page = () => {
             htmlFor=""
             className="flex justify-start items-center space-x-3"
           >
-            <Image
-              src={"/icon/mail-black.svg"}
-              alt="アイコン"
-              width={22}
-              height={22}
-            />
+            <EmailIcon />
             <span className="font-bold">メールアドレス</span>
           </label>
           <div className="ml-8">
-            {/* <Input type="email" name="email" id="email" /> */}
             <p>test@example.com</p>
           </div>
         </div>
