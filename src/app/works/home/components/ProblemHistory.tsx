@@ -1,17 +1,12 @@
 import TitleText from "@/components/Title/TitleText";
-import Image from "next/image";
 import React from "react";
+import HistoryIcon from "@mui/icons-material/History";
 
 const ProblemHistory = () => {
   return (
     <>
       <div className="relative flex justify-start items-center mx-4 mt-8 mb-4 space-x-2">
-        <Image
-          src={"/icon/clock-black.svg"}
-          alt="アイコン"
-          width={20}
-          height={20}
-        />
+        <HistoryIcon />
         <TitleText text="最近の復習" />
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mx-4">

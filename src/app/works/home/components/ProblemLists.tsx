@@ -1,10 +1,10 @@
 import TitleText from "@/components/Title/TitleText";
-import Image from "next/image";
 import React from "react";
 import NewProblemContent from "./NewProblemContent";
 import { prisma } from "@/lib/prisma";
 import { auth } from "../../../../../auth";
 import Link from "next/link";
+import FolderIcon from "@mui/icons-material/Folder";
 
 async function getProblemSet() {
   try {
@@ -28,12 +28,7 @@ const ProblemLists = async () => {
   return (
     <>
       <div className="relative flex justify-start items-center mx-4 mt-16 mb-4 space-x-2">
-        <Image
-          src={"/icon/folder-black.svg"}
-          alt="アイコン"
-          width={20}
-          height={20}
-        />
+        <FolderIcon />
         <TitleText text="問題集一覧" />
       </div>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 mx-4">

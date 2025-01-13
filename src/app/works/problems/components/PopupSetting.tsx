@@ -2,9 +2,9 @@
 import { createStudySession } from "@/actions/createStudySession";
 import ButtonMedium from "@/components/buttons/ButtonMedium";
 import { CategoryModel } from "@/types/types";
-import Image from "next/image";
+import CloseIcon from "@mui/icons-material/Close";
 import React, { useContext, useState } from "react";
-import { LoadingPopup } from "../../layout";
+import { LoadingPopup } from "@/components/Layout/works/WorksLayout";
 import { useRouter } from "next/navigation";
 interface Prop {
   problemSetId: string;
@@ -55,12 +55,7 @@ const PopupSetting = ({
         <div className="flex justify-between items-center">
           <h1 className="text-2xl font-bold">出題設定</h1>
           <button type="button" onClick={handlePopUp}>
-            <Image
-              src={"/icon/batu-white.svg"}
-              alt="アイコン"
-              width={18}
-              height={18}
-            />
+            <CloseIcon />
           </button>
         </div>
         <p className="font-bold text-lg">
