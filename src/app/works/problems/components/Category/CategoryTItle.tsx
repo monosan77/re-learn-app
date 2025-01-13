@@ -1,6 +1,5 @@
 "use client";
 import Modal from "@/components/Modal/Modal";
-import Image from "next/image";
 import React, { useState } from "react";
 import { CategoryModel } from "@/types/types";
 import { updateCategory } from "@/actions/updateCategory";
@@ -9,6 +8,8 @@ import Mask_Transparent from "@/components/Mask/Mask_Transparent";
 import Form from "../CategoryForm/Form";
 import ConfirmModal from "@/components/Modal/ConfirmModal";
 import MenuModal from "./MenuModal";
+import ListIcon from "@mui/icons-material/List";
+
 interface Prop {
   category: CategoryModel;
   problemSet_id: string;
@@ -71,19 +72,14 @@ const CategoryTItle = ({ category, problemSet_id }: Prop) => {
   }
   return (
     <>
-      <div className="flex justify-between items-center border-solid border-b font-bold mb-2">
+      <div className="flex justify-between items-center border-solid border-b border-current font-bold mb-2">
         <h3>{category.name} </h3>
         <button
           type="button"
           onClick={handleMenuOpen}
           className="hover:opacity-80"
         >
-          <Image
-            src={"/icon/three-ten-white.svg"}
-            alt="アイコン"
-            width={20}
-            height={20}
-          />
+          <ListIcon />
         </button>
       </div>
 

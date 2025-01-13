@@ -1,10 +1,10 @@
 "use client";
-import Image from "next/image";
 import React, { useState } from "react";
 import MenuModal from "./MenuModal";
 import { useRouter } from "next/navigation";
 import ConfirmModal from "@/components/Modal/ConfirmModal";
 import Mask_Transparent from "@/components/Mask/Mask_Transparent";
+import CreateIcon from "@mui/icons-material/Create";
 interface Props {
   problemName: string;
   problemSet_id: string;
@@ -60,12 +60,7 @@ const ProblemList = ({
         className="w-full flex justify-between items-center"
       >
         <p>{problemName}</p>
-        <Image
-          src={"/icon/pen-white.svg"}
-          alt="アイコン"
-          width={18}
-          height={18}
-        />
+        <CreateIcon />
       </button>
       <div style={{ display: isMenuOpen ? "block" : "none" }}>
         <MenuModal
