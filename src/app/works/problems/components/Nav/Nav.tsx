@@ -9,8 +9,8 @@ import { updateProblem } from "@/actions/updateProblem";
 import Modal from "@/components/Modal/Modal";
 import ConfirmModal from "@/components/Modal/ConfirmModal";
 import AddCategoryNav from "./AddCategoryNav";
-import BuildIcon from '@mui/icons-material/Build';
-import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import BuildIcon from "@mui/icons-material/Build";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
 interface Prop {
   problemData: Problem_SetModel;
 }
@@ -86,7 +86,7 @@ const Nav = ({ problemData }: Prop) => {
         handleFn={handleOpenFilter}
         openBool={isOpenFilter}
         // iconPath={"/icon/filter-white.svg"}
-        iconElem={<FilterAltIcon/>}
+        iconElem={<FilterAltIcon />}
         navName={"Filter"}
       >
         <ul className="space-y-2 text-sm">
@@ -97,7 +97,7 @@ const Nav = ({ problemData }: Prop) => {
       <DropDownList
         handleFn={handleOpenSetting}
         openBool={isOpenSetting}
-        iconElem={<BuildIcon/>}
+        iconElem={<BuildIcon />}
         navName={"設定"}
       >
         <ul className="space-y-2 text-sm">

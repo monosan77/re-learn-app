@@ -5,8 +5,7 @@ import Modal from "@/components/Modal/Modal";
 import Form from "../CategoryForm/Form";
 import { createCategory } from "@/actions/createCategory";
 import { useRouter } from "next/navigation";
-import AddIcon from '@mui/icons-material/Add';
-
+import AddIcon from "@mui/icons-material/Add";
 
 interface Prop {
   problemSetId: string;
@@ -39,7 +38,7 @@ const AddCategoryNav = ({ problemSetId }: Prop) => {
   return (
     <div>
       <button onClick={handleOpen}>
-        <NavList iconElem={<AddIcon/>} categoryName="カテゴリー追加" />
+        <NavList iconElem={<AddIcon />} categoryName="カテゴリー追加" />
       </button>
       <div style={{ display: isOpenPop ? "block" : "none" }}>
         <Modal openFn={handleOpen}>

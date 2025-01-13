@@ -1,6 +1,5 @@
 "use client";
 import Modal from "@/components/Modal/Modal";
-import Image from "next/image";
 import React, { useState } from "react";
 import { CategoryModel } from "@/types/types";
 import { updateCategory } from "@/actions/updateCategory";

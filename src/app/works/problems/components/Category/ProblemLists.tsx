@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import ProblemList from "./ProblemList";
@@ -16,7 +15,10 @@ const ProblemLists = ({ problemSet_id, problems, category, name }: Prop) => {
   return (
     <ul className="pace-y-0.5">
       {problems.map((problem) => (
-        <li key={problem.id} className="border-b border-transparent hover:opacity-80 hover:border-b hover:border-solid hover:border-current">
+        <li
+          key={problem.id}
+          className="border-b border-transparent hover:opacity-80 hover:border-b hover:border-solid hover:border-current"
+        >
           <ProblemList
             problemName={problem.title}
             problemSet_id={problemSet_id}
