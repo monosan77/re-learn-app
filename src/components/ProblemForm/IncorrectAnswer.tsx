@@ -4,6 +4,7 @@ import ButtonSmall from "@/components/buttons/ButtonSmall";
 import React, { useState } from "react";
 import {
   FieldErrors,
+  UseFormClearErrors,
   UseFormRegister,
   UseFormSetError,
   UseFormSetValue,
@@ -14,19 +15,23 @@ interface Prop {
   answer: string;
   otherAnswer: string[];
   statement: string;
+  format: "select" | "write";
   error: FieldErrors<Inputs>;
   register: UseFormRegister<Inputs>;
   setError: UseFormSetError<Inputs>;
   setValue: UseFormSetValue<Inputs>;
+  clearErrors: UseFormClearErrors<Inputs>;
 }
 const IncorrectAnswer = ({
   answer,
   otherAnswer,
   statement,
+  format,
   error,
   register,
   setError,
   setValue,
+  clearErrors,
 }: Prop) => {
   const [loading, setLoading] = useState(false);
   const handleSubmit = async () => {
@@ -34,21 +39,26 @@ const IncorrectAnswer = ({
     // 問題文と答えが入力されていないと生成できないので手動でバリデーション
     if (answer.trim().length === 0 && statement.trim().length === 0) {
       return setError("otherAnswer", {
-        type: "custom",
+        // types:{required:"問題文と答えを入力してください"},
+
+        // type: "custom",
         message: "問題文と答えを入力してください",
       });
     } else if (statement.trim().length === 0) {
       return setError("otherAnswer", {
-        type: "custom",
+        // types:{required:"問題文を入力してください"},
         message: "問題文を入力してください",
       });
     } else if (answer.trim().length === 0) {
       return setError("otherAnswer", {
-        type: "custom",
+        // types:{required:"答えを入力してください"},
+
+        // type: "custom",
         message: "答えを入力してください",
       });
     }
-    setError("otherAnswer", { type: "custom", message: "" });
+    // setError("otherAnswer", { type: "custom", message: "" });
+    clearErrors("otherAnswer");
 
     // 処理開始
     setLoading(true);
@@ -64,10 +74,7 @@ const IncorrectAnswer = ({
       if (res.ok) {
         const data = await res.json();
         console.log(data, "生成された");
-        setValue("otherAnswer", data.text, {
-          shouldValidate: true,
-          shouldDirty: true,
-        });
+        setValue("otherAnswer", [data.text[0], data.text[1], data.text[2]]);
       } else {
         throw new Error("生成できませんでした。");
       }
@@ -81,8 +88,6 @@ const IncorrectAnswer = ({
       setLoading(false);
     }
   };
-  console.log(error.otherAnswer?.message, "ddd");
-
   return (
     <div>
       <label className="font-bold">
@@ -109,6 +114,7 @@ const IncorrectAnswer = ({
               id={index.toString()}
               {...register(`otherAnswer.${index}`)}
               className="w-full border border-gray-400 rounded-md px-1  bg-white focus:outline-black focus:border focus:rounded-sm"
+              required={format === "select" ? true : false}
             />
           </div>
         ))}

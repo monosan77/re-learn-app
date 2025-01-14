@@ -7,7 +7,6 @@ import ButtonContents from "./ButtonContents";
 import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 
-
 interface Prop {
   category_id: string;
   problem_id: string;
@@ -31,6 +30,7 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
     watch,
     setError,
     setValue,
+    clearErrors
   } = useForm<Inputs>({
     defaultValues: {
       title: "",
@@ -47,16 +47,9 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
     "statement",
     "otherAnswer",
   ]);
-console.log(otherAnswer,'other')
+  console.log(otherAnswer,'otherAnswer')
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
-    // 配列全体にエラーメッセージを付与したいのでここでバリデーションを実施する。
-    if (otherAnswer.every((item) => item.trim().length === 0)) {
-      return setError("otherAnswer", {
-        type: "custom",
-        message: "選択肢は必須です。",
-      });
-    }
-    console.log(data);
+
     try {
       const res = await fetch("/api/editProblem", {
         method: "POST",
@@ -68,17 +61,19 @@ console.log(otherAnswer,'other')
           category_id,
         }),
       });
-      console.log(res);
       if (!res.ok) {
+        console.log(res);
         throw new Error("api error");
       }
+      
       return router.push(`/works/problems?id=${problem_id}`);
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
-    <form className=" pt-4 space-y-6">
+    <form onSubmit={handleSubmit(onSubmit)} className=" pt-4 space-y-6">
       <InputText
         title="問題タイトル"
         name="title"
@@ -113,6 +108,8 @@ console.log(otherAnswer,'other')
           setError={setError}
           setValue={setValue}
           error={errors}
+          format={format}
+          clearErrors={clearErrors}
         />
       )}
 
@@ -123,7 +120,7 @@ console.log(otherAnswer,'other')
         error={errors}
       />
 
-      <ButtonContents handleSubmit={handleSubmit(onSubmit)} />
+      <ButtonContents type="submit" />
     </form>
   );
 };

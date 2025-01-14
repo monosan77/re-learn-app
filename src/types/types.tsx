@@ -40,7 +40,7 @@ export interface CategoryModel {
 export interface ProblemModel {
   id: string;
   title: string;
-  format: string;
+  format: "select" | "write";
   statement: string;
   answer: string;
   otherOptions: string[];

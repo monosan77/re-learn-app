@@ -4,9 +4,10 @@ import ButtonSmallWhite from "@/components/buttons/ButtonSmall-white";
 import { useRouter } from "next/navigation";
 import React from "react";
 interface Prop {
-  handleSubmit: () => void;
+  // handleSubmit: () => void;
+  type:"submit" | "reset" | "button" | undefined;
 }
-const ButtonContents = ({ handleSubmit }: Prop) => {
+const ButtonContents = ({ type }: Prop) => {
   const router = useRouter();
   function backPage() {
     router.back();
@@ -14,8 +15,8 @@ const ButtonContents = ({ handleSubmit }: Prop) => {
 
   return (
     <div className="max-w-450 flex justify-between items-center mx-auto pt-8">
-      <div onClick={handleSubmit}>
-        <ButtonSmall type="button" buttonText="保存する" />
+      <div >
+        <ButtonSmall type={type} buttonText="保存する" />
       </div>
       <ButtonSmallWhite type="button" buttonText="キャンセル" fn={backPage} />
     </div>

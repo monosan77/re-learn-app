@@ -57,7 +57,7 @@ const ProblemList = ({
       <button
         type="button"
         onClick={handleMenuOpen}
-        className="w-full flex justify-between items-center"
+        className="w-full flex justify-between items-center hover:opacity-80"
       >
         <p>{problemName}</p>
         <CreateIcon />
