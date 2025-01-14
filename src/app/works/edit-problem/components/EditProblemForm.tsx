@@ -3,11 +3,9 @@ import IncorrectAnswer from "@/components/ProblemForm/IncorrectAnswer";
 import InputText from "@/components/ProblemForm/InputText";
 import InputTextArea from "@/components/ProblemForm/InputTextArea";
 import ProblemFormat from "@/components/ProblemForm/ProblemFormat";
-import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import ButtonContents from "../../create-problem/components/ButtonContents";
 import { ProblemModel } from "@/types/types";
-import { arrayNothingValidation, nothingValidation } from "@/utils/validation";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface Prop {
@@ -61,25 +59,25 @@ const EditProblemForm = ({
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
     console.log({ ...data, category_id, problem_id });
     try {
-    const res = await fetch("/api/editProblem", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // title,
-        // format,
-        // statement,
-        // answer,
-        // otherAnswer,
-        // explanation,
-        ...data,
-        category_id,
-        problem_id,
-      }),
-    });
+      const res = await fetch("/api/editProblem", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          // title,
+          // format,
+          // statement,
+          // answer,
+          // otherAnswer,
+          // explanation,
+          ...data,
+          category_id,
+          problem_id,
+        }),
+      });
       if (!res.ok) {
-        console.log(res)
+        console.log(res);
         throw new Error("api error");
       }
       return router.push(`/works/problems?id=${problemSetId}`);

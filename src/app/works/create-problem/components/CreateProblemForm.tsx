@@ -30,7 +30,7 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
     watch,
     setError,
     setValue,
-    clearErrors
+    clearErrors,
   } = useForm<Inputs>({
     defaultValues: {
       title: "",
@@ -47,9 +47,8 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
     "statement",
     "otherAnswer",
   ]);
-  console.log(otherAnswer,'otherAnswer')
+  console.log(otherAnswer, "otherAnswer");
   const onSubmit: SubmitHandler<Inputs> = async (data: Inputs) => {
-
     try {
       const res = await fetch("/api/editProblem", {
         method: "POST",
@@ -65,7 +64,7 @@ const CreateProblemForm = ({ category_id, problem_id }: Prop) => {
         console.log(res);
         throw new Error("api error");
       }
-      
+
       return router.push(`/works/problems?id=${problem_id}`);
     } catch (error) {
       console.log(error);
