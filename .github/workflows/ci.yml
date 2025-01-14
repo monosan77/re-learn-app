@@ -23,7 +23,7 @@ jobs:
         run: |
           echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" > .env
           echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> .env
-      
+
       - name: Resolve Failed Migration
         run: npx prisma migrate resolve --applied "20250113113812_format_change"
 
