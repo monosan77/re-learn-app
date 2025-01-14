@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 interface FormData {
   title: string;
-  format: string;
+  format: "select" | "write";
   statement: string;
   answer: string;
   otherAnswer: string[];
@@ -25,24 +25,29 @@ export async function POST(req: Request) {
       );
     }
 
-    const newOptions: string[] = formData.otherAnswer.map((elem: string) => {
-      const result = elem.replace(/[\r\n]+/g, "");
-      return result;
-    });
+    let newOptions: string[] = [];
+    if (formData.format === "select") {
+      newOptions = formData.otherAnswer.map((elem: string) => {
+        const result = elem.replace(/[\r\n]+/g, "");
+        return result;
+      });
+    } else {
+      newOptions = [];
+    }
 
-    const data = await prisma.problem.create({
+    await prisma.problem.create({
       data: {
-        title: formData.title,
+        title: formData.title.trim(),
         format: formData.format,
-        statement: formData.statement,
-        answer: formData.answer,
+        statement: formData.statement.trim(),
+        answer: formData.answer.trim(),
         otherOptions: newOptions,
-        explanation: formData.explanation,
+        explanation: formData.explanation?.trim(),
         category_id: formData.category_id,
       },
     });
     revalidatePath("/works/problems");
-    return NextResponse.json({ data }, { status: 200 });
+    return NextResponse.json({ message: "成功した" }, { status: 200 });
   } catch (error) {
     console.error("server error", error);
     return NextResponse.json({ error: "server error" }, { status: 500 });
@@ -61,27 +66,33 @@ export async function PUT(req: Request) {
       );
     }
 
-    const newOptions: string[] = formData.otherAnswer.map((elem: string) => {
-      const result = elem.replace(/[\r\n]+/g, "");
-      return result;
-    });
+    // 改行を削除関数
+    let newOptions: string[] = [];
+    if (formData.format === "select") {
+      newOptions = formData.otherAnswer.map((elem: string) => {
+        const result = elem.replace(/[\r\n]+/g, "");
+        return result;
+      });
+    } else {
+      newOptions = [];
+    }
 
-    const data = await prisma.problem.update({
+    await prisma.problem.update({
       where: {
         id: formData.problem_id,
       },
       data: {
         title: formData.title.trim(),
         format: formData.format,
-        statement: formData.statement,
-        answer: formData.answer,
+        statement: formData.statement.trim(),
+        answer: formData.answer.trim(),
         otherOptions: newOptions,
-        explanation: formData.explanation,
+        explanation: formData.explanation?.trim(),
         category_id: formData.category_id,
       },
     });
     revalidatePath("/works/problems");
-    return NextResponse.json({ data }, { status: 200 });
+    return NextResponse.json({ message: "成功しました。" }, { status: 200 });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ message: "server error" }, { status: 500 });

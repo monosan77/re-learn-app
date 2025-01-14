@@ -1,5 +1,5 @@
-import Image from "next/image";
 import React from "react";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface Prop {
   handleFn: () => void;
@@ -19,13 +19,7 @@ const MenuModal = ({
       <div className="flex items-center justify-between  text-center mb-3">
         <h3 className="font-bold">{modalTitle}</h3>
         <button onClick={handleOpenMenu}>
-          <Image
-            src={"/icon/batu-white.svg"}
-            alt="アイコン"
-            width={14}
-            height={14}
-            className="hover:opacity-70"
-          />
+          <CloseIcon />
         </button>
       </div>
 

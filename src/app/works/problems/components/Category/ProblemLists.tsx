@@ -17,7 +17,7 @@ const ProblemLists = ({ problemSet_id, problems, category, name }: Prop) => {
       {problems.map((problem) => (
         <li
           key={problem.id}
-          className="border-b border-transparent hover:opacity-80 hover:border-b hover:border-solid hover:border-current"
+          className="border-b border-transparent  hover:border-b hover:border-solid hover:border-current"
         >
           <ProblemList
             problemName={problem.title}

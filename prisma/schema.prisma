@@ -86,10 +86,15 @@ model category {
 
 }
 
+enum Format {
+  select
+  write
+}
+
 model problem {
   id            String @id @default(uuid())
   title         String //問題タイトル
-  format        String
+  format        Format
   statement     String //問題文
   answer        String //解答文
   otherOptions  String[] //他の選択肢
