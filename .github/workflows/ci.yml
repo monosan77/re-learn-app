@@ -27,6 +27,22 @@ jobs:
       - name: Install dependencies
         run: yarn install # 依存関係のインストール
 
+      # localhost:3000サーバーを起動
+      - name: Start Next.js server
+        run: yarn dev &
+        env:
+          PORT: 3000
+
+      # サーバー起動まで待機
+      - name: Wait for localhost:3000
+        run: |
+          echo "Waiting for server to start..."
+          for i in {1..30}; do
+            curl -sSf http://localhost:3000 > /dev/null && echo "Server is up!" && break
+            echo "Server is not ready yet. Retrying in 2 seconds..."
+            sleep 2
+          done
+
       - name: Run Prettier
         run: yarn prettier --check .
 
