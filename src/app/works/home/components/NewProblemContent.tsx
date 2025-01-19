@@ -5,11 +5,20 @@ import Modal from "@/components/Modal/Modal";
 import Form from "./ProblemSetForm/Form";
 import { createProblem } from "@/actions/createProblem";
 import { useRouter } from "next/navigation";
+import { Problem_SetModel } from "@/types/types";
 
-const NewProblemContent = ({}) => {
+interface Props {
+  problemData: Problem_SetModel[];
+}
+
+const NewProblemContent = ({ problemData }: Props) => {
   const router = useRouter();
   const [isOpenPop, setIsOpenPop] = useState(false);
+
   function handleOpen() {
+    if (problemData.length >= 8) {
+      return setIsOpenPop(false)
+    }
     setIsOpenPop(!isOpenPop);
   }
 
@@ -38,7 +47,13 @@ const NewProblemContent = ({}) => {
           onClick={handleOpen}
           className="w-full h-full flex justify-center items-center bg-gray-400 p-4 rounded-md space-y-2 box-shadow hover:scale-[1.025] transition-all duration-100"
         >
-          <p className="text-white font-bold">新しい問題集を作る</p>
+          <div >
+            <p className="text-white font-bold">新しい問題集を作る</p>
+            
+            <p>{8 - problemData.length>0?`残り ${ 8 - problemData.length} 個作成できます。`:
+              '問題集は8個まで作成できます。'
+              }</p>
+          </div>
         </button>
       </div>
 
