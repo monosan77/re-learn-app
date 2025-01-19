@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function POST(_: Request) {
   try {
     return NextResponse.json({ message: "ok" });
   } catch (error) {

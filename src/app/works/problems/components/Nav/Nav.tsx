@@ -13,11 +13,10 @@ import BuildIcon from "@mui/icons-material/Build";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 interface Prop {
   problemData: Problem_SetModel;
-    category:CategoryModel[];
-  
+  category: CategoryModel[];
 }
 
-const Nav = ({ problemData,category }: Prop) => {
+const Nav = ({ problemData, category }: Prop) => {
   const router = useRouter();
   const [isOpenSetting, setIsOpenSetting] = useState(false);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
@@ -81,8 +80,7 @@ const Nav = ({ problemData,category }: Prop) => {
 
   return (
     <div className="flex justify-end items-center ">
-    { 8 > category.length  && <AddCategoryNav problemSetId={problemData.id} />}
-      
+      {8 > category.length && <AddCategoryNav problemSetId={problemData.id} />}
 
       {/* <NavList imgPath="/icon/plus-white.svg" categoryName="カテゴリー追加" /> */}
       <DropDownList

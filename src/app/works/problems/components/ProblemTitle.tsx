@@ -4,9 +4,9 @@ import Nav from "./Nav/Nav";
 
 interface Prop {
   problemData: Problem_SetModel;
-  category:CategoryModel[];
+  category: CategoryModel[];
 }
-const ProblemTitle = async ({ problemData ,category}: Prop) => {
+const ProblemTitle = async ({ problemData, category }: Prop) => {
   return (
     <div className="w-ful" style={{ background: `${problemData?.color}` }}>
       <div
@@ -14,7 +14,7 @@ const ProblemTitle = async ({ problemData ,category}: Prop) => {
         style={{ color: `${problemData.text_color}` }}
       >
         <h1 className="font-bold text-xl mb-4">{problemData.name}</h1>
-        <Nav problemData={problemData} category={category}/>
+        <Nav problemData={problemData} category={category} />
       </div>
     </div>
   );
