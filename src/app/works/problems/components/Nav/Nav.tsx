@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import List from "./List";
 import DropDownList from "./DropDownList";
 import Form from "../../../home/components/ProblemSetForm/Form";
@@ -16,30 +16,72 @@ interface Prop {
   category: CategoryModel[];
 }
 
+interface NavState {
+  isOpenSetting: boolean;
+  isOpenFilter: boolean;
+  isProblemModal: boolean;
+  isDeleteModal: boolean;
+}
+type NavAction =
+  | { type: "TOGGLE_SETTING" }
+  | { type: "TOGGLE_FILTER" }
+  | { type: "TOGGLE_PROBLEM_MODAL" }
+  | { type: "TOGGLE_DELETE_MODAL" };
+
+const navReducer = (state: NavState, action: NavAction) => {
+  switch (action.type) {
+    case "TOGGLE_SETTING":
+      return {
+        ...state,
+        isOpenSetting: !state.isOpenSetting,
+        isOpenFilter: false,
+        isProblemModal: false,
+      };
+    case "TOGGLE_FILTER":
+      return {
+        ...state,
+        isOpenFilter: !state.isOpenFilter,
+        isOpenSetting: false,
+      };
+    case "TOGGLE_PROBLEM_MODAL":
+      return {
+        ...state,
+        isProblemModal: !state.isProblemModal,
+        isOpenSetting: false,
+        isDeleteModal: false,
+      };
+    case "TOGGLE_DELETE_MODAL":
+      return {
+        ...state,
+        isDeleteModal: !state.isDeleteModal,
+        isOpenSetting: false,
+        isProblemModal: false,
+      };
+  }
+};
+const initialState = {
+  isOpenSetting: false,
+  isOpenFilter: false,
+  isProblemModal: false,
+  isDeleteModal: false,
+};
+
 const Nav = ({ problemData, category }: Prop) => {
   const router = useRouter();
-  const [isOpenSetting, setIsOpenSetting] = useState(false);
-  const [isOpenFilter, setIsOpenFilter] = useState(false);
-  const [isProblemModal, setIsProblemModal] = useState(false);
-  const [isDeleteModal, setIsDeleteModal] = useState(false);
+  const [state, dispatch] = useReducer(navReducer, initialState);
+
+  //ドロップダウンのメニューを開閉する関数
   function handleOpenSetting() {
-    setIsOpenSetting(!isOpenSetting);
-    setIsOpenFilter(false);
-    setIsProblemModal(false);
+    dispatch({ type: "TOGGLE_SETTING" });
   }
   function handleOpenFilter() {
-    setIsOpenFilter(!isOpenFilter);
-    setIsOpenSetting(false);
+    dispatch({ type: "TOGGLE_FILTER" });
   }
   function handleProblemModalOpen() {
-    setIsProblemModal(!isProblemModal);
-    setIsOpenSetting(false);
-    setIsDeleteModal(false);
+    dispatch({ type: "TOGGLE_PROBLEM_MODAL" });
   }
   function handleDeleteProblemModalOpen() {
-    setIsDeleteModal(!isDeleteModal);
-    setIsProblemModal(false);
-    setIsOpenSetting(false);
+    dispatch({ type: "TOGGLE_DELETE_MODAL" });
   }
 
   async function deleteProblemSet() {
@@ -82,11 +124,9 @@ const Nav = ({ problemData, category }: Prop) => {
     <div className="flex justify-end items-center ">
       {8 > category.length && <AddCategoryNav problemSetId={problemData.id} />}
 
-      {/* <NavList imgPath="/icon/plus-white.svg" categoryName="カテゴリー追加" /> */}
       <DropDownList
         handleFn={handleOpenFilter}
-        openBool={isOpenFilter}
-        // iconPath={"/icon/filter-white.svg"}
+        openBool={state.isOpenFilter}
         iconElem={<FilterAltIcon />}
         navName={"Filter"}
       >
@@ -97,7 +137,7 @@ const Nav = ({ problemData, category }: Prop) => {
       </DropDownList>
       <DropDownList
         handleFn={handleOpenSetting}
-        openBool={isOpenSetting}
+        openBool={state.isOpenSetting}
         iconElem={<BuildIcon />}
         navName={"設定"}
       >
@@ -118,7 +158,7 @@ const Nav = ({ problemData, category }: Prop) => {
         </ul>
       </DropDownList>
       {/* 問題集の編集モーダル */}
-      <div className={`${isProblemModal ? "block" : "hidden"} `}>
+      <div className={`${state.isProblemModal ? "block" : "hidden"} `}>
         <Modal openFn={handleOpenSetting}>
           <Form
             problemData={problemData}
@@ -130,7 +170,7 @@ const Nav = ({ problemData, category }: Prop) => {
       </div>
       {/* 削除確認モーダル */}
       <ConfirmModal
-        active={isDeleteModal}
+        active={state.isDeleteModal}
         submitFn={deleteProblemSet}
         backActionFn={handleDeleteProblemModalOpen}
         confirmText="問題集を削除したら復元できません。"
