@@ -54,7 +54,7 @@ const Page = async ({
               />
             ))
           : ""}
-        <AddCategory id={id} />
+        <AddCategory id={id} categoryLength={problemData.category.length}/>
       </div>
       <StudyStartContent
         problemSetId={id}
