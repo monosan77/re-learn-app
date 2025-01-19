@@ -42,7 +42,7 @@ const Page = async ({
 
   return (
     <div>
-      <ProblemTitle problemData={problemData} />
+      <ProblemTitle problemData={problemData} category={problemData.category} />
       <div className="px-4 pt-4 pb-52 flex justify-start space-x-4 overflow-hidden hover:overflow-x-auto hover:scrollbar-thin">
         {problemData.category
           ? problemData.category.map((part) => (
@@ -54,7 +54,7 @@ const Page = async ({
               />
             ))
           : ""}
-        <AddCategory id={id} />
+        <AddCategory id={id} categoryLength={problemData.category.length} />
       </div>
       <StudyStartContent
         problemSetId={id}

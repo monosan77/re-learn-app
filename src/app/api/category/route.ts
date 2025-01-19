@@ -2,6 +2,15 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 
+export async function POST(_: Request) {
+  try {
+    return NextResponse.json({ message: "ok" });
+  } catch (error) {
+    console.log(error);
+    return NextResponse.json({ message: "server error" }, { status: 500 });
+  }
+}
+
 export async function DELETE(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
