@@ -17,8 +17,8 @@ const AddCategory = ({ id, categoryLength }: Prop) => {
   const [errors, setErrors] = useState<string>();
 
   function handleOpen() {
-    // 10個以上の時カテゴリーを作成できないように制限する。
-    if (10 <= categoryLength) {
+    // 8個以上の時カテゴリーを作成できないように制限する。
+    if (8 <= categoryLength) {
       setIsOpenPop(false);
       return;
     }
@@ -26,10 +26,6 @@ const AddCategory = ({ id, categoryLength }: Prop) => {
   }
   async function handleSubmit(formData: FormData) {
     setErrors("");
-    if (10 <= categoryLength) {
-      setErrors("カテゴリーは10個まで作成できます。");
-      return;
-    }
 
     try {
       const result = await createCategory(formData, id);
@@ -54,8 +50,8 @@ const AddCategory = ({ id, categoryLength }: Prop) => {
           <p className="text-sm">カテゴリーを追加</p>
           <p className=" text-xs">
             ※{" "}
-            {10 > categoryLength
-              ? `残り${10 - categoryLength} 作成できます。`
+            {8 > categoryLength
+              ? `残り${8 - categoryLength} 作成できます。`
               : "これ以上作成できません。"}
           </p>
         </div>

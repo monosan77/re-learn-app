@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import List from "./List";
 import DropDownList from "./DropDownList";
 import Form from "../../../home/components/ProblemSetForm/Form";
-import { Problem_SetModel } from "@/types/types";
+import { CategoryModel, Problem_SetModel } from "@/types/types";
 import { useRouter } from "next/navigation";
 import { updateProblem } from "@/actions/updateProblem";
 import Modal from "@/components/Modal/Modal";
@@ -13,9 +13,11 @@ import BuildIcon from "@mui/icons-material/Build";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 interface Prop {
   problemData: Problem_SetModel;
+    category:CategoryModel[];
+  
 }
 
-const Nav = ({ problemData }: Prop) => {
+const Nav = ({ problemData,category }: Prop) => {
   const router = useRouter();
   const [isOpenSetting, setIsOpenSetting] = useState(false);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
@@ -79,7 +81,8 @@ const Nav = ({ problemData }: Prop) => {
 
   return (
     <div className="flex justify-end items-center ">
-      <AddCategoryNav problemSetId={problemData.id} />
+    { 8 > category.length  && <AddCategoryNav problemSetId={problemData.id} />}
+      
 
       {/* <NavList imgPath="/icon/plus-white.svg" categoryName="カテゴリー追加" /> */}
       <DropDownList
