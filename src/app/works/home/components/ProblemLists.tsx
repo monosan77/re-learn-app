@@ -24,7 +24,7 @@ async function getProblemSet() {
 
 const ProblemLists = async () => {
   const problemData = await getProblemSet();
-  if(!problemData)return <p>データを取得できませんでした。</p>
+  if (!problemData) return <p>データを取得できませんでした。</p>;
 
   return (
     <>
@@ -50,7 +50,7 @@ const ProblemLists = async () => {
             </Link>
           ))}
 
-        <NewProblemContent problemData={problemData}/>
+        <NewProblemContent problemData={problemData} />
       </div>
     </>
   );

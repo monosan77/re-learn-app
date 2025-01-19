@@ -52,7 +52,6 @@ const NewProblemContent = ({ problemData }: Props) => {
         >
           <div>
             <p className="text-white font-bold">新しい問題集を作る</p>
-
             <p>
               {8 - problemData.length > 0
                 ? `残り ${8 - problemData.length} 個作成できます。`
