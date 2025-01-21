@@ -2,32 +2,30 @@ import React from "react";
 import StudyingTitle from "./StudyingTitle";
 import { Answer_History_Model } from "@/types/types";
 interface Prop {
-  index: number;
-  length: number;
+  currentIndex: number;
+  problemsLength: number;
   currentProblem: Answer_History_Model;
   shuffledSelectAnswer: string[];
-  write: string;
-  select: string;
-  setWrite: (value: string) => void;
-  setSelect: (value: string) => void;
+  writeAnswer: string;
+  setWriteAnswer: (value: string) => void;
+  setSelectAnswer: (value: string) => void;
 }
 const ProblemContent = ({
-  index,
-  length,
+  currentIndex,
+  problemsLength,
   currentProblem,
   shuffledSelectAnswer,
-  write,
-  select,
-  setWrite,
-  setSelect,
+  writeAnswer,
+  setWriteAnswer,
+  setSelectAnswer,
 }: Prop) => {
   return (
     <>
       <StudyingTitle
         color="mainColor"
         text="問題"
-        index={Number(index)}
-        total={length}
+        index={Number(currentIndex)}
+        total={problemsLength}
       />
       <h3 className="font-bold">{currentProblem.problem.title}</h3>
       <p>{currentProblem.problem.statement}</p>
@@ -38,8 +36,8 @@ const ProblemContent = ({
             type="text"
             name="write"
             id="write"
-            value={write}
-            onChange={(e) => setWrite(e.target.value)}
+            value={writeAnswer}
+            onChange={(e) => setWriteAnswer(e.target.value)}
             className="w-full border text-black border-gray-400 rounded-md px-1  bg-white focus:outline-black focus:border focus:rounded-sm"
           />
         </div>
@@ -47,16 +45,15 @@ const ProblemContent = ({
         <ul className="space-y-3 max-w-96 mb-5">
           {shuffledSelectAnswer.map((answer, index) => (
             <li
-              key={index}
+              key={index.toString()}
               className="flex px-2 bg-gray-300 justify-start rounded-sm items-center space-x-2 cursor-pointer"
             >
               <input
                 type="radio"
                 name="select"
                 id={`select${index}`}
-                checked={answer === select}
                 value={answer}
-                onChange={(e) => setSelect(e.target.value)}
+                onChange={(e) => setSelectAnswer(e.target.value)}
               />
               <label
                 htmlFor={`select${index}`}

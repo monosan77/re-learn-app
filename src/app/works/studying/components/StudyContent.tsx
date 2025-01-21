@@ -8,30 +8,30 @@ import { LoadingPopup } from "@/components/Layout/works/WorksLayout";
 import { useRouter } from "next/navigation";
 
 interface Prop {
-  id: string;
+  studySessionId: string;
   setId: string;
   category_id: string;
-  name: string;
-  index: number;
-  length: number;
+  categoryName: string;
+  currentIndex: number;
+  problemsLength: number;
   currentProblem: Answer_History_Model;
   shuffledSelectAnswer: string[];
 }
 
 const StudyContent = ({
-  id,
+  studySessionId,
   setId,
   category_id,
-  name,
-  index,
-  length,
+  categoryName,
+  currentIndex,
+  problemsLength,
   currentProblem,
   shuffledSelectAnswer,
 }: Prop) => {
   const router = useRouter();
   const [isProblemContent, setIsProblemContent] = useState(true);
-  const [write, setWrite] = useState(currentProblem.user_answer);
-  const [select, setSelect] = useState(currentProblem.user_answer);
+  const [writeAnswer, setWriteAnswer] = useState(currentProblem.user_answer);
+  const [selectAnswer, setSelectAnswer] = useState(currentProblem.user_answer);
   const { setLoading } = useContext(LoadingPopup);
 
   async function updateProblemSession() {
@@ -44,24 +44,32 @@ const StudyContent = ({
         },
         body: JSON.stringify({
           currentProblem,
-          index,
+          currentIndex,
           userAnswer:
-            currentProblem.problem.format === "select" ? select : write,
+            currentProblem.problem.format === "select"
+              ? selectAnswer
+              : writeAnswer,
         }),
       });
       if (!res.ok) {
         throw new Error("通信に失敗しました。");
       }
 
-      if (length === index) {
+      // 状態をリセットしないと遷移先に初期値に値がセットされてしまうので初期化する
+      setWriteAnswer("");
+      setSelectAnswer("");
+
+      // 全ての問題を解いたらresultページに遷移
+      if (problemsLength === currentIndex) {
         return router.push(
-          `/works/studying/result?id=${id}&category=${category_id}&setId=${setId}&name=${name}`
+          `/works/studying/result?id=${studySessionId}&category=${category_id}&setId=${setId}&name=${categoryName}`
+        );
+      } else {
+        // 次の問題に遷移
+        return router.push(
+          `/works/studying?id=${studySessionId}&category=${category_id}&setId=${setId}&name=${categoryName}&index=${currentIndex + 1}`
         );
       }
-
-      return router.push(
-        `/works/studying?id=${id}&category=${category_id}&setId=${setId}&name=${name}&index=${index + 1}`
-      );
     } catch (error) {
       console.log(error);
     } finally {
@@ -72,38 +80,45 @@ const StudyContent = ({
 
   return (
     <>
+      {/* 問題画面と答え画面の切り替え */}
       {isProblemContent ? (
         <ProblemContent
-          index={index}
-          length={length}
+          currentIndex={currentIndex}
+          problemsLength={problemsLength}
           currentProblem={currentProblem}
           shuffledSelectAnswer={shuffledSelectAnswer}
-          write={write}
-          select={select}
-          setWrite={setWrite}
-          setSelect={setSelect}
+          writeAnswer={writeAnswer}
+          setWriteAnswer={setWriteAnswer}
+          setSelectAnswer={setSelectAnswer}
         />
       ) : (
         <AnswerContent
-          index={index}
-          length={length}
+          currentIndex={currentIndex}
+          problemsLength={problemsLength}
           currentProblem={currentProblem}
           checkAnswer={
-            currentProblem.problem.format === "write" ? write : select
+            currentProblem.problem.format === "write"
+              ? writeAnswer
+              : selectAnswer
           }
         />
       )}
 
-      <div
-        onClick={() =>
-          isProblemContent
-            ? setIsProblemContent(!isProblemContent)
-            : updateProblemSession()
-        }
-        className="flex justify-end items-center pt-2"
-      >
-        <StudyingNextBtn type="button" buttonText="答え" />
-      </div>
+      {isProblemContent ? (
+        <div
+          onClick={() => setIsProblemContent(!isProblemContent)}
+          className="flex justify-end items-center pt-2"
+        >
+          <StudyingNextBtn type="button" buttonText="答え" />
+        </div>
+      ) : (
+        <div
+          onClick={() => updateProblemSession()}
+          className="flex justify-end items-center pt-2"
+        >
+          <StudyingNextBtn type="button" buttonText="次へ" />
+        </div>
+      )}
     </>
   );
 };

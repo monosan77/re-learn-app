@@ -9,23 +9,33 @@ interface Prop {
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }
 const Page = async ({ searchParams }: Prop) => {
-  const id = (await searchParams).id;
+  const studySessionId = (await searchParams).id;
   const category_id = (await searchParams).category;
-  const name = (await searchParams).name;
-  const index = Number((await searchParams).index);
+  const categoryName = (await searchParams).name;
+  const currentIndex = Number((await searchParams).index);
   const setId = (await searchParams).setId;
-  if (!id || !category_id || !name || !index || !setId)
+  if (
+    !studySessionId ||
+    !category_id ||
+    !categoryName ||
+    !currentIndex ||
+    !setId
+  )
     return <p>データを取得できませんでした。</p>;
 
+  // カテゴリーデータと問題情報を取得
   const [categoryData, answerHistoryData]: [
     CategoryModel | null,
     Study_Session_Model | null,
-  ] = await Promise.all([getCategory(category_id), getAnswerHistory(id)]);
+  ] = await Promise.all([
+    getCategory(category_id),
+    getAnswerHistory(studySessionId),
+  ]);
 
   if (!categoryData || !answerHistoryData || !answerHistoryData.answer_history)
     return <p>データを取得できませんでした。</p>;
 
-  const currentProblem = answerHistoryData.answer_history[index - 1];
+  const currentProblem = answerHistoryData.answer_history[currentIndex - 1];
 
   // 選択式の時、選択肢をランダムに並び替える
   let shuffledSelectAnswer: string[] = [];
@@ -37,14 +47,14 @@ const Page = async ({ searchParams }: Prop) => {
   }
 
   return (
-    <StudyingCard categoryData={categoryData} name={name}>
+    <StudyingCard categoryData={categoryData} name={categoryName}>
       <StudyContent
-        id={id}
+        studySessionId={studySessionId}
         setId={setId}
         category_id={category_id}
-        name={name}
-        index={index}
-        length={answerHistoryData.answer_history.length}
+        categoryName={categoryName}
+        currentIndex={currentIndex}
+        problemsLength={answerHistoryData.answer_history.length}
         currentProblem={currentProblem}
         shuffledSelectAnswer={shuffledSelectAnswer}
       />
