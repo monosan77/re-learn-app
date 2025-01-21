@@ -1,17 +1,19 @@
 import { prisma } from "@/lib/prisma";
 import { Answer_History_Model } from "@/types/types";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 interface fetchModel {
   currentProblem: Answer_History_Model;
-  index: number;
+  currentIndex: number;
   userAnswer: string;
 }
 
 export async function PUT(req: Request) {
   try {
-    const { currentProblem, index, userAnswer }: fetchModel = await req.json();
-    if (!currentProblem || !index || !userAnswer) {
+    const { currentProblem, currentIndex, userAnswer }: fetchModel =
+      await req.json();
+    if (!currentProblem || !currentIndex) {
       return NextResponse.json(
         { message: "リクエストエラー" },
         { status: 405 }
@@ -25,21 +27,24 @@ export async function PUT(req: Request) {
       include: {
         answer_history: {
           where: {
-            index: index,
+            index: currentIndex,
           },
         },
       },
     });
 
-    const isCorrect = currentProblem.problem.answer === userAnswer;
-    const isCompleted = studySessionData?.answer_history.length === index;
+    // ユーザの解答と答えの正当
+    const isCorrect: boolean = currentProblem.problem.answer === userAnswer;
+    // 全ての問題を解き終わったか
+    const isCompleted:boolean =
+      studySessionData?.answer_history.length === currentIndex;
 
     await prisma.study_session.update({
       where: {
         id: currentProblem.study_session_id,
       },
       data: {
-        current_index: index + 1,
+        current_index: currentIndex + 1,
         is_completed: isCompleted,
       },
     });
@@ -48,10 +53,11 @@ export async function PUT(req: Request) {
         id: currentProblem.id,
       },
       data: {
-        user_answer: userAnswer,
+        user_answer: userAnswer ? userAnswer : "",
         is_correct: isCorrect,
       },
     });
+    revalidatePath("/works/studying");
     return NextResponse.json({ message: "ok" });
   } catch (error) {
     console.log(error);

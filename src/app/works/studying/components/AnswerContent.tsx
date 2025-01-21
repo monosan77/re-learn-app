@@ -5,20 +5,21 @@ import CorrectORIncorrect from "./CorrectORIncorrect";
 import ExplainText from "./ExplainText";
 import { Answer_History_Model } from "@/types/types";
 interface Prop {
-  index: number;
-  length: number;
+  currentIndex: number;
+  problemsLength: number;
   currentProblem: Answer_History_Model;
   checkAnswer: string;
 }
+
 const AnswerContent = ({
-  index,
-  length,
+  currentIndex,
+  problemsLength,
   currentProblem,
   checkAnswer,
 }: Prop) => {
   return (
     <>
-      <StudyingTitle color="red-600" text="答え" index={index} total={length} />
+      <StudyingTitle color="red-600" text="答え" index={currentIndex} total={problemsLength} />
       <StudyingProblemTitle
         currentProblem={currentProblem}
         checkAnswer={checkAnswer}
