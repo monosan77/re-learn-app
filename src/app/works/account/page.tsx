@@ -1,10 +1,18 @@
 import TitleText from "@/components/Title/TitleText";
 import React from "react";
-import { signOut } from "../../../../auth";
+import { auth, signOut } from "../../../../auth";
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
+import { redirect } from "next/navigation";
+import Image from "next/image";
+export const dynamic = "force-dynamic";
 
-const Page = () => {
+const Page = async () => {
+  const session = await auth();
+  if (!session || !session.user || !session.user.image) {
+    redirect("/src/app/session-error");
+  }
+  const userInfo = session.user;
   return (
     <div className="w-[calc(100%-32px)] mx-4 my-8 p-7 md:max-w-600 md:mx-auto rounded-md  card-shadow space-y-8">
       <div className="w-full flex justify-between items-center ">
@@ -23,30 +31,32 @@ const Page = () => {
           </button>
         </form>
       </div>
-      <form action="" className="w-full space-y-8">
+      <div className="w-full space-y-8">
         <div className="w-full flex justify-start items-center space-x-7">
           <div className="relative bg-mainColor rounded-full w-16 min-w-16 h-16 min-h-16">
-            <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold text-3xl text-white">
+            <Image
+              src={userInfo.image ?? "/images/default-account-image.png"}
+              alt={"アイコン画像"}
+              width={100}
+              height={100}
+              className="rounded-full"
+            />
+            {/* <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 font-bold text-3xl text-white">
               Y
-            </p>
+            </p> */}
           </div>
           <div>
-            <label htmlFor="userName" className="font-bold">
-              名前
-            </label>
-            <p>yoshiki noguch</p>
+            <p className="font-bold">名前</p>
+            <p>{userInfo.name}</p>
           </div>
         </div>
         <div className="space-y-3">
-          <label
-            htmlFor=""
-            className="flex justify-start items-center space-x-3"
-          >
+          <p className="flex justify-start items-center space-x-3">
             <EmailIcon />
             <span className="font-bold">メールアドレス</span>
-          </label>
+          </p>
           <div className="ml-8">
-            <p>test@example.com</p>
+            <p>{userInfo.email}</p>
           </div>
         </div>
         {/* <div className="space-y-3">
@@ -78,7 +88,7 @@ const Page = () => {
           <ButtonSmallWhite type="button" buttonText="戻る" />
           <ButtonSmall type="button" buttonText="変更を保存" />
         </div> */}
-      </form>
+      </div>
     </div>
   );
 };
