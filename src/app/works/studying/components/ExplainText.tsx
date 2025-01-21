@@ -1,11 +1,15 @@
 import React from "react";
 
-const ExplainText = () => {
+interface Props {
+  explanation: string | null;
+}
+
+const ExplainText = ({ explanation }: Props) => {
   return (
     <div>
       <h4 className=" font-bold">解説</h4>
       <p className="text-sm">
-        SSRは、サーバーサイドでページをレンダリングして、完全なHTMLをクライアントに送信する機能です。これにより、ページがユーザーに表示される前にサーバー側で処理されるため、高速なWEBサイトが実装されます。
+        {explanation === "" && "解説が登録されていません。"}
       </p>
     </div>
   );

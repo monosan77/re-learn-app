@@ -80,6 +80,7 @@ const StudyContent = ({
 
   return (
     <>
+      {/* 問題画面と答え画面の切り替え */}
       {isProblemContent ? (
         <ProblemContent
           currentIndex={currentIndex}

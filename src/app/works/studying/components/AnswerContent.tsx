@@ -19,7 +19,12 @@ const AnswerContent = ({
 }: Prop) => {
   return (
     <>
-      <StudyingTitle color="red-600" text="答え" index={currentIndex} total={problemsLength} />
+      <StudyingTitle
+        color="red-600"
+        text="答え"
+        index={currentIndex}
+        total={problemsLength}
+      />
       <StudyingProblemTitle
         currentProblem={currentProblem}
         checkAnswer={checkAnswer}
@@ -28,7 +33,7 @@ const AnswerContent = ({
         currentProblem={currentProblem}
         checkAnswer={checkAnswer}
       />
-      <ExplainText />
+      <ExplainText explanation={currentProblem.problem.explanation} />
     </>
   );
 };

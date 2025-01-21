@@ -14,14 +14,23 @@ const Page = async ({ searchParams }: Prop) => {
   const categoryName = (await searchParams).name;
   const currentIndex = Number((await searchParams).index);
   const setId = (await searchParams).setId;
-  if (!studySessionId || !category_id || !categoryName || !currentIndex || !setId)
+  if (
+    !studySessionId ||
+    !category_id ||
+    !categoryName ||
+    !currentIndex ||
+    !setId
+  )
     return <p>データを取得できませんでした。</p>;
 
   // カテゴリーデータと問題情報を取得
   const [categoryData, answerHistoryData]: [
     CategoryModel | null,
     Study_Session_Model | null,
-  ] = await Promise.all([getCategory(category_id), getAnswerHistory(studySessionId)]);
+  ] = await Promise.all([
+    getCategory(category_id),
+    getAnswerHistory(studySessionId),
+  ]);
 
   if (!categoryData || !answerHistoryData || !answerHistoryData.answer_history)
     return <p>データを取得できませんでした。</p>;

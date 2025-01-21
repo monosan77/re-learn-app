@@ -36,7 +36,7 @@ export async function PUT(req: Request) {
     // ユーザの解答と答えの正当
     const isCorrect: boolean = currentProblem.problem.answer === userAnswer;
     // 全ての問題を解き終わったか
-    const isCompleted:boolean =
+    const isCompleted: boolean =
       studySessionData?.answer_history.length === currentIndex;
 
     await prisma.study_session.update({
