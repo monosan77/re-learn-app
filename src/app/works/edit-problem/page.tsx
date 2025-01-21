@@ -5,6 +5,7 @@ import EditProblemForm from "./components/EditProblemForm";
 import { getCategory } from "@/actions/getCategory";
 import { CategoryModel, ProblemModel } from "@/types/types";
 import { getProblem } from "@/actions/getProblem";
+export const dynamic = "force-dynamic";
 
 const Page = async ({
   searchParams,

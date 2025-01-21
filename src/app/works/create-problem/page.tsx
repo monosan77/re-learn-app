@@ -3,6 +3,7 @@ import TitleText from "@/components/Title/TitleText";
 import CreateProblemForm from "./components/CreateProblemForm";
 import { CategoryModel } from "@/types/types";
 import { getCategory } from "@/actions/getCategory";
+export const dynamic = "force-dynamic";
 
 const Page = async ({
   searchParams,

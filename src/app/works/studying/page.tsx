@@ -5,6 +5,8 @@ import { getAnswerHistory } from "@/actions/getAnserHistory";
 import { createSelectAnswer } from "@/utils/shuffledArray";
 import { CategoryModel, Study_Session_Model } from "@/types/types";
 import StudyContent from "./components/StudyContent";
+export const dynamic = "force-dynamic";
+
 interface Prop {
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }

@@ -5,6 +5,7 @@ import StudyStartContent from "./components/StudyStartContent";
 import { prisma } from "@/lib/prisma";
 import { Problem_SetModel } from "@/types/types";
 import AddCategory from "./components/AddCategory";
+export const dynamic = "force-dynamic";
 
 async function getProblemData(id: string) {
   const data = await prisma.problem_set.findUnique({
