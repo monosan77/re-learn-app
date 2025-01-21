@@ -3,7 +3,7 @@ import ProblemHistory from "./components/ProblemHistory";
 import ProblemLists from "./components/ProblemLists";
 import { auth } from "../../../../auth";
 import { redirect } from "next/navigation";
-
+export const dynamic = "force-dynamic";
 const Page = async () => {
   const session = await auth();
   if (!session) return redirect("/session-error");
